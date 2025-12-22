@@ -1,43 +1,90 @@
-# Astro Starter Kit: Minimal
+# 🏪 Ferretería Rosita
 
-```sh
-pnpm create astro@latest -- --template minimal
+E-commerce moderno para Ferretería Rosita - Materiales de construcción y ferretería en Lima, Perú.
+
+![Ferretería Rosita](public/images/og-image.jpg)
+
+## ✨ Características
+
+- 🛒 **Catálogo de Productos** con filtros por categoría, marca y precio
+- 🔍 **Buscador Instantáneo** con resultados en tiempo real
+- 🛍️ **Carrito de Compras** con integración a WhatsApp
+- 🧮 **Calculadoras de Materiales** (ladrillos, pintura) con estándares peruanos
+- 📱 **PWA Ready** con iconos y manifest
+- 🎨 **Diseño Premium** con glassmorphism y animaciones
+- 📧 **Formulario de Contacto** con envío a WhatsApp
+- ❓ **Página FAQ** con acordeón interactivo
+- 🔧 **SEO Optimizado** con Schema.org, Open Graph y meta tags
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Astro](https://astro.build) v5
+- **Styling**: [TailwindCSS](https://tailwindcss.com) v4
+- **Icons**: [Material Symbols](https://fonts.google.com/icons)
+- **State**: [Nanostores](https://github.com/nanostores/nanostores)
+- **Content**: Astro Content Collections
+
+## 🚀 Instalación
+
+```bash
+# Clonar repositorio
+git clone [url-del-repo]
+
+# Instalar dependencias
+pnpm install
+
+# Iniciar desarrollo
+pnpm dev
+
+# Build producción
+pnpm build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📁 Estructura del Proyecto
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/       # Componentes reutilizables
+│   ├── cart/         # Carrito de compras
+│   ├── catalog/      # Catálogo y filtros
+│   ├── common/       # Header, Footer, SEO
+│   └── home/         # Secciones del home
+├── config/           # Configuración centralizada
+│   └── site.ts       # Datos del negocio, contacto, SEO
+├── content/          # Content Collections
+│   └── products/     # Productos en Markdown
+├── layouts/          # Layouts principales
+├── lib/              # Utilidades y lógica
+├── pages/            # Rutas de páginas
+│   ├── api/          # API endpoints
+│   └── catalogo/     # Catálogo dinámico
+└── stores/           # Nanostores (carrito, formularios)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 📚 Documentación
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Documento | Descripción |
+|-----------|-------------|
+| [CALCULADORAS.md](DOCS/CALCULADORAS.md) | Fórmulas de calculadoras |
+| [INSTANT-SEARCH.md](DOCS/INSTANT-SEARCH.md) | Implementación del buscador |
+| [IMAGE-GENERATION-PLAN.md](DOCS/IMAGE-GENERATION-PLAN.md) | Plan para imágenes de productos |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🧞 Comandos
 
-## 🧞 Commands
+| Comando | Descripción |
+|---------|-------------|
+| `pnpm dev` | Servidor de desarrollo en `localhost:4321` |
+| `pnpm build` | Build de producción a `./dist/` |
+| `pnpm preview` | Preview del build |
+| `node scripts/generate-icons.js` | Generar iconos PWA |
 
-All commands are run from the root of the project, from a terminal:
+## 📄 Licencia
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+Este proyecto es software propietario. Ver [LICENSE](LICENSE) para más detalles.
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+<div align="center">
+  <p>Desarrollado por <a href="https://www.hebert.dev" target="_blank">Hebert.Dev</a></p>
+  <p>¿Te gustaría una landing page como esta? <a href="mailto:hola@hebert.dev">Contáctame</a></p>
+</div>
