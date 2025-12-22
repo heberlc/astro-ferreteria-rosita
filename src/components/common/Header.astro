@@ -24,8 +24,11 @@
         >
       </a>
 
-      <!-- Search Bar -->
-      <div class="hidden md:flex flex-1 max-w-2xl mx-auto">
+      <!-- Search Bar with Instant Results -->
+      <div
+        class="hidden md:flex flex-1 max-w-2xl mx-auto relative"
+        id="search-container"
+      >
         <form
           id="search-form"
           action="/catalogo"
@@ -41,10 +44,34 @@
             type="text"
             name="search"
             id="header-search"
+            autocomplete="off"
             placeholder="Buscar herramientas, materiales, marcas..."
             class="block w-full h-12 pl-10 pr-4 rounded-lg bg-surface-dark border-transparent focus:border-primary focus:bg-[#333] focus:ring-1 focus:ring-primary text-white placeholder-text-secondary transition-all duration-200"
           />
         </form>
+
+        <!-- Instant Search Results Dropdown -->
+        <div
+          id="search-results"
+          class="absolute top-full left-0 right-0 mt-2 bg-surface-dark rounded-xl border border-border-dark shadow-2xl z-50 hidden max-h-[400px] overflow-y-auto"
+        >
+          <div id="search-results-list" class="p-2">
+            <!-- Results will be inserted here -->
+          </div>
+          <div
+            id="search-no-results"
+            class="p-4 text-center text-text-secondary hidden"
+          >
+            No se encontraron productos
+          </div>
+          <div
+            id="search-loading"
+            class="p-4 text-center text-text-secondary hidden"
+          >
+            <span class="material-symbols-outlined animate-spin">sync</span>
+            Buscando...
+          </div>
+        </div>
       </div>
 
       <!-- Right Actions -->
@@ -150,5 +177,150 @@
 
   mobileMenuButton?.addEventListener("click", () => {
     mobileMenu?.classList.toggle("hidden");
+  });
+
+  // ========== Instant Search ==========
+  interface Product {
+    slug: string;
+    title: string;
+    brand: string;
+    price: number;
+    image: string;
+    category: string;
+  }
+
+  let products: Product[] = [];
+  let searchTimeout: ReturnType<typeof setTimeout>;
+
+  const searchInput = document.getElementById(
+    "header-search"
+  ) as HTMLInputElement;
+  const searchResults = document.getElementById("search-results");
+  const searchResultsList = document.getElementById("search-results-list");
+  const searchNoResults = document.getElementById("search-no-results");
+  const searchLoading = document.getElementById("search-loading");
+  const searchContainer = document.getElementById("search-container");
+
+  // Load products on first focus
+  async function loadProducts() {
+    if (products.length > 0) return;
+
+    try {
+      searchLoading?.classList.remove("hidden");
+      searchNoResults?.classList.add("hidden");
+      const response = await fetch("/api/products.json");
+      products = await response.json();
+      searchLoading?.classList.add("hidden");
+    } catch (error) {
+      console.error("Error loading products:", error);
+      searchLoading?.classList.add("hidden");
+    }
+  }
+
+  // Search and display results
+  function performSearch(query: string) {
+    if (!query || query.length < 2) {
+      hideResults();
+      return;
+    }
+
+    const searchTerm = query.toLowerCase();
+    const results = products
+      .filter(
+        (p) =>
+          p.title.toLowerCase().includes(searchTerm) ||
+          p.brand.toLowerCase().includes(searchTerm) ||
+          p.category.toLowerCase().includes(searchTerm)
+      )
+      .slice(0, 6); // Limit to 6 results
+
+    displayResults(results);
+  }
+
+  function displayResults(results: Product[]) {
+    if (!searchResultsList || !searchResults || !searchNoResults) return;
+
+    if (results.length === 0) {
+      searchResultsList.innerHTML = "";
+      searchNoResults.classList.remove("hidden");
+      searchResults.classList.remove("hidden");
+      return;
+    }
+
+    searchNoResults.classList.add("hidden");
+    searchResultsList.innerHTML = results
+      .map(
+        (product) => `
+      <a 
+        href="/catalogo/${product.slug}" 
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+      >
+        <div class="w-14 h-14 rounded-lg bg-white/10 overflow-hidden shrink-0">
+          <img 
+            src="${product.image}" 
+            alt="${product.title}"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+            loading="lazy"
+          />
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-white font-medium text-sm truncate">${product.title}</p>
+          <p class="text-text-secondary text-xs">${product.brand}</p>
+        </div>
+        <div class="text-primary font-bold text-sm shrink-0">
+          S/ ${product.price.toFixed(2)}
+        </div>
+      </a>
+    `
+      )
+      .join("");
+
+    // Add "Ver todos" link
+    searchResultsList.innerHTML += `
+      <div class="border-t border-border-dark mt-2 pt-2">
+        <a 
+          href="/catalogo?search=${encodeURIComponent(searchInput?.value || "")}" 
+          class="flex items-center justify-center gap-2 p-3 text-primary hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium"
+        >
+          Ver todos los resultados
+          <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </a>
+      </div>
+    `;
+
+    searchResults.classList.remove("hidden");
+  }
+
+  function hideResults() {
+    searchResults?.classList.add("hidden");
+  }
+
+  // Event listeners
+  searchInput?.addEventListener("focus", () => {
+    loadProducts();
+    if (searchInput.value.length >= 2) {
+      performSearch(searchInput.value);
+    }
+  });
+
+  searchInput?.addEventListener("input", () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      performSearch(searchInput.value);
+    }, 200); // 200ms debounce
+  });
+
+  // Close on click outside
+  document.addEventListener("click", (e) => {
+    if (!searchContainer?.contains(e.target as Node)) {
+      hideResults();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      hideResults();
+    }
   });
 </script>
