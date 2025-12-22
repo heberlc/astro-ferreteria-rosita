@@ -1,0 +1,8 @@
+# Robots.txt - Ferretería Rosita
+# https://rosita.pe
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://rosita.pe/sitemap-index.xml

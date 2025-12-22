@@ -1,0 +1,106 @@
+---
+/**
+ * SEO Component
+ * Centralized meta tags, Open Graph, and Schema.org data
+ */
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  type?: "website" | "product" | "article";
+}
+
+const {
+  title = "Ferretería Rosita | Materiales de Construcción en Lima",
+  description = "Tu aliado confiable en construcción y mejoras para el hogar. Más de 5,000 productos de calidad profesional al mejor precio. Desde 1995.",
+  image = "/og-image.jpg",
+  url = Astro.url.href,
+  type = "website",
+} = Astro.props;
+
+const siteName = "Ferretería Rosita";
+const siteUrl = "https://rosita.pe";
+
+// Schema.org LocalBusiness
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HardwareStore",
+  name: "Corporación Ferretería Rosita SAC",
+  alternateName: "Ferretería Rosita",
+  url: siteUrl,
+  logo: `${siteUrl}/logo.png`,
+  image: `${siteUrl}/storefront.jpg`,
+  description: description,
+  telephone: ["+51955314610", "+51955099118", "+5112515860"],
+  email: "ventas.empresarial@rosita.pe",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Av. Guardia Civil 221-225",
+    addressLocality: "Chorrillos",
+    addressRegion: "Lima",
+    postalCode: "15067",
+    addressCountry: "PE",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -12.168,
+    longitude: -77.0085,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "08:00",
+      closes: "18:00",
+    },
+  ],
+  priceRange: "$$",
+  sameAs: [
+    "https://www.facebook.com/ferreteriarosita",
+    "https://www.instagram.com/ferreteriarosita",
+  ],
+};
+---
+
+<!-- Primary Meta Tags -->
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={siteName} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={`${siteUrl}${image}`} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="es_PE" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={`${siteUrl}${image}`} />
+
+<!-- Canonical -->
+<link rel="canonical" href={url} />
+
+<!-- Web Manifest -->
+<link rel="manifest" href="/manifest.json" />
+<meta name="theme-color" content="#f96b06" />
+
+<!-- Schema.org LocalBusiness -->
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(localBusinessSchema)}
+/>
