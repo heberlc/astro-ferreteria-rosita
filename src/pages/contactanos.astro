@@ -112,49 +112,63 @@ const whatsappMessage = encodeURIComponent(
           <h2 class="text-2xl font-bold text-white mb-6">
             Envíanos un mensaje
           </h2>
-          <form class="space-y-6">
+          <form id="contact-form" class="space-y-6">
             <div>
               <label class="block text-text-secondary text-sm mb-2"
                 >Nombre completo</label
               >
               <input
+                id="contact-name"
                 type="text"
                 class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
                 placeholder="Tu nombre"
               />
+              <span id="error-name" class="text-red-500 text-sm mt-1 hidden"
+              ></span>
             </div>
             <div>
               <label class="block text-text-secondary text-sm mb-2">Email</label
               >
               <input
+                id="contact-email"
                 type="email"
                 class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
                 placeholder="tu@email.com"
               />
+              <span id="error-email" class="text-red-500 text-sm mt-1 hidden"
+              ></span>
             </div>
             <div>
               <label class="block text-text-secondary text-sm mb-2"
                 >Teléfono</label
               >
               <input
+                id="contact-phone"
                 type="tel"
                 class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
                 placeholder="+51 999 999 999"
               />
+              <span id="error-phone" class="text-red-500 text-sm mt-1 hidden"
+              ></span>
             </div>
             <div>
               <label class="block text-text-secondary text-sm mb-2"
                 >Mensaje</label
               >
               <textarea
+                id="contact-message"
                 rows="4"
                 class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none"
                 placeholder="¿En qué podemos ayudarte?"></textarea>
+              <span id="error-message" class="text-red-500 text-sm mt-1 hidden"
+              ></span>
             </div>
             <button
+              id="contact-submit"
               type="submit"
-              class="w-full h-14 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors shadow-lg shadow-primary/25"
+              class="w-full h-14 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
             >
+              <span class="material-symbols-outlined">send</span>
               Enviar mensaje
             </button>
           </form>
@@ -164,4 +178,120 @@ const whatsappMessage = encodeURIComponent(
   </main>
 
   <Footer />
+
+  <script>
+    import {
+      $contactForm,
+      updateField,
+      submitForm,
+    } from "../stores/contactForm";
+
+    // Get form elements
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const nameInput = document.getElementById(
+      "contact-name"
+    ) as HTMLInputElement;
+    const emailInput = document.getElementById(
+      "contact-email"
+    ) as HTMLInputElement;
+    const phoneInput = document.getElementById(
+      "contact-phone"
+    ) as HTMLInputElement;
+    const messageInput = document.getElementById(
+      "contact-message"
+    ) as HTMLTextAreaElement;
+    const submitBtn = document.getElementById(
+      "contact-submit"
+    ) as HTMLButtonElement;
+
+    // Error elements
+    const errorName = document.getElementById("error-name")!;
+    const errorEmail = document.getElementById("error-email")!;
+    const errorPhone = document.getElementById("error-phone")!;
+    const errorMessage = document.getElementById("error-message")!;
+
+    // Update store on input changes
+    nameInput?.addEventListener("input", () =>
+      updateField("name", nameInput.value)
+    );
+    emailInput?.addEventListener("input", () =>
+      updateField("email", emailInput.value)
+    );
+    phoneInput?.addEventListener("input", () =>
+      updateField("phone", phoneInput.value)
+    );
+    messageInput?.addEventListener("input", () =>
+      updateField("message", messageInput.value)
+    );
+
+    // Subscribe to store changes for error display
+    $contactForm.subscribe((state) => {
+      // Update error displays
+      if (state.errors.name) {
+        errorName.textContent = state.errors.name;
+        errorName.classList.remove("hidden");
+        nameInput?.classList.add("border-red-500");
+      } else {
+        errorName.classList.add("hidden");
+        nameInput?.classList.remove("border-red-500");
+      }
+
+      if (state.errors.email) {
+        errorEmail.textContent = state.errors.email;
+        errorEmail.classList.remove("hidden");
+        emailInput?.classList.add("border-red-500");
+      } else {
+        errorEmail.classList.add("hidden");
+        emailInput?.classList.remove("border-red-500");
+      }
+
+      if (state.errors.phone) {
+        errorPhone.textContent = state.errors.phone;
+        errorPhone.classList.remove("hidden");
+        phoneInput?.classList.add("border-red-500");
+      } else {
+        errorPhone.classList.add("hidden");
+        phoneInput?.classList.remove("border-red-500");
+      }
+
+      if (state.errors.message) {
+        errorMessage.textContent = state.errors.message;
+        errorMessage.classList.remove("hidden");
+        messageInput?.classList.add("border-red-500");
+      } else {
+        errorMessage.classList.add("hidden");
+        messageInput?.classList.remove("border-red-500");
+      }
+
+      // Update button state
+      if (state.isSubmitting) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+          '<span class="material-symbols-outlined animate-spin">sync</span> Enviando...';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML =
+          '<span class="material-symbols-outlined">send</span> Enviar mensaje';
+      }
+
+      // Clear form fields if data is reset
+      if (
+        !state.data.name &&
+        !state.data.email &&
+        !state.data.phone &&
+        !state.data.message
+      ) {
+        if (nameInput) nameInput.value = "";
+        if (emailInput) emailInput.value = "";
+        if (phoneInput) phoneInput.value = "";
+        if (messageInput) messageInput.value = "";
+      }
+    });
+
+    // Handle form submission
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      submitForm();
+    });
+  </script>
 </Layout>
