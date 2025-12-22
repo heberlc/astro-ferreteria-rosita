@@ -12,7 +12,13 @@
   /* Background Colors (Dark Mode) */
   --color-background-dark: #181411;
   --color-surface-dark: #231f1b;
+  --color-surface-elevated: #2a2622;  /* Cards, elevated surfaces */
+  --color-surface-hover: #333333;     /* Input focus, hover states */
   --color-border-dark: #3a2f27;
+  
+  /* Footer & Section Backgrounds */
+  --color-footer-bg: #151515;
+  --color-section-alt: #1f1f1f;       /* Alternate section background */
 
   /* Text Colors */
   --color-text-primary: #ffffff;

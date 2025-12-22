@@ -39,8 +39,11 @@ function renderStars(rating: number) {
         const badge = discount ? `-${discount}% OFF` : isNew ? 'NUEVO' : null;
         const badgeColor = discount ? 'bg-red-600' : 'bg-green-500';
         
+        // Handle both local images (ImageMetadata) and external URLs (string)
+        const imageSrc = typeof image === 'string' ? image : image.src;
+        
         return (
-          <a href={`/catalogo/${product.data.slug}`} class="group bg-[#2a2a2a] rounded-xl overflow-hidden border border-white/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-black/50">
+          <a href={`/catalogo/${product.data.slug}`} class="group bg-surface-elevated rounded-xl overflow-hidden border border-white/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-black/50">
             <!-- Image -->
             <div class="relative aspect-square overflow-hidden bg-white/5 p-4 flex items-center justify-center">
               {badge && (
@@ -49,7 +52,7 @@ function renderStars(rating: number) {
                 </div>
               )}
               <img 
-                src={image} 
+                src={imageSrc} 
                 alt={title}
                 class="object-contain h-full w-full group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
@@ -76,13 +79,13 @@ function renderStars(rating: number) {
                 </div>
                 <div class="flex text-yellow-500 text-sm">
                   {Array.from({ length: stars.fullStars }).map(() => (
-                    <span class="material-symbols-outlined text-[16px]">star</span>
+                    <span class="material-symbols-outlined text-base">star</span>
                   ))}
                   {stars.hasHalf && (
-                    <span class="material-symbols-outlined text-[16px]">star_half</span>
+                    <span class="material-symbols-outlined text-base">star_half</span>
                   )}
                   {Array.from({ length: stars.emptyStars }).map(() => (
-                    <span class="material-symbols-outlined text-[16px] text-text-muted">star_border</span>
+                    <span class="material-symbols-outlined text-base text-text-muted">star_border</span>
                   ))}
                 </div>
               </div>
