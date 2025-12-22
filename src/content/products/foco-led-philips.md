@@ -9,6 +9,8 @@ image: "../../assets/products/foco-led-philips.png"
 stock: true
 featured: true
 isNew: false
+rating: 5
+reviewCount: 52
 features:
   - "Potencia: 12W"
   - "Equivale a 100W"

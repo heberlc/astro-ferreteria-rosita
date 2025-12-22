@@ -9,6 +9,8 @@ image: "../../assets/products/cable-indeco.png"
 stock: true
 featured: true
 isNew: false
+rating: 4.5
+reviewCount: 35
 features:
   - "Calibre: 14 AWG"
   - "Tipo: TW - Termoplástico"

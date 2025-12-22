@@ -11,6 +11,8 @@ stock: true
 featured: true
 isNew: false
 discount: 15
+rating: 4.5
+reviewCount: 47
 features:
   - "Motor brushless de alta eficiencia"
   - "2 velocidades: 0-550 / 0-2000 RPM"

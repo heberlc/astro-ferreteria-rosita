@@ -33,8 +33,7 @@ function renderStars(rating: number) {
     <!-- Products Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {featuredProducts.map((product) => {
-        const { title, brand, price, originalPrice, image, discount, isNew } = product.data;
-        const rating = 4; // Default rating
+        const { title, brand, price, originalPrice, image, discount, isNew, rating = 0, reviewCount = 0 } = product.data;
         const stars = renderStars(rating);
         const badge = discount ? `-${discount}% OFF` : isNew ? 'NUEVO' : null;
         const badgeColor = discount ? 'bg-red-600' : 'bg-green-500';

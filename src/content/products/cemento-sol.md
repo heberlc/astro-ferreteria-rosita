@@ -9,6 +9,8 @@ image: "../../assets/products/cemento-sol.png"
 stock: true
 featured: true
 isNew: false
+rating: 4
+reviewCount: 28
 features:
   - "Alta resistencia inicial"
   - "Fraguado normal"

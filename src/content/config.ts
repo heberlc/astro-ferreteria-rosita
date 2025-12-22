@@ -30,6 +30,8 @@ const products = defineCollection({
     featured: z.boolean().default(false),
     isNew: z.boolean().default(false),
     discount: z.number().optional(),
+    rating: z.number().min(0).max(5).default(0), // Product rating 0-5
+    reviewCount: z.number().default(0), // Number of reviews
   }),
 });
 
