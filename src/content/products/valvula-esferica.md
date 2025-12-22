@@ -1,0 +1,19 @@
+---
+title: "Válvula Esférica 1/2\" PVC"
+slug: "valvula-esferica-pvc"
+description: "Válvula de bola PVC para control de flujo de agua. Fácil operación."
+price: 8.90
+category: "gasfiteria"
+brand: "Pavco"
+image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80"
+stock: true
+featured: false
+isNew: true
+features:
+  - "Diámetro: 1/2 pulgada"
+  - "Material: PVC"
+  - "Presión máxima: 125 PSI"
+  - "Rosca NPT"
+---
+
+Válvula esférica de calidad para instalaciones de agua.

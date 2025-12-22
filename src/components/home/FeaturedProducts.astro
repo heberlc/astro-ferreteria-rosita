@@ -1,55 +1,15 @@
 ---
 /**
  * Featured Products Component
- * Showcase popular products with pricing
+ * Showcase products marked as featured from Content Collections
  */
+import { getCollection } from 'astro:content';
 
-interface Product {
-  name: string;
-  brand: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  rating: number;
-  badge?: string;
-  badgeColor?: string;
-}
-
-const products: Product[] = [
-  {
-    name: "Taladro Percutor Inalámbrico 20V MAX",
-    brand: "Dewalt",
-    price: 189.99,
-    originalPrice: 210.00,
-    image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80",
-    rating: 4.5,
-    badge: "OFERTA",
-    badgeColor: "bg-primary"
-  },
-  {
-    name: "Casco de Seguridad Industrial Ajustable",
-    brand: "3M",
-    price: 24.50,
-    image: "https://images.unsplash.com/photo-1578874691223-64558a3ca096?w=400&q=80",
-    rating: 4
-  },
-  {
-    name: "Martillo de Uña Curva Mango de Fibra",
-    brand: "Stanley",
-    price: 15.99,
-    image: "https://images.unsplash.com/photo-1586864387789-628af9feed72?w=400&q=80",
-    rating: 5
-  },
-  {
-    name: "Llave Inglesa Ajustable Cromada 10\"",
-    brand: "Truper",
-    price: 12.50,
-    image: "https://images.unsplash.com/photo-1580402427914-a6cc60d7d44f?w=400&q=80",
-    rating: 3.5,
-    badge: "NUEVO",
-    badgeColor: "bg-green-500"
-  }
-];
+// Get featured products from Content Collections
+const allProducts = await getCollection('products');
+const featuredProducts = allProducts
+  .filter(p => p.data.featured)
+  .slice(0, 4);
 
 function renderStars(rating: number) {
   const fullStars = Math.floor(rating);
@@ -64,50 +24,54 @@ function renderStars(rating: number) {
     <!-- Header -->
     <div class="flex items-center justify-between mb-10">
       <h2 class="text-3xl font-bold text-white">Productos Populares</h2>
-      <div class="flex gap-2">
-        <button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5 transition-colors">
-          <span class="material-symbols-outlined">arrow_back</span>
-        </button>
-        <button class="w-10 h-10 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
-          <span class="material-symbols-outlined">arrow_forward</span>
-        </button>
-      </div>
+      <a href="/catalogo" class="flex items-center gap-1 text-primary hover:text-primary-hover font-medium transition-colors">
+        Ver todos
+        <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+      </a>
     </div>
 
     <!-- Products Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {products.map((product) => {
-        const stars = renderStars(product.rating);
+      {featuredProducts.map((product) => {
+        const { title, brand, price, originalPrice, image, discount, isNew } = product.data;
+        const rating = 4; // Default rating
+        const stars = renderStars(rating);
+        const badge = discount ? `-${discount}% OFF` : isNew ? 'NUEVO' : null;
+        const badgeColor = discount ? 'bg-red-600' : 'bg-green-500';
+        
         return (
-          <div class="group bg-[#2a2a2a] rounded-xl overflow-hidden border border-white/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-black/50">
+          <a href={`/catalogo/${product.data.slug}`} class="group bg-[#2a2a2a] rounded-xl overflow-hidden border border-white/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-black/50">
             <!-- Image -->
             <div class="relative aspect-square overflow-hidden bg-white/5 p-4 flex items-center justify-center">
-              {product.badge && (
-                <div class={`absolute top-3 left-3 z-10 ${product.badgeColor} text-white text-xs font-bold px-2 py-1 rounded`}>
-                  {product.badge}
+              {badge && (
+                <div class={`absolute top-3 left-3 z-10 ${badgeColor} text-white text-xs font-bold px-2 py-1 rounded`}>
+                  {badge}
                 </div>
               )}
               <img 
-                src={product.image} 
-                alt={product.name}
+                src={image} 
+                alt={title}
                 class="object-contain h-full w-full group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
               />
-              <button class="absolute bottom-3 right-3 w-10 h-10 bg-white text-black rounded-full flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-lg hover:bg-primary hover:text-white">
-                <span class="material-symbols-outlined">add_shopping_cart</span>
-              </button>
             </div>
 
             <!-- Info -->
             <div class="p-5">
-              <p class="text-sm text-text-secondary mb-1">{product.brand}</p>
-              <h3 class="text-white font-semibold text-lg mb-2 line-clamp-2">{product.name}</h3>
+              <p class="text-sm text-text-secondary mb-1">{brand}</p>
+              <h3 class="text-white font-semibold text-lg mb-2 line-clamp-2">{title}</h3>
               
               <div class="flex items-center justify-between mt-4">
                 <div>
-                  <span class="text-2xl font-bold text-primary">S/{product.price.toFixed(2)}</span>
-                  {product.originalPrice && (
-                    <span class="text-sm text-text-muted line-through ml-2">S/{product.originalPrice.toFixed(2)}</span>
+                  {price ? (
+                    <>
+                      <span class="text-2xl font-bold text-primary">S/{price.toFixed(2)}</span>
+                      {originalPrice && (
+                        <span class="text-sm text-text-muted line-through ml-2">S/{originalPrice.toFixed(2)}</span>
+                      )}
+                    </>
+                  ) : (
+                    <span class="text-text-secondary">Consultar</span>
                   )}
                 </div>
                 <div class="flex text-yellow-500 text-sm">
@@ -123,7 +87,7 @@ function renderStars(rating: number) {
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         );
       })}
     </div>

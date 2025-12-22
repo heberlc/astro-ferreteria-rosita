@@ -157,11 +157,11 @@ git add -A && git commit -m "feat: WhatsApp quote cart with Nano Stores"
 **Objetivo**: Optimizar el sitio para motores de búsqueda.
 
 ### Actividades
-- [ ] Crear `src/components/common/SEO.astro` con meta tags.
-- [ ] Crear `public/manifest.json`.
-- [ ] Crear `public/robots.txt`.
-- [ ] Instalar y configurar `@astrojs/sitemap`.
-- [ ] Agregar Schema.org `LocalBusiness` en el layout.
+- [x] Crear `src/components/common/SEO.astro` con meta tags.
+- [x] Crear `public/manifest.json`.
+- [x] Crear `public/robots.txt`.
+- [x] Instalar y configurar `@astrojs/sitemap`.
+- [x] Agregar Schema.org `LocalBusiness` en el layout.
 
 ### Verificación
 ```bash
@@ -185,4 +185,4 @@ git add -A && git commit -m "feat: SEO optimization with sitemap and schema"
 | 4. Catalog | ✅ Completado | `feat: catalog system` |
 | 5. Static Pages | ✅ Completado | `feat: static pages` |
 | 6. WhatsApp Cart | ✅ Completado | `feat: whatsapp cart` |
-| 7. SEO | ⏳ Pendiente | - |
+| 7. SEO | ✅ Completado | `feat: seo optimization` |

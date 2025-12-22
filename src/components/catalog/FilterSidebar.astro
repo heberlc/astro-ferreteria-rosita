@@ -1,8 +1,9 @@
 ---
 /**
  * Filter Sidebar Component
- * Sidebar with category, price, and brand filters
+ * Sidebar with category, price, and brand filters - Dynamic counts from Content Collections
  */
+import { getCollection } from "astro:content";
 
 interface Props {
   currentCategory?: string;
@@ -10,16 +11,41 @@ interface Props {
 
 const { currentCategory } = Astro.props;
 
-const categories = [
-  { slug: "construccion", name: "Construcción", count: 45 },
-  { slug: "gasfiteria", name: "Gasfitería", count: 32 },
-  { slug: "electricidad", name: "Electricidad", count: 28 },
-  { slug: "pinturas", name: "Pinturas", count: 24 },
-  { slug: "ferreteria", name: "Ferretería", count: 67 },
-  { slug: "ceramicos", name: "Cerámicos", count: 18 },
-];
+// Get all products and categories from Content Collections
+const allProducts = await getCollection("products");
+const categoriesData = await getCollection("categories");
 
-const brands = ["Pavco", "Celima", "Truper", "Stanley", "Dewalt", "CPP"];
+// Calculate product count per category
+const categoryCountMap = new Map<string, number>();
+allProducts.forEach((product) => {
+  const cat = product.data.category;
+  categoryCountMap.set(cat, (categoryCountMap.get(cat) || 0) + 1);
+});
+
+// Build categories with real counts
+const categories = categoriesData
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99))
+  .map((cat) => ({
+    slug: cat.data.slug,
+    name: cat.data.title,
+    count: categoryCountMap.get(cat.data.slug) || 0,
+  }));
+
+// Get unique brands from products
+const brandsSet = new Set<string>();
+allProducts.forEach((product) => {
+  if (product.data.brand) {
+    brandsSet.add(product.data.brand);
+  }
+});
+const brands = Array.from(brandsSet).sort();
+
+// Calculate price range
+const prices = allProducts
+  .map((p) => p.data.price)
+  .filter((p): p is number => p !== undefined);
+const minPrice = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0;
+const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
 ---
 
 <aside class="hidden lg:flex flex-col w-72 shrink-0 gap-8 h-fit sticky top-28">
@@ -76,21 +102,17 @@ const brands = ["Pavco", "Celima", "Truper", "Stanley", "Dewalt", "CPP"];
       <div
         class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1"
       >
-        S/0
+        S/{minPrice}
       </div>
       <span class="text-text-secondary">-</span>
       <div
         class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1"
       >
-        S/500
+        S/{maxPrice}
       </div>
     </div>
     <div class="relative h-1 w-full bg-border-dark rounded-full mt-2">
-      <div class="absolute left-0 top-0 h-full w-1/2 bg-primary rounded-full">
-      </div>
-      <div
-        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-4 bg-white border-2 border-primary rounded-full shadow cursor-pointer hover:scale-110 transition-transform"
-      >
+      <div class="absolute left-0 top-0 h-full w-full bg-primary rounded-full">
       </div>
     </div>
   </div>
@@ -98,7 +120,7 @@ const brands = ["Pavco", "Celima", "Truper", "Stanley", "Dewalt", "CPP"];
   <!-- Brands -->
   <div class="flex flex-col gap-3">
     <h4 class="text-text-secondary text-xs font-bold uppercase tracking-wider">
-      Marcas
+      Marcas ({brands.length})
     </h4>
     <div class="flex flex-col gap-2">
       {
