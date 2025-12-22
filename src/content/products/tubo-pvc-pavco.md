@@ -5,7 +5,7 @@ description: "Tubo de PVC para instalaciones de agua fría. Alta resistencia y d
 price: 12.90
 category: "gasfiteria"
 brand: "Pavco"
-image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80"
+image: "../../assets/products/tubo-pvc-pavco.png"
 stock: true
 featured: false
 isNew: true

@@ -5,7 +5,7 @@ description: "Ladrillo de arcilla para muros portantes. Alta resistencia y durab
 price: 0.85
 category: "construccion"
 brand: "Pirámide"
-image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+image: "../../assets/products/ladrillo-king-kong.png"
 stock: true
 featured: false
 isNew: false

@@ -5,7 +5,7 @@ description: "Tablero de distribución para empotrar con capacidad de 6 polos."
 price: 45.00
 category: "electricidad"
 brand: "General Electric"
-image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80"
+image: "../../assets/products/tablero-electrico.png"
 stock: true
 featured: false
 isNew: true

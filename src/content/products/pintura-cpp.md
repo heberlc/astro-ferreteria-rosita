@@ -6,7 +6,7 @@ price: 145.00
 originalPrice: 165.00
 category: "pinturas"
 brand: "CPP"
-image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&q=80"
+image: "../../assets/products/pintura-cpp.png"
 stock: true
 featured: false
 isNew: false

@@ -6,7 +6,7 @@ price: 389.99
 originalPrice: 450.00
 category: "ferreteria"
 brand: "Dewalt"
-image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&q=80"
+image: "../../assets/products/taladro-dewalt.png"
 stock: true
 featured: true
 isNew: false

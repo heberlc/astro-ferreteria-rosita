@@ -6,7 +6,7 @@ price: 459.00
 originalPrice: 520.00
 category: "gasfiteria"
 brand: "Trebol"
-image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80"
+image: "../../assets/products/inodoro-trebol.png"
 stock: true
 featured: true
 isNew: false

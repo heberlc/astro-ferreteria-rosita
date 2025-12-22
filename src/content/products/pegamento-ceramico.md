@@ -5,7 +5,7 @@ description: "Pegamento cementicio para instalación de cerámicos y porcelanato
 price: 24.50
 category: "ceramicos"
 brand: "Celima"
-image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80"
+image: "../../assets/products/pegamento-ceramico.png"
 stock: true
 featured: false
 isNew: false

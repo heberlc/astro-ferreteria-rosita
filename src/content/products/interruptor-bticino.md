@@ -5,7 +5,7 @@ description: "Interruptor doble para empotrar. Diseño moderno y fácil instalac
 price: 18.90
 category: "electricidad"
 brand: "Bticino"
-image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80"
+image: "../../assets/products/interruptor-bticino.png"
 stock: true
 featured: false
 isNew: false

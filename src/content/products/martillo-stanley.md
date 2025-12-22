@@ -5,7 +5,7 @@ description: "Martillo de uña curva con mango de fibra de vidrio anti-vibració
 price: 45.90
 category: "ferreteria"
 brand: "Stanley"
-image: "https://images.unsplash.com/photo-1586864387789-628af9feed72?w=600&q=80"
+image: "../../assets/products/martillo-stanley.png"
 stock: true
 featured: true
 isNew: false
