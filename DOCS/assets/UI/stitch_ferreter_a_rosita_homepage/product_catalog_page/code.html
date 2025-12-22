@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ferretería Rosita - Product Catalog</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f96b06",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#181411", // Deep warm charcoal
+                        "surface-dark": "#231f1b", // Slightly lighter for cards
+                        "border-dark": "#3a2f27",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for dark industrial look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #181411; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3a2f27; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f96b06; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-body antialiased selection:bg-primary selection:text-white">
+<div class="flex flex-col min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-[#181411]/90 backdrop-blur-md px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 35.764C39.9944 35.7463 39.9875 35.7155 39.9748 35.6706C39.9436 35.5601 39.8949 35.4259 39.8346 35.2825C39.8168 35.2403 39.7989 35.1993 39.7813 35.1602C38.5103 34.2887 35.9788 33.0607 33.7095 32.5189C30.9875 31.8691 27.6413 31.4783 24 31.4783C20.3587 31.4783 17.0125 31.8691 14.2905 32.5189C12.0012 33.0654 9.44505 34.3104 8.18538 35.1832C8.17384 35.2075 8.16216 35.233 8.15052 35.2592C8.09919 35.3751 8.05721 35.4886 8.02977 35.589C8.00356 35.6848 8.00039 35.7333 8.00004 35.7388C8.00004 35.739 8 35.7393 8.00004 35.7388C8.00004 35.7641 8.0104 36.0767 8.68485 36.6314C9.34546 37.1746 10.4222 37.7531 11.9291 38.2772C14.9242 39.319 19.1919 40 24 40C28.8081 40 33.0758 39.319 36.0709 38.2772C37.5778 37.7531 38.6545 37.1746 39.3151 36.6314C39.9006 36.1499 39.9857 35.8511 39.998 35.764ZM4.95178 32.7688L21.4543 6.30267C22.6288 4.4191 25.3712 4.41909 26.5457 6.30267L43.0534 32.777C43.0709 32.8052 43.0878 32.8338 43.104 32.8629L41.3563 33.8352C43.104 32.8629 43.1038 32.8626 43.104 32.8629L43.1051 32.865L43.1065 32.8675L43.1101 32.8739L43.1199 32.8918C43.1276 32.906 43.1377 32.9246 43.1497 32.9473C43.1738 32.9925 43.2062 33.0545 43.244 33.1299C43.319 33.2792 43.4196 33.489 43.5217 33.7317C43.6901 34.1321 44 34.9311 44 35.7391C44 37.4427 43.003 38.7775 41.8558 39.7209C40.6947 40.6757 39.1354 41.4464 37.385 42.0552C33.8654 43.2794 29.133 44 24 44C18.867 44 14.1346 43.2794 10.615 42.0552C8.86463 41.4464 7.30529 40.6757 6.14419 39.7209C4.99695 38.7775 3.99999 37.4427 3.99999 35.7391C3.99999 34.8725 4.29264 34.0922 4.49321 33.6393C4.60375 33.3898 4.71348 33.1804 4.79687 33.0311C4.83898 32.9556 4.87547 32.8935 4.9035 32.8471C4.91754 32.8238 4.92954 32.8043 4.93916 32.7889L4.94662 32.777L4.95178 32.7688ZM35.9868 29.004L24 9.77997L12.0131 29.004C12.4661 28.8609 12.9179 28.7342 13.3617 28.6282C16.4281 27.8961 20.0901 27.4783 24 27.4783C27.9099 27.4783 31.5719 27.8961 34.6383 28.6282C35.082 28.7342 35.5339 28.8609 35.9868 29.004Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Ferretería Rosita</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group">
+<div class="text-[#bba89b] group-focus-within:text-primary transition-colors flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#bba89b] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search products..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Home</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Catalog</a>
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Deals</a>
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Contact</a>
+</div>
+<div class="flex gap-2">
+<button class="relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-surface-dark hover:bg-[#3a2f27] text-white transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1.5 right-1.5 size-2.5 rounded-full bg-primary ring-2 ring-[#181411]"></span>
+</button>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-surface-dark hover:bg-[#3a2f27] text-white transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 flex px-6 md:px-10 lg:px-16 py-8 max-w-[1600px] w-full mx-auto gap-8">
+<!-- Sidebar / Filters -->
+<aside class="hidden lg:flex flex-col w-72 shrink-0 gap-8 h-fit sticky top-28">
+<!-- Filter Header -->
+<div class="flex items-center justify-between">
+<h3 class="text-white text-lg font-bold">Filters</h3>
+<button class="text-[#bba89b] text-sm hover:text-primary transition-colors">Reset All</button>
+</div>
+<!-- Categories -->
+<div class="flex flex-col gap-4">
+<h4 class="text-[#bba89b] text-xs font-bold uppercase tracking-wider">Categories</h4>
+<div class="flex flex-col gap-2">
+<label class="group flex items-center gap-3 p-3 rounded-lg border border-border-dark bg-surface-dark hover:border-primary/50 cursor-pointer transition-all">
+<input checked="" class="peer h-5 w-5 border-2 border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-[#181411]" name="category" type="radio"/>
+<span class="text-white text-sm font-medium group-hover:text-primary transition-colors">Power Tools</span>
+<span class="ml-auto text-xs text-[#bba89b] bg-[#3a2f27] px-2 py-0.5 rounded-full">120</span>
+</label>
+<label class="group flex items-center gap-3 p-3 rounded-lg border border-border-dark bg-transparent hover:border-border-dark hover:bg-surface-dark cursor-pointer transition-all">
+<input class="peer h-5 w-5 border-2 border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-[#181411]" name="category" type="radio"/>
+<span class="text-[#bba89b] text-sm font-medium peer-checked:text-white group-hover:text-white transition-colors">Hand Tools</span>
+</label>
+<label class="group flex items-center gap-3 p-3 rounded-lg border border-border-dark bg-transparent hover:border-border-dark hover:bg-surface-dark cursor-pointer transition-all">
+<input class="peer h-5 w-5 border-2 border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-[#181411]" name="category" type="radio"/>
+<span class="text-[#bba89b] text-sm font-medium peer-checked:text-white group-hover:text-white transition-colors">Plumbing</span>
+</label>
+<label class="group flex items-center gap-3 p-3 rounded-lg border border-border-dark bg-transparent hover:border-border-dark hover:bg-surface-dark cursor-pointer transition-all">
+<input class="peer h-5 w-5 border-2 border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-[#181411]" name="category" type="radio"/>
+<span class="text-[#bba89b] text-sm font-medium peer-checked:text-white group-hover:text-white transition-colors">Electrical</span>
+</label>
+<label class="group flex items-center gap-3 p-3 rounded-lg border border-border-dark bg-transparent hover:border-border-dark hover:bg-surface-dark cursor-pointer transition-all">
+<input class="peer h-5 w-5 border-2 border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-[#181411]" name="category" type="radio"/>
+<span class="text-[#bba89b] text-sm font-medium peer-checked:text-white group-hover:text-white transition-colors">Safety Gear</span>
+</label>
+</div>
+</div>
+<!-- Price Range -->
+<div class="flex flex-col gap-4">
+<h4 class="text-[#bba89b] text-xs font-bold uppercase tracking-wider">Price Range</h4>
+<div class="flex items-center gap-4 text-white text-sm">
+<div class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1">$0</div>
+<span class="text-[#bba89b]">-</span>
+<div class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1">$500</div>
+</div>
+<div class="relative h-1 w-full bg-[#3a2f27] rounded-full mt-2">
+<div class="absolute left-0 top-0 h-full w-1/2 bg-primary rounded-full"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-4 bg-white border-2 border-primary rounded-full shadow cursor-pointer hover:scale-110 transition-transform"></div>
+</div>
+</div>
+<!-- Brands -->
+<div class="flex flex-col gap-3">
+<h4 class="text-[#bba89b] text-xs font-bold uppercase tracking-wider">Brands</h4>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-border-dark bg-surface-dark text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="text-sm text-[#bba89b] group-hover:text-white transition-colors">Bosch</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-dark bg-surface-dark text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="text-sm text-[#bba89b] group-hover:text-white transition-colors">Makita</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-dark bg-surface-dark text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="text-sm text-[#bba89b] group-hover:text-white transition-colors">DeWalt</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-dark bg-surface-dark text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="text-sm text-[#bba89b] group-hover:text-white transition-colors">Milwaukee</span>
+</label>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap items-center gap-2 mb-2">
+<a class="text-[#bba89b] hover:text-white transition-colors text-sm font-medium" href="#">Home</a>
+<span class="material-symbols-outlined text-[#bba89b] text-base">chevron_right</span>
+<a class="text-[#bba89b] hover:text-white transition-colors text-sm font-medium" href="#">Catalog</a>
+<span class="material-symbols-outlined text-[#bba89b] text-base">chevron_right</span>
+<span class="text-primary text-sm font-medium">Power Tools</span>
+</div>
+<!-- Page Header & Toolbar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-border-dark pb-6">
+<div>
+<h1 class="text-white text-3xl md:text-4xl font-bold tracking-tight mb-2">Power Tools</h1>
+<p class="text-[#bba89b] text-sm">Showing 1-9 of 120 products</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative group">
+<button class="flex items-center gap-2 bg-surface-dark border border-border-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:border-[#bba89b] transition-colors">
+<span class="material-symbols-outlined text-lg">sort</span>
+                                Sort by: Featured
+                                <span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+</div>
+<div class="flex bg-surface-dark rounded-lg p-1 border border-border-dark">
+<button class="p-1.5 rounded bg-[#3a2f27] text-white shadow-sm">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-[#bba89b] hover:text-white hover:bg-[#3a2f27]/50 transition-colors">
+<span class="material-symbols-outlined text-xl">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10">
+<div class="absolute top-3 left-3 z-10 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">New Arrival</div>
+<button class="absolute top-3 right-3 z-10 text-[#bba89b] hover:text-primary p-1.5 bg-[#181411]/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<div class="relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden">
+<img alt="Cordless Drill" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500 mix-blend-overlay opacity-90" data-alt="Yellow cordless drill on dark surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAolJu5ugWxExlLY0ZGZowk6FqVtmY0mJA-nPkor0JG_VK2ruzy6dqkzYM5JZPWANx1Xta32Dkl3U5CggEoor3s-bBoMGeK9P8B1iCEzYWGOnjPzfCqdOgAlX08nTWO46e7ZwdlMOnrnlPEsljFuDLQXzvMHav4HQ55-jHllWz2jwI8zJB-3MRPZlKGy8xFVvTchKX36-RINc3_VdO6v_lU4uTIU30aVAoWg9LDvjz8-sDuWhFm0JqRkOGb0hdqd7hBmpdKOf31RUro"/>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current text-[#4a4a4a]">star</span>
+<span class="text-[#bba89b] text-xs ml-1">(42)</span>
+</div>
+<h3 class="text-white font-semibold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">DeWalt 20V MAX Cordless Drill Driver Kit</h3>
+<p class="text-[#bba89b] text-sm mb-4">Includes 2 batteries and charger</p>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="text-[#bba89b] text-xs line-through">$159.00</span>
+<span class="text-white text-xl font-bold">$129.00</span>
+</div>
+<button class="bg-primary hover:bg-orange-600 text-white p-2.5 rounded-lg transition-colors shadow-lg shadow-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10">
+<button class="absolute top-3 right-3 z-10 text-[#bba89b] hover:text-primary p-1.5 bg-[#181411]/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<div class="relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden">
+<img alt="Hammer" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500 mix-blend-normal opacity-90" data-alt="Red hammer lying on a wooden workbench" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxj0TsPBWw79EdKI0ztemL1M6Akoa1ZDooWLlkKNQjKgk9F9VJrJM6cmzoe85xJTYgduhoZrLwIsrM954ZQTdBcmtT6OJcXIjGIHJ8PhTfTRUYGCoqTHPBD9WBEH3V9RWjLdsb2qrtEk_lUuBaRi957D-uy9P216htWUBCpjQtP97a3eQqrOSVz3cKuotOlHQzrjt_PN3pDBdNl22h0WP2l5-94wXc7_VXWK9QTppCmvmsMMxXRtesQjFTtB9lCkvTMA1WEhNonHzu"/>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="text-[#bba89b] text-xs ml-1">(128)</span>
+</div>
+<h3 class="text-white font-semibold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">Milwaukee General Purpose Hammer</h3>
+<p class="text-[#bba89b] text-sm mb-4">Fiberglass handle, anti-vibration</p>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="text-white text-xl font-bold">$24.99</span>
+</div>
+<button class="bg-[#3a2f27] hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center group-hover:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10">
+<div class="absolute top-3 left-3 z-10 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">-15% OFF</div>
+<button class="absolute top-3 right-3 z-10 text-[#bba89b] hover:text-primary p-1.5 bg-[#181411]/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<div class="relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden">
+<img alt="Circular Saw" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500 mix-blend-overlay opacity-90" data-alt="Circular saw cutting wood plank" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdMl2yTDWNLZZLWQpSNmtT_Y9GCodqlPhG0QeNQLVAH8XJJ7fVYbdWyqnAqpxG8SqvIYByVtTl67KoALf3fKUwl4JN9pR0332Yb1WPyqEf1bqRqu_cMKEQ4POPdnGZOCqx1qnUudHuDfFOqet83MzCaxAovFxxUFrhlN1P9PksuTaqAkkNxfD6DT90Ox4MnFbWUWQk1Vmm7f4HGNwAnPLM0gt1AbBeh4hQ15Kgbu9MPdA1eTwtmhYeRjIeDXMR4NCIzPhuqVfZF-j1"/>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current text-[#4a4a4a]">star_half</span>
+<span class="text-[#bba89b] text-xs ml-1">(85)</span>
+</div>
+<h3 class="text-white font-semibold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">Bosch 7-1/4 in. Circular Saw</h3>
+<p class="text-[#bba89b] text-sm mb-4">15 Amp motor, lightweight design</p>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="text-[#bba89b] text-xs line-through">$139.00</span>
+<span class="text-white text-xl font-bold">$118.00</span>
+</div>
+<button class="bg-[#3a2f27] hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center group-hover:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10">
+<button class="absolute top-3 right-3 z-10 text-[#bba89b] hover:text-primary p-1.5 bg-[#181411]/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<div class="relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden">
+<img alt="Tape Measure" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500 mix-blend-normal opacity-90" data-alt="Blue tape measure on wood background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC_5qtWwXIBHYUF4tEsKCaDgtH0JXnkdTB9ySpDJOVxMTqNh4g62tq3iQMpyVlVtgYSACGiaHKSHhWP1i-MFhLXbBfOOJCLmAdFZIpUA6BFJ7mUy2uR3OF-VN5nieFkfKmIeVIxg0JPzMCPnG739RGRZp7Wjreif4Tn3GzS54bGeECjRiuQoGiJIO1rT32p37ohgic7SriFGK2AIVJvbKywFi_JWEsmI-dPDW2PQVav9oogPtvuA5lST03exqCcN3RiQePyAvLL2wG"/>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="text-[#bba89b] text-xs ml-1">(210)</span>
+</div>
+<h3 class="text-white font-semibold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">Stanley FatMax 25 ft Tape Measure</h3>
+<p class="text-[#bba89b] text-sm mb-4">Durable casing, easy to read</p>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="text-white text-xl font-bold">$29.99</span>
+</div>
+<button class="bg-[#3a2f27] hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center group-hover:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10">
+<div class="absolute top-3 left-3 z-10 bg-gray-700 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Out of Stock</div>
+<button class="absolute top-3 right-3 z-10 text-[#bba89b] hover:text-primary p-1.5 bg-[#181411]/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<div class="relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden grayscale">
+<img alt="Pliers Set" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500 mix-blend-overlay opacity-70" data-alt="Assorted pliers on a table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdq6J__FkVm6PL2teSybkreccMlYBxjnhoYGF5IyQr-TCUyxEAeY9dk77-W6jdK-uyCe6blW5sHeY7hTju3gYjLo4HeUwRzK8hvrYfahz0CZjXYhZqguutDqrx90XaZvcPDvJK5Pv5vFJmMxLXuBbSkXICPao_pJXs4tU7XTUIbjI7Ga_XmM7KaeydtFdOzn0dJUpXfZWaoZZGL8BkA0yd9vf0U_6OEVeGkiR0jBKfB48fBPXwN-Ce3UNgNV_tdv-L8JNO1hUjB-ac"/>
+</div>
+<div class="flex flex-col flex-1 p-5 opacity-75">
+<div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current text-[#4a4a4a]">star_border</span>
+<span class="text-[#bba89b] text-xs ml-1">(15)</span>
+</div>
+<h3 class="text-white font-semibold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">Kobalt 3-Piece Pliers Set</h3>
+<p class="text-[#bba89b] text-sm mb-4">Includes needle nose, diagonal, slip joint</p>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="text-white text-xl font-bold">$34.99</span>
+</div>
+<button class="bg-[#3a2f27] text-white/50 cursor-not-allowed p-2.5 rounded-lg flex items-center justify-center" disabled="">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10">
+<button class="absolute top-3 right-3 z-10 text-[#bba89b] hover:text-primary p-1.5 bg-[#181411]/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<div class="relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden">
+<img alt="Safety Gear" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500 mix-blend-normal opacity-90" data-alt="Safety helmet and gloves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMpWdh4l_3zRpfNqe5L3DI0DKwOe16jm_C2Agq_kqiRruLhlEarUm12OTkghHjycllCy9kBkz5xGYAT_N6azCg8QLP58N65sd5JmGA9ntBWb7fckx-GN1-r0eKyGnyKXVZjQG0DcTwcl8Yvz95O1p3-6oR30QHWUzwy4E8M5-yZ6FhTa3uvR6_gvarWfgvXvg_zBF_CMHye9UzQ2Q5L_FaHZlk4OEFgTb2vS37F8yrSgRzbaUAOwmQxJuyKfZEVgXarWrtJC5Zs6pV"/>
+</div>
+<div class="flex flex-col flex-1 p-5">
+<div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="material-symbols-outlined text-base fill-current">star</span>
+<span class="text-[#bba89b] text-xs ml-1">(67)</span>
+</div>
+<h3 class="text-white font-semibold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">3M SecureFit Safety Helmet</h3>
+<p class="text-[#bba89b] text-sm mb-4">Vented, ratchet adjustment</p>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="text-white text-xl font-bold">$22.00</span>
+</div>
+<button class="bg-[#3a2f27] hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center group-hover:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center mt-12 mb-8">
+<nav class="flex items-center gap-2">
+<button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-[#bba89b] hover:text-white hover:border-[#bba89b] transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-lg border border-primary bg-primary text-white font-bold shadow-lg shadow-primary/20">1</button>
+<button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-[#bba89b] hover:text-white hover:border-[#bba89b] transition-all">2</button>
+<button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-[#bba89b] hover:text-white hover:border-[#bba89b] transition-all">3</button>
+<span class="text-[#bba89b] px-2">...</span>
+<button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-[#bba89b] hover:text-white hover:border-[#bba89b] transition-all">12</button>
+<button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-[#bba89b] hover:text-white hover:border-[#bba89b] transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</nav>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="mt-auto bg-[#130f0c] border-t border-border-dark py-12 px-10">
+<div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between gap-10">
+<div class="flex flex-col gap-4 max-w-sm">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold">Ferretería Rosita</h2>
+</div>
+<p class="text-[#bba89b] text-sm leading-relaxed">Your premium destination for industrial-grade tools and hardware. Quality you can trust for every project.</p>
+</div>
+<div class="flex flex-wrap gap-12 lg:gap-24">
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold text-sm uppercase tracking-wider">Shop</h4>
+<a class="text-[#bba89b] hover:text-primary transition-colors text-sm" href="#">All Products</a>
+<a class="text-[#bba89b] hover:text-primary transition-colors text-sm" href="#">New Arrivals</a>
+<a class="text-[#bba89b] hover:text-primary transition-colors text-sm" href="#">Deals &amp; Offers</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold text-sm uppercase tracking-wider">Support</h4>
+<a class="text-[#bba89b] hover:text-primary transition-colors text-sm" href="#">Contact Us</a>
+<a class="text-[#bba89b] hover:text-primary transition-colors text-sm" href="#">Shipping Policy</a>
+<a class="text-[#bba89b] hover:text-primary transition-colors text-sm" href="#">Returns</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold text-sm uppercase tracking-wider">Follow Us</h4>
+<div class="flex gap-4">
+<a class="text-[#bba89b] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-[#bba89b] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-[1600px] mx-auto mt-12 pt-8 border-t border-border-dark flex justify-between items-center text-xs text-[#bba89b]">
+<p>© 2024 Ferretería Rosita. All rights reserved.</p>
+<div class="flex gap-4">
+<span>Privacy Policy</span>
+<span>Terms of Service</span>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

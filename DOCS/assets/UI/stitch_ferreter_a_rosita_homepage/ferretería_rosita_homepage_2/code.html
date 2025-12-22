@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nosotros - Ferretería Rosita</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff6a00",
+                        "primary-hover": "#e65f00",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#1A1A1A", 
+                        "surface-dark": "#252525",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(37, 37, 37, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-white">
+<header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 transition-all duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20 gap-8">
+<div class="flex items-center gap-3 shrink-0 cursor-pointer">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-[24px]">construction</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-white hidden sm:block">Ferretería Rosita</span>
+</div>
+<div class="hidden md:flex flex-1 max-w-2xl mx-auto">
+<div class="relative w-full group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-white/50 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="block w-full h-12 pl-10 pr-4 rounded-lg bg-[#2a2a2a] border-transparent focus:border-primary focus:bg-[#333] focus:ring-1 focus:ring-primary text-white placeholder-white/40 transition-all duration-200" placeholder="Buscar herramientas, materiales, marcas..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 shrink-0">
+<nav class="hidden lg:flex items-center gap-6 mr-4">
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Inicio</a>
+<a class="text-sm font-bold text-primary transition-colors" href="#">Nosotros</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Catálogo</a>
+</nav>
+<div class="flex items-center gap-2">
+<button class="relative p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors group">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="relative p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_cart</span>
+<span class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">0</span>
+</button>
+</div>
+<button class="lg:hidden p-2 text-gray-300 hover:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-20">
+<section class="relative h-[500px] w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/90 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-[#1A1A1A]/40 z-10"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="Team of hardware store employees working together" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAq1F0yJhTQ6VjT-vPiYaR-70P1jj3JIixxVyWQPwlzA9mmuFaovv4s98kvtDdB9z04tyGTr6WP58-zTzlmifTugfPLsyjVZ1qxjdNHDFOsnODNKDy-IAa9EktBvBSn046P3QAWjo5oVLudaIhUpKGYUbMvGTHwIl6sW6zTB2KmUF-L1wJTHw-PdUXZrBvBDoh2j868IJf6pZbrD2eiHDrfQ7LPziK403ED9z2ACLHjwnBIMAsS4pMEKecLtS9JFUFVV8StS3Ae-8bC');">
+</div>
+</div>
+<div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="max-w-3xl flex flex-col gap-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 w-fit backdrop-blur-sm">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Sobre Nosotros</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-black text-white leading-[1.1] tracking-tight">
+                    Construyendo Confianza <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">Desde 1995</span>
+</h1>
+<p class="text-lg text-gray-300 max-w-xl leading-relaxed">
+                    Más que una ferretería, somos el aliado estratégico para contratistas, profesionales y familias que buscan calidad y expertise técnico.
+                </p>
+</div>
+</div>
+</section>
+<section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<div class="absolute -inset-4 bg-primary/20 blur-2xl rounded-full opacity-40"></div>
+<div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+<img alt="Original store front from 1995" class="w-full h-auto object-cover opacity-90 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPXt9oB3Qnq4zLDsVYqUaK9lfE94UHOtFsMKtWYoRDm16EROhGinhfNjGdgJ5K_pMxrzmldZpimb_VgnvoGQqWNZnP24AGPsTWc3zT3xaD7X4ME4wZ1OEMZbJw6DF0JyIuWbRTyJTGc80KnI1UjHF25X_yb4Tt2Gob_-aJEF9oiMEKuq0JTkryCjb9ZCXSrw19mvM1GtwiWr0YA0d1w_lCRY4BnqCTi0Xi5MTkCmzqtmbYKPicwuTl7FfWxaRYv8CPmjtvuSdKIbHe"/>
+</div>
+<div class="absolute -bottom-6 -right-6 glass-card p-6 rounded-xl max-w-xs border-l-4 border-l-primary hidden md:block">
+<p class="text-4xl font-black text-white mb-1">28+</p>
+<p class="text-sm text-gray-400">Años de experiencia sirviendo a la comunidad con excelencia.</p>
+</div>
+</div>
+<div class="space-y-6">
+<h2 class="text-3xl md:text-4xl font-bold text-white">Nuestra Historia</h2>
+<div class="w-20 h-1.5 bg-primary rounded-full"></div>
+<div class="space-y-4 text-gray-300 leading-relaxed">
+<p>
+                        Ferretería Rosita nació de un pequeño sueño en el corazón de la zona industrial. Fundada por Don Roberto Rosales, comenzamos con un mostrador modesto y una misión clara: ofrecer no solo herramientas, sino soluciones reales a los problemas de nuestros clientes.
+                    </p>
+<p>
+                        A través de las décadas, hemos crecido junto con la ciudad. Lo que empezó como un negocio familiar de tres empleados, hoy es un referente en el sector ferretero, con un catálogo de más de 5,000 productos y un equipo de asesores técnicos especializados.
+                    </p>
+<p>
+                        A pesar de nuestro crecimiento y modernización, mantenemos intactos los valores que nos vieron nacer: honestidad en el trato, pasión por el servicio y compromiso inquebrantable con la calidad.
+                    </p>
+</div>
+<div class="pt-4">
+<button class="text-primary font-bold hover:text-white transition-colors flex items-center gap-2 group">
+                        Conoce más de nuestros orígenes
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-[#202020] border-y border-white/5 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="glass-card p-10 rounded-2xl hover:bg-white/5 transition-all group">
+<div class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">Nuestra Misión</h3>
+<p class="text-gray-400 leading-relaxed">
+                        Proveer materiales de construcción y herramientas de la más alta calidad, acompañados de una asesoría técnica experta que garantice el éxito de cada proyecto, desde pequeñas reparaciones hogareñas hasta grandes obras de infraestructura.
+                    </p>
+</div>
+<div class="glass-card p-10 rounded-2xl hover:bg-white/5 transition-all group">
+<div class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">visibility</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">Nuestra Visión</h3>
+<p class="text-gray-400 leading-relaxed">
+                        Ser reconocidos como la cadena de ferreterías líder en innovación y servicio al cliente en la región, impulsando el desarrollo sostenible de la construcción y mejorando la calidad de vida de nuestra comunidad a través de soluciones eficientes.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nuestros Valores</h2>
+<p class="text-gray-400 max-w-2xl mx-auto">Los pilares fundamentales que guían cada una de nuestras decisiones y relaciones con nuestros clientes.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-[#2a2a2a] p-6 rounded-xl border border-white/5 hover:border-primary/40 transition-colors text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 mb-4">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<h4 class="text-lg font-bold text-white mb-2">Integridad</h4>
+<p class="text-sm text-gray-400">Actuamos con honestidad y transparencia en cada transacción.</p>
+</div>
+<div class="bg-[#2a2a2a] p-6 rounded-xl border border-white/5 hover:border-primary/40 transition-colors text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/20 text-green-400 mb-4">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<h4 class="text-lg font-bold text-white mb-2">Calidad</h4>
+<p class="text-sm text-gray-400">Solo trabajamos con marcas y productos que cumplen altos estándares.</p>
+</div>
+<div class="bg-[#2a2a2a] p-6 rounded-xl border border-white/5 hover:border-primary/40 transition-colors text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-yellow-500/20 text-yellow-400 mb-4">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<h4 class="text-lg font-bold text-white mb-2">Innovación</h4>
+<p class="text-sm text-gray-400">Buscamos constantemente nuevas soluciones para facilitar tu trabajo.</p>
+</div>
+<div class="bg-[#2a2a2a] p-6 rounded-xl border border-white/5 hover:border-primary/40 transition-colors text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 mb-4">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<h4 class="text-lg font-bold text-white mb-2">Trabajo en Equipo</h4>
+<p class="text-sm text-gray-400">Colaboramos internamente para brindarte la mejor experiencia.</p>
+</div>
+</div>
+</section>
+<section class="py-20 bg-[#1f1f1f] relative">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div>
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Nuestro Equipo</h2>
+<p class="text-gray-400">Conoce a los expertos detrás de Ferretería Rosita.</p>
+</div>
+<button class="px-6 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-colors text-sm font-medium">
+                    Unirse al equipo
+                </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="group relative">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-[#2a2a2a] mb-4">
+<img alt="Roberto Rosales" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDySihwFPLmUltEI8eYzUEFimC-MIytXiNEaqAV8nJt8BA_0PRhRYK1lJPlG8Ved0NkVGohALZXxdky36PzL2RTWQARsg3rOinAESsQQ7zk341dLS6xaAkq5UsJY9K11ev9sk29_Mld6TiGW6Sm60V8-WOm3qG6k9bG-ARx_UylAXpsjLlydjoemp9yFi5NZ-oUhAW3_0BT2lYc2N22cSMD4GaI2v9m5bEDMWY-gXQ-a9JOOD_TVlJqQdODmH7Bm8G_14icBwlo948z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+<div class="flex gap-2">
+<a class="p-2 bg-white/10 hover:bg-primary rounded-full text-white backdrop-blur-sm transition-colors" href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white">Roberto Rosales</h3>
+<p class="text-primary text-sm font-medium mb-2">Fundador &amp; CEO</p>
+<p class="text-gray-400 text-sm line-clamp-2">Liderando con visión y experiencia desde 1995 para construir el futuro.</p>
+</div>
+<div class="group relative">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-[#2a2a2a] mb-4">
+<img alt="Ana García" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuYo1D_OFYOlZd8vhHLUkmvx5eFpTO0o74Wi6eomdP0_orddJ3JlQByv8az2GiFKf32hcKMiMdLem_PR3uTo82TG1N9hhDP2WVb-oTQjDeD3bHZaOU26237JmbSk-T6VkbMQ9GDMVPKj9ixahh4jmsmLR9uMpyJ1Q4P_7VmWX_YoAT06H2SYqbV6iCgQ9xy3A7aVBzAVUfq9j5LE97iiLph6znl1uEpQZWn3uABWqbSM8oU5AyvcHRm8FFV-3PmFxDa_C_wBg8-f8x"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+<div class="flex gap-2">
+<a class="p-2 bg-white/10 hover:bg-primary rounded-full text-white backdrop-blur-sm transition-colors" href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white">Ana García</h3>
+<p class="text-primary text-sm font-medium mb-2">Directora Comercial</p>
+<p class="text-gray-400 text-sm line-clamp-2">Experta en relaciones con proveedores y gestión de grandes cuentas.</p>
+</div>
+<div class="group relative">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-[#2a2a2a] mb-4">
+<img alt="Carlos Méndez" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGEmUeX6cZsJ3pKEdL3N2gQGfJrmwlZfv8ZlhfFwEuIH7TyV_y67Xq5RKwJOCgpAxPnk6zwMWxLDj7hUkuhFp1QilDjsq3wci7tnBt7ud2HR4o5K8bMjUNID-xUi6NLi8lW4o7LoBueVf2PHdSbe-LSsfEmE8s-QqOOJYL_fjCWiQ1X9mbuEzK2Qtw3Pi1c9xzYYzQJWVs7uSkoBUEUzrtSZ_UvdWabiVR0FnCkzxteGR_McQlW26kN8b0qPcV87zCZiWq3scoYdQ7"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+<div class="flex gap-2">
+<a class="p-2 bg-white/10 hover:bg-primary rounded-full text-white backdrop-blur-sm transition-colors" href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white">Carlos Méndez</h3>
+<p class="text-primary text-sm font-medium mb-2">Jefe de Almacén</p>
+<p class="text-gray-400 text-sm line-clamp-2">Garantizando que cada pedido llegue completo y a tiempo a su destino.</p>
+</div>
+<div class="group relative">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden bg-[#2a2a2a] mb-4">
+<img alt="Lucía Torres" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGB9K9gl9XWxmMLvfosjBdzRfnIyH7tMpbxCPV2dp4hRsPu8QrJxSicyswQY8lxsR4GoVTJbc4yGpmfhlXAjMNW1b6IXQLX8NAQOJTNgUUC58nTzahKQem-p149NEKULL_fBmv7hyCmmzrQOSHz1KX23zTPZZzFhnUQ2Qdzmtyu7Q3CwoNQZjbd5DvUNwSM8cH2H_VDpu-9k6_8uUQeeZ2hTB1CLQ3YE9cy2PneNCeRZoQlq7ce26IRBEWaczrRsyed-kBIdPHkazi"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+<div class="flex gap-2">
+<a class="p-2 bg-white/10 hover:bg-primary rounded-full text-white backdrop-blur-sm transition-colors" href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white">Lucía Torres</h3>
+<p class="text-primary text-sm font-medium mb-2">Asesora Técnica</p>
+<p class="text-gray-400 text-sm line-clamp-2">Ingeniera civil dedicada a resolver las dudas más complejas de tus proyectos.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-primary">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
+<div>
+<p class="text-4xl font-black text-white mb-1">50k+</p>
+<p class="text-white/80 text-sm font-medium uppercase tracking-wide">Clientes Felices</p>
+</div>
+<div>
+<p class="text-4xl font-black text-white mb-1">120+</p>
+<p class="text-white/80 text-sm font-medium uppercase tracking-wide">Proveedores</p>
+</div>
+<div>
+<p class="text-4xl font-black text-white mb-1">24h</p>
+<p class="text-white/80 text-sm font-medium uppercase tracking-wide">Soporte Técnico</p>
+</div>
+<div>
+<p class="text-4xl font-black text-white mb-1">100%</p>
+<p class="text-white/80 text-sm font-medium uppercase tracking-wide">Garantía</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 relative overflow-hidden bg-background-dark">
+<div class="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_ui3GRRjDLp0bLz68r64D1eDqNf9EUIdg-EcAhXKE6lg8mEWtigg5EzIn9vsGMrH7ANEpDuWym02oE3ltKKaWq3p3-FhbL98_oQZRxXo1I7Hzr2sxUdDSSQPfwFpmNVRi37ILSLgDLoPiIEWiw7OklY0ykyQf--qZz3MXbjY0ChVZkRqQYk40qSVZfatI82uxy2D0l40KkaK_QLVhjIJEKwpW2jyeLUQGpyWRfYT9kOvX12D-bVN39WZ1yZ8fOPxCmqrLLWSKro23')] bg-cover bg-center opacity-10"></div>
+<div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">¿Listo para iniciar tu próximo proyecto?</h2>
+<p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">Visítanos hoy mismo o contáctanos para recibir una cotización personalizada. Tenemos todo lo que necesitas.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors shadow-lg shadow-primary/25 text-lg">
+                    Ver Catálogo Completo
+                </button>
+<button class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-lg border border-white/10 backdrop-blur-sm transition-colors text-lg">
+                    Contactar Asesor
+                </button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-[#151515] border-t border-white/10 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<div class="flex items-center justify-center w-8 h-8 rounded bg-primary text-white">
+<span class="material-symbols-outlined text-[18px]">construction</span>
+</div>
+<span class="text-xl font-bold text-white">Ferretería Rosita</span>
+</div>
+<p class="text-gray-400 text-sm leading-relaxed">
+                    Tu aliado confiable en construcción y mejoras para el hogar. Calidad profesional al mejor precio desde 1995.
+                </p>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-white transition-colors" href="#">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg>
+</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772 4.902 4.902 0 011.772-1.153c.636-.247 1.363-.416 2.427-.465 1.067-.047 1.409-.06 3.809-.06s2.742.013 3.809.06zm-1.315 3.555a1.275 1.275 0 110 2.55 1.275 1.275 0 010-2.55zm0 13.914c-1.714 0-3.353-.665-4.565-1.877-1.212-1.212-1.877-2.851-1.877-4.565 0-1.714.665-3.353 1.877-4.565 1.212-1.212 2.851-1.877 4.565-1.877 1.714 0 3.353.665 4.565 1.877 1.212 1.212 1.877 2.851 1.877 4.565 0 1.714-.665 3.353-1.877 4.565-1.212 1.212-2.851 1.877-4.565 1.877zm0-7.859a3.294 3.294 0 100 6.588 3.294 3.294 0 000-6.588z" fill-rule="evenodd"></path></svg>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4">Categorías</h3>
+<ul class="space-y-2 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Herramientas Eléctricas</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Plomería y Gas</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Electricidad e Iluminación</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pinturas y Acabados</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Jardinería</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4">Atención al Cliente</h3>
+<ul class="space-y-2 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Rastrea tu pedido</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Políticas de Devolución</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Preguntas Frecuentes</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Facturación</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contacto</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4">Contacto</h3>
+<ul class="space-y-3 text-sm text-gray-400">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg">location_on</span>
+<span>Av. Industrial 1234, Zona Centro, Ciudad de México</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">call</span>
+<span>+52 55 1234 5678</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">mail</span>
+<span>contacto@ferreteriarosita.com</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-gray-500">© 2023 Ferretería Rosita. Todos los derechos reservados.</p>
+<div class="flex gap-6 text-sm text-gray-500">
+<a class="hover:text-white transition-colors" href="#">Privacidad</a>
+<a class="hover:text-white transition-colors" href="#">Términos</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

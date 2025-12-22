@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us - Ferretería Rosita</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f96b06",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#181411", // Updated to match the component's dark bg
+                        "surface-dark": "#27201b",
+                        "border-dark": "#3a2f27",
+                        "text-secondary": "#bba89b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(39, 32, 27, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .map-filter {
+            filter: grayscale(100%) invert(10%) contrast(110%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased">
+<div class="flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-border-dark bg-[#181411]/95 backdrop-blur-md px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<!-- Custom Hardware Icon/Logo Representation -->
+<span class="material-symbols-outlined text-[32px]">construction</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Ferretería Rosita</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Products</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Services</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">About Us</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Contact</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden lg:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group">
+<div class="text-text-secondary flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search products..." value=""/>
+</div>
+</label>
+<div class="flex gap-3">
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-surface-dark hover:bg-border-dark text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-surface-dark hover:bg-border-dark text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-border-dark" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmiCQklh1i_XHSZVuKPPTsoCuVyR8ZRL1CvXiSx3UOjfd9Z__pzJD7AUUsFfRUIXH1rDa_owx-2Elmd6qXvJvVPHnTt_IdEjv1tOBk_KYtPLnUWEctfcgMHodDjYZQiAAPh7l7A4EBx3wi1vA2lCfUAvfgW13WDVa2DY3qhsWuumT6Id6VRPAP3qrucKdEkiesoHdKWoZHNBNq1AI2RcXPcW3bxz2kW5t9Yx2u2xKfTALnI-ZX1QFZUABmlIViB1OQTg1MwmUb7PSE");'></div>
+</div>
+</header>
+<!-- Main Content Wrapper -->
+<main class="flex-grow flex flex-col">
+<!-- Hero Section -->
+<section class="relative">
+<div class="absolute inset-0 bg-gradient-to-b from-[#181411]/80 to-[#181411] z-10 pointer-events-none"></div>
+<div class="flex min-h-[320px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-4 relative" data-alt="Industrial warehouse shelves blurred background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxYe2YEHqw2pcgR0zh52JFZDZvJ4pjka-Cr44FNyyNhl5dITsKc1_nBmLa9MtPjAD7ltyR2fkUp8FJ_I7FE8LwE6sWggTsXEFL-beXZQ6DC59F9HGp-z26ZeLUctnH-2dzJgt5411RShW00QYCoH5wzHQ1J9SS0Rs740IWfVq4lgBAyCaIrfAYhiAn_1xcm5VQGp9TxEs_UA99PJowuZqy0HwlwhmPxviC3j3_Rbx3qOtwDRoSk96PD_4VS3OXtokPEA1M0C_anmNU");'>
+<div class="relative z-20 flex flex-col gap-3 text-center max-w-[800px]">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-6xl">
+                            Get in Touch
+                        </h1>
+<p class="text-text-secondary text-lg font-normal leading-normal max-w-2xl mx-auto">
+                            Whether you need a quote for bulk materials or advice on your next DIY project, our team of experts is here to help.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Content Grid: Form & Info -->
+<div class="px-4 md:px-10 lg:px-40 py-10 flex justify-center -mt-10 z-20 relative">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1 w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Contact Form (Span 7) -->
+<div class="lg:col-span-7 flex flex-col">
+<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl">
+<div>
+<h2 class="text-white text-2xl font-bold leading-tight">Send us a message</h2>
+<p class="text-text-secondary mt-2 text-sm">Fill out the form below and we'll get back to you within 24 hours.</p>
+</div>
+<form class="flex flex-col gap-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">First Name</span>
+<input class="form-input flex w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-surface-dark/50 h-12 placeholder:text-text-secondary px-4 text-base" placeholder="John" type="text"/>
+</label>
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">Last Name</span>
+<input class="form-input flex w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-surface-dark/50 h-12 placeholder:text-text-secondary px-4 text-base" placeholder="Doe" type="text"/>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">Email Address</span>
+<input class="form-input flex w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-surface-dark/50 h-12 placeholder:text-text-secondary px-4 text-base" placeholder="john@example.com" type="email"/>
+</label>
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">Subject</span>
+<div class="relative">
+<select class="form-select flex w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-surface-dark/50 h-12 px-4 text-base appearance-none pr-10">
+<option>General Inquiry</option>
+<option>Product Quote</option>
+<option>Support</option>
+<option>Bulk Order</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</label>
+</div>
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">Message</span>
+<textarea class="form-textarea flex w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-border-dark bg-surface-dark/50 min-h-[160px] placeholder:text-text-secondary p-4 text-base resize-y" placeholder="How can we help you today?"></textarea>
+</label>
+<button class="mt-2 flex w-full md:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-8 bg-primary hover:bg-orange-600 transition-colors text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-orange-900/20" type="button">
+                                        Send Message
+                                    </button>
+</form>
+</div>
+</div>
+<!-- Right Column: Contact Info & Map (Span 5) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Contact Info Cards -->
+<div class="flex flex-col gap-4">
+<div class="flex gap-4 rounded-xl border border-border-dark bg-surface-dark p-5 items-start hover:border-primary/50 transition-colors group">
+<div class="flex-shrink-0 size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-white text-lg font-bold">Visit Us</h3>
+<p class="text-text-secondary text-sm leading-relaxed">123 Industrial Ave, Sector 4,<br/>Industrial District, Cityname 90210</p>
+</div>
+</div>
+<div class="flex gap-4 rounded-xl border border-border-dark bg-surface-dark p-5 items-start hover:border-primary/50 transition-colors group">
+<div class="flex-shrink-0 size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-white text-lg font-bold">Call Us</h3>
+<p class="text-text-secondary text-sm leading-relaxed">Mon-Fri from 8am to 6pm.</p>
+<p class="text-white font-medium mt-1">+1 (555) 019-2834</p>
+</div>
+</div>
+<div class="flex gap-4 rounded-xl border border-border-dark bg-surface-dark p-5 items-start hover:border-primary/50 transition-colors group">
+<div class="flex-shrink-0 size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-white text-lg font-bold">Email Us</h3>
+<p class="text-text-secondary text-sm leading-relaxed">For general inquiries and quotes.</p>
+<p class="text-white font-medium mt-1">support@ferreteriarosita.com</p>
+</div>
+</div>
+</div>
+<!-- Map Section -->
+<div class="rounded-xl overflow-hidden border border-border-dark h-full min-h-[300px] relative group">
+<div class="absolute inset-0 bg-cover bg-center map-filter opacity-80 group-hover:opacity-100 transition-opacity duration-500" data-alt="Map showing store location in city grid" data-location="Cityname Industrial District" style='background-image: url("https://placeholder.pics/svg/300");'></div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="size-12 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-lg transform -translate-y-4">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+</div>
+<div class="absolute bottom-4 right-4">
+<button class="bg-white text-black text-xs font-bold py-2 px-4 rounded shadow hover:bg-gray-100 transition-colors">
+                                        Open in Maps
+                                     </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FAQ or Additional Help Section -->
+<section class="px-4 md:px-10 lg:px-40 py-20 bg-surface-dark border-t border-border-dark">
+<div class="max-w-[960px] mx-auto text-center flex flex-col gap-8">
+<h2 class="text-white text-3xl font-bold">Frequently Asked Questions</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+<div class="p-6 rounded-lg bg-background-dark border border-border-dark">
+<h4 class="text-white font-bold mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">help</span> Do you offer delivery?</h4>
+<p class="text-text-secondary text-sm">Yes, we offer same-day delivery for local orders placed before 12 PM. Shipping rates vary by distance and load size.</p>
+</div>
+<div class="p-6 rounded-lg bg-background-dark border border-border-dark">
+<h4 class="text-white font-bold mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">help</span> Can I open a trade account?</h4>
+<p class="text-text-secondary text-sm">Absolutely. Professional contractors can apply for a trade account to receive bulk pricing and 30-day payment terms.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0f0c0a] border-t border-border-dark py-12 px-4 md:px-10 lg:px-40">
+<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-10">
+<div class="flex flex-col gap-4 max-w-xs">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-primary">construction</span>
+<span class="text-lg font-bold">Ferretería Rosita</span>
+</div>
+<p class="text-text-secondary text-sm">Your trusted partner for high-quality hardware, tools, and construction materials since 1985.</p>
+</div>
+<div class="flex flex-wrap gap-10 md:gap-20">
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold">Company</h4>
+<a class="text-text-secondary hover:text-primary text-sm transition-colors" href="#">About Us</a>
+<a class="text-text-secondary hover:text-primary text-sm transition-colors" href="#">Careers</a>
+<a class="text-text-secondary hover:text-primary text-sm transition-colors" href="#">Blog</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold">Support</h4>
+<a class="text-text-secondary hover:text-primary text-sm transition-colors" href="#">Help Center</a>
+<a class="text-text-secondary hover:text-primary text-sm transition-colors" href="#">Return Policy</a>
+<a class="text-text-secondary hover:text-primary text-sm transition-colors" href="#">Contact Us</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-white font-bold">Social</h4>
+<div class="flex gap-4">
+<a class="text-text-secondary hover:text-white transition-colors" href="#">
+<!-- Simple placeholder for social icons -->
+<div class="size-6 bg-border-dark rounded-full flex items-center justify-center text-[10px]">FB</div>
+</a>
+<a class="text-text-secondary hover:text-white transition-colors" href="#">
+<div class="size-6 bg-border-dark rounded-full flex items-center justify-center text-[10px]">IG</div>
+</a>
+<a class="text-text-secondary hover:text-white transition-colors" href="#">
+<div class="size-6 bg-border-dark rounded-full flex items-center justify-center text-[10px]">X</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto mt-12 pt-8 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-secondary">
+<p>© 2023 Ferretería Rosita. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white" href="#">Privacy Policy</a>
+<a class="hover:text-white" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
