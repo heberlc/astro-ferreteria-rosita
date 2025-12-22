@@ -9,6 +9,8 @@ image: "../../assets/products/esmalte-cpp.png"
 stock: true
 featured: false
 isNew: false
+rating: 0
+reviewCount: 0
 features:
   - "Alto brillo"
   - "Para metal y madera"

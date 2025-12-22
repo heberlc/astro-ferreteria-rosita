@@ -9,6 +9,8 @@ image: "../../assets/products/valvula-esferica.png"
 stock: true
 featured: false
 isNew: true
+rating: 0
+reviewCount: 0
 features:
   - "Diámetro: 1/2 pulgada"
   - "Material: PVC"

@@ -9,6 +9,8 @@ image: "../../assets/products/martillo-stanley.png"
 stock: true
 featured: true
 isNew: false
+rating: 0
+reviewCount: 0
 features:
   - "Peso: 16 oz (450g)"
   - "Mango de fibra de vidrio"

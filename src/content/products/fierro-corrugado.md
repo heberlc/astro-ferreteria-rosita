@@ -9,6 +9,8 @@ image: "../../assets/products/fierro-corrugado.png"
 stock: true
 featured: false
 isNew: false
+rating: 0
+reviewCount: 0
 features:
   - "Diámetro: 1/2 pulgada (12mm)"
   - "Longitud: 9 metros"

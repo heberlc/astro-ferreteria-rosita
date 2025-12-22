@@ -3,7 +3,7 @@ title: "Pinturas"
 slug: "pinturas"
 description: "Pinturas látex, esmaltes, barnices, selladores y accesorios de pintura."
 icon: "format_paint"
-image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&q=80"
+image: "../../assets/categories/pinturas.jpg"
 order: 4
 ---
 

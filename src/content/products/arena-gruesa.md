@@ -9,6 +9,8 @@ image: "../../assets/products/arena-gruesa.png"
 stock: true
 featured: false
 isNew: false
+rating: 0
+reviewCount: 0
 features:
   - "Peso: 40 kg"
   - "Granulometría gruesa"

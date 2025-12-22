@@ -9,6 +9,8 @@ image: "../../assets/products/interruptor-bticino.png"
 stock: true
 featured: false
 isNew: false
+rating: 0
+reviewCount: 0
 features:
   - "Doble interruptor"
   - "10 Amperios"

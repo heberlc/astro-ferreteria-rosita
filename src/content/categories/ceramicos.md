@@ -3,7 +3,7 @@ title: "Cerámicos"
 slug: "ceramicos"
 description: "Porcelanatos, mayólicas, pegamentos, fraguas y herramientas de instalación."
 icon: "grid_view"
-image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80"
+image: "../../assets/categories/ceramicos.jpg"
 order: 6
 ---
 

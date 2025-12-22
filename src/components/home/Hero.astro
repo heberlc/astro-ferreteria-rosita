@@ -3,6 +3,8 @@
  * Hero Section Component
  * Full-width hero with gradient overlay and CTA
  */
+import { Image } from "astro:assets";
+import heroImage from "../../assets/hero.jpg";
 ---
 
 <section
@@ -18,11 +20,12 @@
       class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-background-dark/40 z-10"
     >
     </div>
-    <div
-      class="w-full h-full bg-cover bg-center"
-      style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80');"
-    >
-    </div>
+    <Image
+      src={heroImage}
+      alt="Ferretería Rosita - Materiales de construcción"
+      class="w-full h-full object-cover"
+      loading="eager"
+    />
   </div>
 
   <!-- Content -->

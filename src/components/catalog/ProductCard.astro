@@ -6,6 +6,7 @@
  */
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import { FEATURES } from "../../config/site";
 
 interface Props {
   title: string;
@@ -113,30 +114,31 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
   <div class="flex flex-col flex-1 p-5">
     <!-- Rating -->
     {
-      rating > 0 ? (
-        <div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
-          {Array.from({ length: fullStars }).map(() => (
-            <span class="material-symbols-outlined text-base">star</span>
-          ))}
-          {hasHalfStar && (
-            <span class="material-symbols-outlined text-base">star_half</span>
-          )}
-          {Array.from({ length: emptyStars }).map(() => (
-            <span class="material-symbols-outlined text-base text-text-muted">
-              star_border
-            </span>
-          ))}
-          {reviewCount > 0 && (
-            <span class="text-text-secondary text-xs ml-1">
-              ({reviewCount})
-            </span>
-          )}
-        </div>
-      ) : (
-        <div class="flex items-center gap-1 mb-2 text-text-muted text-sm">
-          <span class="text-xs">Sin reseñas</span>
-        </div>
-      )
+      FEATURES.showProductReviews &&
+        (rating > 0 ? (
+          <div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+            {Array.from({ length: fullStars }).map(() => (
+              <span class="material-symbols-outlined text-base">star</span>
+            ))}
+            {hasHalfStar && (
+              <span class="material-symbols-outlined text-base">star_half</span>
+            )}
+            {Array.from({ length: emptyStars }).map(() => (
+              <span class="material-symbols-outlined text-base text-text-muted">
+                star_border
+              </span>
+            ))}
+            {reviewCount > 0 && (
+              <span class="text-text-secondary text-xs ml-1">
+                ({reviewCount})
+              </span>
+            )}
+          </div>
+        ) : (
+          <div class="flex items-center gap-1 mb-2 text-text-muted text-sm">
+            <span class="text-xs">Sin reseñas</span>
+          </div>
+        ))
     }
 
     <!-- Title -->

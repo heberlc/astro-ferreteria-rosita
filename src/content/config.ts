@@ -41,12 +41,12 @@ const products = defineCollection({
  */
 const categories = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/categories" }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     slug: z.string(),
     description: z.string(),
     icon: z.string(), // Material Symbols icon name
-    image: z.string(),
+    image: z.union([image(), z.string()]), // Supports both local images and URLs
     order: z.number().default(0),
   }),
 });

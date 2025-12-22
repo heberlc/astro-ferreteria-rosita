@@ -9,6 +9,8 @@ image: "../../assets/products/ladrillo-king-kong.png"
 stock: true
 featured: false
 isNew: false
+rating: 0
+reviewCount: 0
 features:
   - "Dimensiones: 9x13x24 cm"
   - "18 huecos"

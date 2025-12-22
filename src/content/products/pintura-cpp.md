@@ -11,6 +11,8 @@ stock: true
 featured: false
 isNew: false
 discount: 12
+rating: 0
+reviewCount: 0
 features:
   - "Acabado: Mate"
   - "Rendimiento: 45-50 m²/galón"

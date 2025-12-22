@@ -9,6 +9,8 @@ image: "../../assets/products/tablero-electrico.png"
 stock: true
 featured: false
 isNew: true
+rating: 0
+reviewCount: 0
 features:
   - "6 polos"
   - "Para empotrar"

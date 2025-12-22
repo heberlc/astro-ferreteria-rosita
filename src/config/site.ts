@@ -68,6 +68,12 @@ export const CATALOG = {
   maxVisiblePaginationPages: 5,
 } as const;
 
+// ============ FEATURES TOGGLE ============
+export const FEATURES = {
+  /** Mostrar/ocultar reseñas y ratings de productos en todo el sitio */
+  showProductReviews: false,
+} as const;
+
 // ============ WHATSAPP MESSAGE TEMPLATES ============
 export const WHATSAPP_TEMPLATES = {
   cartOrder: `🛒 *SOLICITUD DE COTIZACIÓN - ${BUSINESS.name.toUpperCase()}*`,

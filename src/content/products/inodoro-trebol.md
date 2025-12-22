@@ -11,6 +11,8 @@ stock: true
 featured: true
 isNew: false
 discount: 12
+rating: 0
+reviewCount: 0
 features:
   - "Sistema dual flush (3L/6L)"
   - "Color blanco"

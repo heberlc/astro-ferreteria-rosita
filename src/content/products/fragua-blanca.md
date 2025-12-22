@@ -9,6 +9,8 @@ image: "../../assets/products/fragua-blanca.png"
 stock: true
 featured: false
 isNew: false
+rating: 0
+reviewCount: 0
 features:
   - "Peso: 1 kg"
   - "Color blanco"

@@ -11,6 +11,8 @@ stock: true
 featured: true
 isNew: false
 discount: 18
+rating: 0
+reviewCount: 0
 features:
   - "Acabado cromado"
   - "Mezclador monocomando"

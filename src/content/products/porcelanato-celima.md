@@ -9,6 +9,8 @@ image: "../../assets/products/porcelanato-celima.png"
 stock: true
 featured: true
 isNew: true
+rating: 0
+reviewCount: 0
 features:
   - "Dimensiones: 60x60 cm"
   - "Rectificado"
