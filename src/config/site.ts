@@ -58,7 +58,7 @@ export const SITE = {
   defaultDescription: BUSINESS.description,
   language: "es-PE",
   locale: "es_PE",
-  ogImage: "/og-image.jpg",
+  ogImage: "/images/og-image.jpg",
   favicon: "/favicon.svg",
 } as const;
 
