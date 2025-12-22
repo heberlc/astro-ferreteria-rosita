@@ -18,8 +18,7 @@
           <span class="material-symbols-outlined text-[24px]">construction</span
           >
         </div>
-        <span
-          class="text-xl font-bold tracking-tight text-white hidden sm:block"
+        <span class="text-lg sm:text-xl font-bold tracking-tight text-white"
           >Ferretería Rosita</span
         >
       </a>
@@ -141,6 +140,46 @@
     class="lg:hidden hidden border-t border-white/10 bg-background-dark/95 backdrop-blur-md"
   >
     <div class="px-4 py-4 space-y-3">
+      <!-- Mobile Search Bar -->
+      <div
+        class="relative pb-3 border-b border-white/10"
+        id="mobile-search-container"
+      >
+        <form
+          id="mobile-search-form"
+          action="/catalogo"
+          method="get"
+          class="relative w-full group"
+        >
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary group-focus-within:text-primary transition-colors"
+          >
+            <span class="material-symbols-outlined">search</span>
+          </div>
+          <input
+            type="text"
+            name="search"
+            id="mobile-header-search"
+            autocomplete="off"
+            placeholder="Buscar productos..."
+            class="block w-full h-12 pl-10 pr-4 rounded-lg bg-surface-dark border-transparent focus:border-primary focus:bg-[#333] focus:ring-1 focus:ring-primary text-white placeholder-text-secondary transition-all duration-200"
+          />
+        </form>
+        <!-- Mobile Search Results Dropdown -->
+        <div
+          id="mobile-search-results"
+          class="absolute top-full left-0 right-0 mt-2 bg-surface-dark rounded-xl border border-border-dark shadow-2xl z-50 hidden max-h-[300px] overflow-y-auto"
+        >
+          <div id="mobile-search-results-list" class="p-2"></div>
+          <div
+            id="mobile-search-no-results"
+            class="p-4 text-center text-text-secondary hidden"
+          >
+            No se encontraron productos
+          </div>
+        </div>
+      </div>
+
       <a
         href="/"
         class="block py-2 text-white hover:text-primary transition-colors"
@@ -192,6 +231,7 @@
   let products: Product[] = [];
   let searchTimeout: ReturnType<typeof setTimeout>;
 
+  // Desktop search elements
   const searchInput = document.getElementById(
     "header-search"
   ) as HTMLInputElement;
@@ -200,6 +240,21 @@
   const searchNoResults = document.getElementById("search-no-results");
   const searchLoading = document.getElementById("search-loading");
   const searchContainer = document.getElementById("search-container");
+
+  // Mobile search elements
+  const mobileSearchInput = document.getElementById(
+    "mobile-header-search"
+  ) as HTMLInputElement;
+  const mobileSearchResults = document.getElementById("mobile-search-results");
+  const mobileSearchResultsList = document.getElementById(
+    "mobile-search-results-list"
+  );
+  const mobileSearchNoResults = document.getElementById(
+    "mobile-search-no-results"
+  );
+  const mobileSearchContainer = document.getElementById(
+    "mobile-search-container"
+  );
 
   // Load products on first focus
   async function loadProducts() {
@@ -217,7 +272,7 @@
     }
   }
 
-  // Search and display results
+  // Search and display results (desktop)
   function performSearch(query: string) {
     if (!query || query.length < 2) {
       hideResults();
@@ -235,6 +290,26 @@
       .slice(0, 6); // Limit to 6 results
 
     displayResults(results);
+  }
+
+  // Search and display results (mobile)
+  function performMobileSearch(query: string) {
+    if (!query || query.length < 2) {
+      hideMobileResults();
+      return;
+    }
+
+    const searchTerm = query.toLowerCase();
+    const results = products
+      .filter(
+        (p) =>
+          p.title.toLowerCase().includes(searchTerm) ||
+          p.brand.toLowerCase().includes(searchTerm) ||
+          p.category.toLowerCase().includes(searchTerm)
+      )
+      .slice(0, 5); // Limit to 5 results for mobile
+
+    displayMobileResults(results);
   }
 
   function displayResults(results: Product[]) {
@@ -291,11 +366,74 @@
     searchResults.classList.remove("hidden");
   }
 
+  function displayMobileResults(results: Product[]) {
+    if (
+      !mobileSearchResultsList ||
+      !mobileSearchResults ||
+      !mobileSearchNoResults
+    )
+      return;
+
+    if (results.length === 0) {
+      mobileSearchResultsList.innerHTML = "";
+      mobileSearchNoResults.classList.remove("hidden");
+      mobileSearchResults.classList.remove("hidden");
+      return;
+    }
+
+    mobileSearchNoResults.classList.add("hidden");
+    mobileSearchResultsList.innerHTML = results
+      .map(
+        (product) => `
+      <a 
+        href="/catalogo/${product.slug}" 
+        class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors group"
+      >
+        <div class="w-12 h-12 rounded-lg bg-white/10 overflow-hidden shrink-0">
+          <img 
+            src="${product.image}" 
+            alt="${product.title}"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-white font-medium text-sm truncate">${product.title}</p>
+          <p class="text-text-secondary text-xs">${product.brand}</p>
+        </div>
+        <div class="text-primary font-bold text-xs shrink-0">
+          S/ ${product.price.toFixed(2)}
+        </div>
+      </a>
+    `
+      )
+      .join("");
+
+    // Add "Ver todos" link
+    mobileSearchResultsList.innerHTML += `
+      <div class="border-t border-border-dark mt-2 pt-2">
+        <a 
+          href="/catalogo?search=${encodeURIComponent(mobileSearchInput?.value || "")}" 
+          class="flex items-center justify-center gap-2 p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium"
+        >
+          Ver todos
+          <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </a>
+      </div>
+    `;
+
+    mobileSearchResults.classList.remove("hidden");
+  }
+
   function hideResults() {
     searchResults?.classList.add("hidden");
   }
 
-  // Event listeners
+  function hideMobileResults() {
+    mobileSearchResults?.classList.add("hidden");
+  }
+
+  // Desktop event listeners
   searchInput?.addEventListener("focus", () => {
     loadProducts();
     if (searchInput.value.length >= 2) {
@@ -310,10 +448,28 @@
     }, 200); // 200ms debounce
   });
 
+  // Mobile event listeners
+  mobileSearchInput?.addEventListener("focus", () => {
+    loadProducts();
+    if (mobileSearchInput.value.length >= 2) {
+      performMobileSearch(mobileSearchInput.value);
+    }
+  });
+
+  mobileSearchInput?.addEventListener("input", () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      performMobileSearch(mobileSearchInput.value);
+    }, 200); // 200ms debounce
+  });
+
   // Close on click outside
   document.addEventListener("click", (e) => {
     if (!searchContainer?.contains(e.target as Node)) {
       hideResults();
+    }
+    if (!mobileSearchContainer?.contains(e.target as Node)) {
+      hideMobileResults();
     }
   });
 
@@ -321,6 +477,7 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       hideResults();
+      hideMobileResults();
     }
   });
 </script>

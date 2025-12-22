@@ -2,6 +2,7 @@
 /**
  * Filter Sidebar Component
  * Sidebar with dynamic category, price, and brand filters with interactive functionality
+ * Includes mobile drawer mode
  */
 import { getCollection } from "astro:content";
 
@@ -48,6 +49,7 @@ const minPrice = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0;
 const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
 ---
 
+<!-- Desktop Sidebar -->
 <aside class="hidden lg:flex flex-col w-72 shrink-0 gap-8 h-fit sticky top-28">
   <!-- Filter Header -->
   <div class="flex items-center justify-between">
@@ -158,13 +160,201 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
   </div>
 </aside>
 
+<!-- Mobile Filter Drawer -->
+<div
+  id="mobile-filter-overlay"
+  class="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"
+>
+</div>
+
+<aside
+  id="mobile-filter-drawer"
+  class="lg:hidden fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-background-dark border-r border-border-dark z-50 transform -translate-x-full transition-transform duration-300 overflow-y-auto"
+>
+  <!-- Mobile Filter Header -->
+  <div
+    class="flex items-center justify-between p-4 border-b border-border-dark sticky top-0 bg-background-dark z-10"
+  >
+    <h3 class="text-white text-lg font-bold">Filtros</h3>
+    <div class="flex items-center gap-3">
+      <button
+        id="mobile-clear-filters"
+        class="text-text-secondary text-sm hover:text-primary transition-colors"
+        >Limpiar</button
+      >
+      <button
+        id="close-mobile-filters"
+        class="p-2 text-text-secondary hover:text-white rounded-lg hover:bg-surface-dark transition-colors"
+      >
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="p-4 flex flex-col gap-6">
+    <!-- Categories -->
+    <div class="flex flex-col gap-4">
+      <h4
+        class="text-text-secondary text-xs font-bold uppercase tracking-wider"
+      >
+        Categorías
+      </h4>
+      <div class="flex flex-col gap-2" id="mobile-category-filters">
+        <!-- All categories button -->
+        <button
+          data-filter="category"
+          data-category=""
+          class="category-btn group flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer border-primary/50 bg-surface-dark"
+        >
+          <span class="text-sm font-medium transition-colors text-white">
+            Todas
+          </span>
+          <span
+            class="ml-auto text-xs text-text-secondary bg-border-dark px-2 py-0.5 rounded-full"
+          >
+            {allProducts.length}
+          </span>
+        </button>
+        {
+          categories.map((cat) => (
+            <button
+              data-filter="category"
+              data-category={cat.slug}
+              class="category-btn group flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer border-border-dark bg-transparent hover:border-border-dark hover:bg-surface-dark"
+            >
+              <span class="text-sm font-medium transition-colors text-text-secondary group-hover:text-white">
+                {cat.name}
+              </span>
+              <span class="ml-auto text-xs text-text-secondary bg-border-dark px-2 py-0.5 rounded-full">
+                {cat.count}
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Price Range -->
+    <div class="flex flex-col gap-4">
+      <h4
+        class="text-text-secondary text-xs font-bold uppercase tracking-wider"
+      >
+        Rango de Precio
+      </h4>
+      <div class="flex items-center gap-4 text-white text-sm">
+        <input
+          type="number"
+          id="mobile-price-min"
+          data-min={minPrice}
+          value={minPrice}
+          min={minPrice}
+          max={maxPrice}
+          class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1 w-full text-white focus:border-primary focus:outline-none"
+        />
+        <span class="text-text-secondary">-</span>
+        <input
+          type="number"
+          id="mobile-price-max"
+          data-max={maxPrice}
+          value={maxPrice}
+          min={minPrice}
+          max={maxPrice}
+          class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1 w-full text-white focus:border-primary focus:outline-none"
+        />
+      </div>
+      <button
+        id="mobile-apply-price-filter"
+        class="w-full py-2 bg-primary/20 text-primary text-sm font-medium rounded-lg hover:bg-primary/30 transition-colors"
+      >
+        Aplicar precio
+      </button>
+    </div>
+
+    <!-- Brands -->
+    <div class="flex flex-col gap-3">
+      <h4
+        class="text-text-secondary text-xs font-bold uppercase tracking-wider"
+      >
+        Marcas ({brands.length})
+      </h4>
+      <div class="flex flex-col gap-2 max-h-64 overflow-y-auto">
+        {
+          brands.map((brand) => (
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                value={brand}
+                data-filter="brand"
+                class="rounded border-border-dark bg-surface-dark text-primary focus:ring-0 focus:ring-offset-0"
+              />
+              <span class="text-sm text-text-secondary group-hover:text-white transition-colors">
+                {brand}
+              </span>
+            </label>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Apply Filters Button (Mobile) -->
+  <div
+    class="sticky bottom-0 p-4 bg-background-dark border-t border-border-dark"
+  >
+    <button
+      id="apply-mobile-filters"
+      class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-colors"
+    >
+      Ver Resultados
+    </button>
+  </div>
+</aside>
+
 <script>
+  // ========== Mobile Filter Drawer ==========
+  const mobileFilterButton = document.getElementById("mobile-filter-button");
+  const mobileFilterOverlay = document.getElementById("mobile-filter-overlay");
+  const mobileFilterDrawer = document.getElementById("mobile-filter-drawer");
+  const closeMobileFilters = document.getElementById("close-mobile-filters");
+  const applyMobileFilters = document.getElementById("apply-mobile-filters");
+
+  function openMobileFilters() {
+    mobileFilterOverlay?.classList.remove("hidden");
+    setTimeout(() => {
+      mobileFilterOverlay?.classList.remove("opacity-0");
+      mobileFilterOverlay?.classList.add("opacity-100");
+      mobileFilterDrawer?.classList.remove("-translate-x-full");
+      mobileFilterDrawer?.classList.add("translate-x-0");
+    }, 10);
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMobileFiltersDrawer() {
+    mobileFilterOverlay?.classList.remove("opacity-100");
+    mobileFilterOverlay?.classList.add("opacity-0");
+    mobileFilterDrawer?.classList.remove("translate-x-0");
+    mobileFilterDrawer?.classList.add("-translate-x-full");
+    setTimeout(() => {
+      mobileFilterOverlay?.classList.add("hidden");
+    }, 300);
+    document.body.style.overflow = "";
+  }
+
+  mobileFilterButton?.addEventListener("click", openMobileFilters);
+  mobileFilterOverlay?.addEventListener("click", closeMobileFiltersDrawer);
+  closeMobileFilters?.addEventListener("click", closeMobileFiltersDrawer);
+  applyMobileFilters?.addEventListener("click", () => {
+    applyFilters();
+    closeMobileFiltersDrawer();
+  });
+
+  // ========== Filter Logic ==========
   // Current selected category
   let selectedCategory = "";
 
   // Apply all filters
   function applyFilters() {
-    // Get selected brands
+    // Get selected brands (from both desktop and mobile)
     const selectedBrands: string[] = [];
     document
       .querySelectorAll<HTMLInputElement>('[data-filter="brand"]:checked')
@@ -172,13 +362,28 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
         selectedBrands.push(cb.value);
       });
 
-    // Get price range
-    const minInput = document.getElementById("price-min") as HTMLInputElement;
-    const maxInput = document.getElementById("price-max") as HTMLInputElement;
-    const minPrice = minInput ? parseFloat(minInput.value) || 0 : 0;
-    const maxPrice = maxInput
-      ? parseFloat(maxInput.value) || Infinity
-      : Infinity;
+    // Get price range (prefer mobile if visible, otherwise desktop)
+    const isMobileVisible =
+      !mobileFilterDrawer?.classList.contains("-translate-x-full");
+
+    let minPrice = 0;
+    let maxPrice = Infinity;
+
+    if (isMobileVisible) {
+      const minInput = document.getElementById(
+        "mobile-price-min"
+      ) as HTMLInputElement;
+      const maxInput = document.getElementById(
+        "mobile-price-max"
+      ) as HTMLInputElement;
+      minPrice = minInput ? parseFloat(minInput.value) || 0 : 0;
+      maxPrice = maxInput ? parseFloat(maxInput.value) || Infinity : Infinity;
+    } else {
+      const minInput = document.getElementById("price-min") as HTMLInputElement;
+      const maxInput = document.getElementById("price-max") as HTMLInputElement;
+      minPrice = minInput ? parseFloat(minInput.value) || 0 : 0;
+      maxPrice = maxInput ? parseFloat(maxInput.value) || Infinity : Infinity;
+    }
 
     const productCards =
       document.querySelectorAll<HTMLElement>("[data-product]");
@@ -235,7 +440,7 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
       });
   }
 
-  // Event listeners for category buttons
+  // Event listeners for category buttons (both desktop and mobile)
   document.querySelectorAll('[data-filter="category"]').forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const target = e.currentTarget as HTMLButtonElement;
@@ -250,13 +455,18 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
     checkbox.addEventListener("change", applyFilters);
   });
 
-  // Event listener for price filter button
+  // Event listener for price filter button (desktop)
   document
     .getElementById("apply-price-filter")
     ?.addEventListener("click", applyFilters);
 
-  // Clear filters
-  document.getElementById("clear-filters")?.addEventListener("click", () => {
+  // Event listener for price filter button (mobile)
+  document
+    .getElementById("mobile-apply-price-filter")
+    ?.addEventListener("click", applyFilters);
+
+  // Clear filters function
+  function clearAllFilters() {
     // Reset category
     selectedCategory = "";
     updateCategoryStyles();
@@ -268,12 +478,33 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
         cb.checked = false;
       });
 
-    // Reset price inputs
+    // Reset price inputs (both desktop and mobile)
     const minInput = document.getElementById("price-min") as HTMLInputElement;
     const maxInput = document.getElementById("price-max") as HTMLInputElement;
+    const mobileMinInput = document.getElementById(
+      "mobile-price-min"
+    ) as HTMLInputElement;
+    const mobileMaxInput = document.getElementById(
+      "mobile-price-max"
+    ) as HTMLInputElement;
+
     if (minInput) minInput.value = minInput.dataset.min || "0";
     if (maxInput) maxInput.value = maxInput.dataset.max || "500";
+    if (mobileMinInput)
+      mobileMinInput.value = mobileMinInput.dataset.min || "0";
+    if (mobileMaxInput)
+      mobileMaxInput.value = mobileMaxInput.dataset.max || "500";
 
     applyFilters();
-  });
+  }
+
+  // Clear filters (desktop)
+  document
+    .getElementById("clear-filters")
+    ?.addEventListener("click", clearAllFilters);
+
+  // Clear filters (mobile)
+  document
+    .getElementById("mobile-clear-filters")
+    ?.addEventListener("click", clearAllFilters);
 </script>

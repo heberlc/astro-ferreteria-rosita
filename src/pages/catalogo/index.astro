@@ -96,6 +96,14 @@ const categoryTitle = categoryFilter
             </p>
           </div>
           <div class="flex items-center gap-3">
+            <!-- Mobile Filter Button -->
+            <button
+              id="mobile-filter-button"
+              class="lg:hidden flex items-center gap-2 bg-surface-dark border border-border-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:border-text-secondary transition-colors"
+            >
+              <span class="material-symbols-outlined text-lg">filter_list</span>
+              <span>Filtros</span>
+            </button>
             <!-- Sort Dropdown -->
             <div class="relative" id="sort-container">
               <button
@@ -112,7 +120,7 @@ const categoryTitle = categoryFilter
               <!-- Dropdown Menu -->
               <div
                 id="sort-dropdown"
-                class="absolute right-0 top-full mt-2 w-48 bg-surface-dark border border-border-dark rounded-lg shadow-xl z-50 hidden"
+                class="absolute left-0 sm:left-auto sm:right-0 top-full mt-2 w-48 bg-surface-dark border border-border-dark rounded-lg shadow-xl z-50 hidden"
               >
                 <button
                   data-sort="default"
@@ -356,8 +364,28 @@ const categoryTitle = categoryFilter
 
       // Reset cards to grid view
       productContainer.querySelectorAll("[data-product]").forEach((card) => {
-        card.classList.remove("flex-row", "max-h-48");
+        card.classList.remove("flex-row", "items-stretch");
         card.classList.add("flex-col");
+
+        // Reset image container for grid view
+        const imageContainer = card.querySelector("a[href^='/catalogo/']");
+        if (imageContainer) {
+          imageContainer.classList.add("h-56", "w-full");
+          imageContainer.classList.remove(
+            "w-40",
+            "sm:w-48",
+            "md:w-56",
+            "h-auto",
+            "min-h-[160px]",
+            "shrink-0"
+          );
+        }
+
+        // Reset content container
+        const contentContainer = card.querySelector(".flex-1.p-5");
+        if (contentContainer) {
+          contentContainer.classList.remove("justify-center");
+        }
       });
 
       setActiveView(viewGrid, viewList);
@@ -376,8 +404,28 @@ const categoryTitle = categoryFilter
 
       // Adjust cards to list view
       productContainer.querySelectorAll("[data-product]").forEach((card) => {
-        card.classList.add("flex-row", "max-h-48");
+        card.classList.add("flex-row", "items-stretch");
         card.classList.remove("flex-col");
+
+        // Adjust image container for list view
+        const imageContainer = card.querySelector("a[href^='/catalogo/']");
+        if (imageContainer) {
+          imageContainer.classList.remove("h-56", "w-full");
+          imageContainer.classList.add(
+            "w-40",
+            "sm:w-48",
+            "md:w-56",
+            "h-auto",
+            "min-h-[160px]",
+            "shrink-0"
+          );
+        }
+
+        // Adjust content container
+        const contentContainer = card.querySelector(".flex-1.p-5");
+        if (contentContainer) {
+          contentContainer.classList.add("justify-center");
+        }
       });
 
       setActiveView(viewList, viewGrid);
