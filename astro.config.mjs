@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://rosita.pe',
+  site: 'https://ferreteria-rosita.netlify.app',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]

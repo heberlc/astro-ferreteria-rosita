@@ -1,8 +1,7 @@
-# Robots.txt - Ferretería Rosita
-# https://rosita.pe
+# https://ferreteria-rosita.netlify.app
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://rosita.pe/sitemap-index.xml
+Sitemap: https://ferreteria-rosita.netlify.app/sitemap-index.xml
