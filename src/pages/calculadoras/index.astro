@@ -1,0 +1,287 @@
+---
+/**
+ * Calculadoras de Materiales
+ * Herramientas para maestros y constructores
+ */
+
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/common/Header.astro";
+import Footer from "../../components/common/Footer.astro";
+import { getPageTitle } from "../../config/site";
+---
+
+<Layout title={getPageTitle("Calculadoras de Materiales")}>
+  <Header />
+
+  <main class="pt-20">
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <!-- Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6"
+        >
+          <span class="material-symbols-outlined text-lg">calculate</span>
+          Herramientas Profesionales
+        </span>
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-6">
+          Calculadoras de <span class="text-primary">Materiales</span>
+        </h1>
+        <p class="text-text-secondary text-lg">
+          Calcula la cantidad exacta de materiales que necesitas para tu
+          proyecto. Basado en estándares de construcción peruanos.
+        </p>
+      </div>
+
+      <!-- Calculators Grid -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Brick Calculator -->
+        <div class="bg-surface-dark rounded-2xl p-8 border border-border-dark">
+          <div class="flex items-center gap-4 mb-6">
+            <div
+              class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-primary text-3xl"
+                >view_in_ar</span
+              >
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">
+                Calculadora de Ladrillos
+              </h2>
+              <p class="text-text-secondary text-sm">
+                Ladrillo King Kong 9x13x24 cm
+              </p>
+            </div>
+          </div>
+
+          <form id="brick-form" class="space-y-6">
+            <div>
+              <label class="block text-text-secondary text-sm mb-2">
+                Área del muro (m²)
+              </label>
+              <div class="relative">
+                <input
+                  id="brick-area"
+                  type="number"
+                  min="1"
+                  step="0.1"
+                  placeholder="Ej: 50"
+                  class="w-full px-4 py-3 pr-12 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+                />
+                <span
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary"
+                  >m²</span
+                >
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full h-12 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <span class="material-symbols-outlined">calculate</span>
+              Calcular
+            </button>
+          </form>
+
+          <!-- Results -->
+          <div
+            id="brick-results"
+            class="mt-6 p-6 bg-background-dark rounded-xl border border-border-dark hidden"
+          >
+            <h3 class="text-primary font-bold mb-4 flex items-center gap-2">
+              <span class="material-symbols-outlined">inventory_2</span>
+              Materiales Necesarios
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Ladrillos King Kong</span>
+                <span id="brick-count" class="text-white font-bold text-lg"
+                  >-</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Cemento (bolsas 42.5kg)</span>
+                <span id="cement-count" class="text-white font-bold text-lg"
+                  >-</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Arena (m³)</span>
+                <span id="sand-count" class="text-white font-bold text-lg"
+                  >-</span
+                >
+              </div>
+            </div>
+            <p class="text-text-muted text-xs mt-4">
+              * Incluye 5% de desperdicio. Valores referenciales.
+            </p>
+          </div>
+        </div>
+
+        <!-- Paint Calculator -->
+        <div class="bg-surface-dark rounded-2xl p-8 border border-border-dark">
+          <div class="flex items-center gap-4 mb-6">
+            <div
+              class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-primary text-3xl"
+                >format_paint</span
+              >
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">
+                Calculadora de Pintura
+              </h2>
+              <p class="text-text-secondary text-sm">Pintura látex (2 manos)</p>
+            </div>
+          </div>
+
+          <form id="paint-form" class="space-y-6">
+            <div>
+              <label class="block text-text-secondary text-sm mb-2">
+                Área a pintar (m²)
+              </label>
+              <div class="relative">
+                <input
+                  id="paint-area"
+                  type="number"
+                  min="1"
+                  step="0.1"
+                  placeholder="Ej: 100"
+                  class="w-full px-4 py-3 pr-12 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+                />
+                <span
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary"
+                  >m²</span
+                >
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full h-12 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <span class="material-symbols-outlined">calculate</span>
+              Calcular
+            </button>
+          </form>
+
+          <!-- Results -->
+          <div
+            id="paint-results"
+            class="mt-6 p-6 bg-background-dark rounded-xl border border-border-dark hidden"
+          >
+            <h3 class="text-primary font-bold mb-4 flex items-center gap-2">
+              <span class="material-symbols-outlined">inventory_2</span>
+              Pintura Necesaria
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Galones</span>
+                <span id="gallon-count" class="text-white font-bold text-lg"
+                  >-</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-secondary">Litros (aprox.)</span>
+                <span id="liter-count" class="text-white font-bold text-lg"
+                  >-</span
+                >
+              </div>
+            </div>
+            <p class="text-text-muted text-xs mt-4">
+              * Basado en rendimiento de 25 m² por galón (2 manos). Valores
+              referenciales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div
+        class="mt-16 text-center bg-gradient-to-r from-primary/20 to-primary/5 rounded-2xl p-8 border border-primary/20"
+      >
+        <h3 class="text-2xl font-bold text-white mb-4">
+          ¿Necesitas cotizar materiales?
+        </h3>
+        <p class="text-text-secondary mb-6">
+          Contáctanos por WhatsApp y te ayudamos con tu pedido
+        </p>
+        <a
+          href="/contactanos"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors"
+        >
+          <span class="material-symbols-outlined">chat</span>
+          Solicitar Cotización
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+  <script>
+    import {
+      calculateBricks,
+      calculatePaint,
+      formatNumber,
+    } from "../../lib/calculators";
+
+    // Brick Calculator
+    const brickForm = document.getElementById("brick-form") as HTMLFormElement;
+    const brickAreaInput = document.getElementById(
+      "brick-area"
+    ) as HTMLInputElement;
+    const brickResults = document.getElementById("brick-results")!;
+    const brickCount = document.getElementById("brick-count")!;
+    const cementCount = document.getElementById("cement-count")!;
+    const sandCount = document.getElementById("sand-count")!;
+
+    brickForm?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const area = parseFloat(brickAreaInput.value);
+
+      if (isNaN(area) || area <= 0) {
+        brickAreaInput.focus();
+        return;
+      }
+
+      const result = calculateBricks(area);
+
+      brickCount.textContent = `${formatNumber(result.bricks)} unid.`;
+      cementCount.textContent = `${result.cementBags} bolsas`;
+      sandCount.textContent = `${result.sandM3} m³`;
+
+      brickResults.classList.remove("hidden");
+      brickResults.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    // Paint Calculator
+    const paintForm = document.getElementById("paint-form") as HTMLFormElement;
+    const paintAreaInput = document.getElementById(
+      "paint-area"
+    ) as HTMLInputElement;
+    const paintResults = document.getElementById("paint-results")!;
+    const gallonCount = document.getElementById("gallon-count")!;
+    const literCount = document.getElementById("liter-count")!;
+
+    paintForm?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const area = parseFloat(paintAreaInput.value);
+
+      if (isNaN(area) || area <= 0) {
+        paintAreaInput.focus();
+        return;
+      }
+
+      const result = calculatePaint(area);
+
+      gallonCount.textContent = `${result.gallons} gal`;
+      literCount.textContent = `${result.liters} L`;
+
+      paintResults.classList.remove("hidden");
+      paintResults.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  </script>
+</Layout>
