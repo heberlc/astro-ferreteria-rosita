@@ -42,14 +42,20 @@ export const GET: APIRoute = async () => {
   
   // Mapear solo los campos necesarios para la búsqueda
   // (No incluimos descripción completa ni otros datos pesados)
-  const searchData = products.map(product => ({
-    slug: product.data.slug || product.id,  // ID para la URL del producto
-    title: product.data.title,              // Nombre del producto
-    brand: product.data.brand,              // Marca (para filtrar)
-    price: product.data.price,              // Precio (para mostrar)
-    image: product.data.image,              // Imagen del producto
-    category: product.data.category,        // Categoría (para filtrar)
-  }));
+  const searchData = products.map(product => {
+    // Handle both local images (ImageMetadata) and external URLs (string)
+    const imageValue = product.data.image;
+    const imageSrc = typeof imageValue === 'string' ? imageValue : imageValue.src;
+    
+    return {
+      slug: product.data.slug || product.id,  // ID para la URL del producto
+      title: product.data.title,              // Nombre del producto
+      brand: product.data.brand,              // Marca (para filtrar)
+      price: product.data.price,              // Precio (para mostrar)
+      image: imageSrc,                        // Imagen del producto (URL string)
+      category: product.data.category,        // Categoría (para filtrar)
+    };
+  });
 
   // Retornar el JSON
   // Response es un objeto estándar de JavaScript (Web API)

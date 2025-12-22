@@ -5,7 +5,7 @@ description: "Cable eléctrico TW calibre 14 para instalaciones eléctricas resi
 price: 185.00
 category: "electricidad"
 brand: "Indeco"
-image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80"
+image: "../../assets/products/cable-indeco.png"
 stock: true
 featured: true
 isNew: false

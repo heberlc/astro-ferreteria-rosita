@@ -5,7 +5,7 @@ description: "Fierro de construcción corrugado de alta resistencia para estruct
 price: 32.50
 category: "construccion"
 brand: "Aceros Arequipa"
-image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80"
+image: "../../assets/products/fierro-corrugado.png"
 stock: true
 featured: false
 isNew: false

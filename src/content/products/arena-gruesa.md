@@ -5,7 +5,7 @@ description: "Arena gruesa lavada para preparación de concreto y mortero."
 price: 8.50
 category: "construccion"
 brand: "Agregados Lima"
-image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&q=80"
+image: "../../assets/products/arena-gruesa.png"
 stock: true
 featured: false
 isNew: false

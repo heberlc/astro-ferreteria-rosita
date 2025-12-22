@@ -2,7 +2,10 @@
 /**
  * Product Card Component
  * Reusable card for product display in catalog
+ * Supports both local images (optimized with Astro Image) and external URLs
  */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
   title: string;
@@ -10,7 +13,7 @@ interface Props {
   brand: string;
   price?: number;
   originalPrice?: number;
-  image: string;
+  image: ImageMetadata | string;
   category: string;
   isNew?: boolean;
   discount?: number;
@@ -32,6 +35,10 @@ const {
 
 const badgeText = discount ? `-${discount}% OFF` : isNew ? "NUEVO" : null;
 const badgeColor = discount ? "bg-red-600" : "bg-primary";
+
+// Check if image is a local asset (ImageMetadata) or external URL (string)
+const isLocalImage = typeof image !== "string";
+const imageSrc = isLocalImage ? image : image;
 ---
 
 <div
@@ -72,12 +79,25 @@ const badgeColor = discount ? "bg-red-600" : "bg-primary";
     href={`/catalogo/${slug}`}
     class={`relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden ${!stock ? "grayscale" : ""}`}
   >
-    <img
-      src={image}
-      alt={title}
-      class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500"
-      loading="lazy"
-    />
+    {
+      isLocalImage ? (
+        <Image
+          src={imageSrc as ImageMetadata}
+          alt={title}
+          width={400}
+          height={400}
+          class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+      ) : (
+        <img
+          src={imageSrc as string}
+          alt={title}
+          class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+      )
+    }
   </a>
 
   <!-- Content -->
@@ -133,7 +153,7 @@ const badgeColor = discount ? "bg-red-600" : "bg-primary";
             data-title={title}
             data-brand={brand}
             data-price={price}
-            data-image={image}
+            data-image={isLocalImage ? (image as ImageMetadata).src : image}
           >
             <span class="material-symbols-outlined">add_shopping_cart</span>
           </button>

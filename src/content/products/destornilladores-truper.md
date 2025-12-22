@@ -5,7 +5,7 @@ description: "Set de destornilladores planos y estrella con mango ergonómico."
 price: 35.00
 category: "ferreteria"
 brand: "Truper"
-image: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&q=80"
+image: "../../assets/products/destornilladores-truper.png"
 stock: true
 featured: false
 isNew: false

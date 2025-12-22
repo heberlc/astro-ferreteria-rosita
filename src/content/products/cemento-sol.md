@@ -5,7 +5,7 @@ description: "Cemento Portland Tipo I de alta resistencia para todo tipo de cons
 price: 28.50
 category: "construccion"
 brand: "Sol"
-image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+image: "../../assets/products/cemento-sol.png"
 stock: true
 featured: true
 isNew: false

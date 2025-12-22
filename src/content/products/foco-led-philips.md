@@ -5,7 +5,7 @@ description: "Foco LED de bajo consumo equivalente a 100W incandescente. Luz bla
 price: 9.90
 category: "electricidad"
 brand: "Philips"
-image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80"
+image: "../../assets/products/foco-led-philips.png"
 stock: true
 featured: true
 isNew: false
