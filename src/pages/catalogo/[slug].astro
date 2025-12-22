@@ -154,12 +154,23 @@ const categoryNames: Record<string, string> = {
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 mt-auto">
             <button
+              id="add-to-cart-btn"
+              data-slug={product.data.slug}
+              data-title={title}
+              data-brand={brand}
+              data-price={price || 0}
+              data-image={image}
               class="flex-1 h-14 px-8 rounded-lg bg-primary hover:bg-primary-hover text-white font-bold transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
             >
               <span class="material-symbols-outlined">add_shopping_cart</span>
               Agregar al Carrito
             </button>
             <button
+              id="whatsapp-btn"
+              data-title={title}
+              data-brand={brand}
+              data-price={price || 0}
+              data-slug={product.data.slug}
               class="h-14 px-8 rounded-lg bg-green-600 hover:bg-green-700 text-white font-bold transition-all flex items-center justify-center gap-2"
             >
               <span class="material-symbols-outlined">chat</span>
@@ -172,4 +183,62 @@ const categoryNames: Record<string, string> = {
   </main>
 
   <Footer />
+
+  <script>
+    import { addToCart } from "../../lib/cart";
+
+    // Add to Cart button
+    const addToCartBtn = document.getElementById("add-to-cart-btn");
+    addToCartBtn?.addEventListener("click", () => {
+      const slug = addToCartBtn.dataset.slug || "";
+      const title = addToCartBtn.dataset.title || "";
+      const brand = addToCartBtn.dataset.brand || "";
+      const price = parseFloat(addToCartBtn.dataset.price || "0");
+      const image = addToCartBtn.dataset.image || "";
+
+      addToCart({
+        slug: slug,
+        title: title,
+        brand: brand,
+        price: price,
+        image: image,
+      });
+
+      // Visual feedback
+      const originalText = addToCartBtn.innerHTML;
+      addToCartBtn.innerHTML = `<span class="material-symbols-outlined">check</span> ¡Agregado!`;
+      addToCartBtn.classList.add("bg-green-600");
+      addToCartBtn.classList.remove("bg-primary", "hover:bg-primary-hover");
+
+      setTimeout(() => {
+        addToCartBtn.innerHTML = originalText;
+        addToCartBtn.classList.remove("bg-green-600");
+        addToCartBtn.classList.add("bg-primary", "hover:bg-primary-hover");
+      }, 2000);
+    });
+
+    // WhatsApp button - direct product inquiry
+    const whatsappBtn = document.getElementById("whatsapp-btn");
+    whatsappBtn?.addEventListener("click", () => {
+      const title = whatsappBtn.dataset.title || "";
+      const brand = whatsappBtn.dataset.brand || "";
+      const price = parseFloat(whatsappBtn.dataset.price || "0");
+      const slug = whatsappBtn.dataset.slug || "";
+
+      const message =
+        `¡Hola! Me interesa el siguiente producto:\n\n` +
+        `📦 *${title}*\n` +
+        `🏷️ Marca: ${brand}\n` +
+        (price > 0 ? `💰 Precio: S/${price.toFixed(2)}\n` : "") +
+        `🔗 Código: ${slug}\n\n` +
+        `¿Podrían darme más información?`;
+
+      const phoneNumber = "51999999999"; // Replace with actual number
+      const encodedMessage = encodeURIComponent(message);
+      window.open(
+        `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+        "_blank"
+      );
+    });
+  </script>
 </Layout>
