@@ -26,7 +26,12 @@
 
       <!-- Search Bar -->
       <div class="hidden md:flex flex-1 max-w-2xl mx-auto">
-        <div class="relative w-full group">
+        <form
+          id="search-form"
+          action="/catalogo"
+          method="get"
+          class="relative w-full group"
+        >
           <div
             class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary group-focus-within:text-primary transition-colors"
           >
@@ -34,10 +39,12 @@
           </div>
           <input
             type="text"
+            name="search"
+            id="header-search"
             placeholder="Buscar herramientas, materiales, marcas..."
             class="block w-full h-12 pl-10 pr-4 rounded-lg bg-surface-dark border-transparent focus:border-primary focus:bg-[#333] focus:ring-1 focus:ring-primary text-white placeholder-text-secondary transition-all duration-200"
           />
-        </div>
+        </form>
       </div>
 
       <!-- Right Actions -->

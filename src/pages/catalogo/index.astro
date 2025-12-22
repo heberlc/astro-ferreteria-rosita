@@ -6,9 +6,10 @@ import ProductCard from "../../components/catalog/ProductCard.astro";
 import FilterSidebar from "../../components/catalog/FilterSidebar.astro";
 import { getCollection } from "astro:content";
 
-// Get category from URL params
+// Get URL params
 const url = new URL(Astro.request.url);
 const categoryFilter = url.searchParams.get("category");
+const searchQuery = url.searchParams.get("search")?.toLowerCase().trim() || "";
 
 // Get all products
 let products = await getCollection("products");
@@ -18,9 +19,25 @@ if (categoryFilter) {
   products = products.filter((p) => p.data.category === categoryFilter);
 }
 
+// Filter by search query if specified
+if (searchQuery) {
+  products = products.filter((p) => {
+    const title = p.data.title.toLowerCase();
+    const brand = (p.data.brand || "").toLowerCase();
+    const slug = p.data.slug.toLowerCase();
+    return (
+      title.includes(searchQuery) ||
+      brand.includes(searchQuery) ||
+      slug.includes(searchQuery)
+    );
+  });
+}
+
 const categoryTitle = categoryFilter
   ? categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1)
-  : "Todos los Productos";
+  : searchQuery
+    ? `Resultados para "${searchQuery}"`
+    : "Todos los Productos";
 ---
 
 <Layout title={`${categoryTitle} | Ferretería Rosita`}>
@@ -380,5 +397,41 @@ const categoryTitle = categoryFilter
 
       setActiveView(viewList, viewGrid);
     });
+
+    // Client-side search filtering on page load
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get("search")?.toLowerCase().trim();
+
+    if (searchQuery) {
+      const allProducts =
+        document.querySelectorAll<HTMLElement>("[data-product]");
+      let visibleCount = 0;
+
+      allProducts.forEach((product) => {
+        const title = product.dataset.product?.toLowerCase() || "";
+        const brand = product.dataset.brand?.toLowerCase() || "";
+        const matchesSearch =
+          title.includes(searchQuery) || brand.includes(searchQuery);
+
+        if (matchesSearch) {
+          product.style.display = "";
+          visibleCount++;
+        } else {
+          product.style.display = "none";
+        }
+      });
+
+      // Update product count
+      const productCount = document.getElementById("product-count");
+      if (productCount) {
+        productCount.textContent = `Mostrando ${visibleCount} producto${visibleCount !== 1 ? "s" : ""}`;
+      }
+
+      // Update page title
+      const pageTitle = document.querySelector("h1");
+      if (pageTitle) {
+        pageTitle.textContent = `Resultados para "${searchQuery}"`;
+      }
+    }
   </script>
 </Layout>
