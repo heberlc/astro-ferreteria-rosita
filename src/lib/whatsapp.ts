@@ -1,0 +1,66 @@
+/**
+ * WhatsApp Message Generator
+ * Creates formatted messages for quote requests
+ */
+
+import { getCart, type CartItem } from './cart';
+
+const WHATSAPP_NUMBER = '51955314610'; // Rosita main number
+
+/**
+ * Generate WhatsApp message with cart items
+ */
+export function generateWhatsAppMessage(): string {
+  const cart = getCart();
+  
+  if (cart.length === 0) {
+    return '';
+  }
+
+  let message = '🛒 *SOLICITUD DE COTIZACIÓN - FERRETERÍA ROSITA*\n\n';
+  message += '📋 *Productos:*\n';
+  message += '─────────────────\n';
+
+  cart.forEach((item, index) => {
+    message += `${index + 1}. *${item.title}*\n`;
+    message += `   Marca: ${item.brand}\n`;
+    message += `   Cantidad: ${item.quantity}\n`;
+    if (item.price) {
+      message += `   Precio ref.: S/${(item.price * item.quantity).toFixed(2)}\n`;
+    }
+    message += '\n';
+  });
+
+  message += '─────────────────\n';
+  
+  const total = cart.reduce((sum, item) => sum + (item.price || 0) * item.quantity, 0);
+  if (total > 0) {
+    message += `💰 *Total Referencial: S/${total.toFixed(2)}*\n\n`;
+  }
+  
+  message += '📞 Por favor, confirmar disponibilidad y precio final.\n';
+  message += '¡Gracias!';
+
+  return message;
+}
+
+/**
+ * Get WhatsApp URL with pre-filled message
+ */
+export function getWhatsAppUrl(): string {
+  const message = generateWhatsAppMessage();
+  if (!message) return '';
+  
+  const encodedMessage = encodeURIComponent(message);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+}
+
+/**
+ * Open WhatsApp with cart message
+ */
+export function openWhatsApp(): void {
+  const url = getWhatsAppUrl();
+  if (url) {
+    window.open(url, '_blank');
+  }
+}

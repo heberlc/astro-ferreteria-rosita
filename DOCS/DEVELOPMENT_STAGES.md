@@ -133,13 +133,12 @@ git add -A && git commit -m "feat: about us and contact pages"
 **Objetivo**: Implementar el carrito de cotización con exportación a WhatsApp.
 
 ### Actividades
-- [ ] Instalar dependencias: `pnpm install nanostores @nanostores/persistent preact`.
-- [ ] Ejecutar `pnpm dlx astro add preact`.
-- [ ] Crear `src/stores/cartStore.ts` con la lógica del carrito.
-- [ ] Crear `src/components/cart/AddToCartButton.tsx` (Preact Island).
-- [ ] Crear `src/components/cart/CartDrawer.tsx` (Preact Island).
-- [ ] Implementar función `generateWhatsAppMessage()` en `src/lib/whatsapp.ts`.
-- [ ] Integrar botón de carrito en `Header.astro`.
+- [x] Instalar dependencias: `pnpm install nanostores @nanostores/persistent`.
+- [x] Crear `src/lib/cart.ts` con la lógica del carrito (Vanilla JS).
+- [x] Crear `src/lib/whatsapp.ts` con generador de mensajes.
+- [x] Crear `src/components/cart/CartDrawer.astro` con template HTML.
+- [x] Agregar script `cart-engine.js` para interactividad.
+- [x] Integrar botón de carrito en `Header.astro`.
 
 ### Verificación
 ```bash
@@ -185,5 +184,5 @@ git add -A && git commit -m "feat: SEO optimization with sitemap and schema"
 | 3. Homepage | ✅ Completado | `feat: homepage implementation` |
 | 4. Catalog | ✅ Completado | `feat: catalog system` |
 | 5. Static Pages | ✅ Completado | `feat: static pages` |
-| 6. WhatsApp Cart | ⏳ Pendiente | - |
+| 6. WhatsApp Cart | ✅ Completado | `feat: whatsapp cart` |
 | 7. SEO | ⏳ Pendiente | - |

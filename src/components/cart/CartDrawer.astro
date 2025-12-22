@@ -1,0 +1,237 @@
+---
+/**
+ * Cart Drawer Component
+ * Slide-out panel showing cart items with WhatsApp checkout
+ */
+---
+
+<!-- Cart Drawer Overlay -->
+<div
+  id="cart-overlay"
+  class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"
+>
+</div>
+
+<!-- Cart Drawer Panel -->
+<aside
+  id="cart-drawer"
+  class="fixed top-0 right-0 h-full w-full max-w-md bg-background-dark border-l border-border-dark z-50 translate-x-full transition-transform duration-300 flex flex-col"
+>
+  <!-- Header -->
+  <header
+    class="flex items-center justify-between p-4 border-b border-border-dark"
+  >
+    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">shopping_cart</span>
+      Carrito de Cotización
+    </h2>
+    <button
+      id="close-cart"
+      class="p-2 text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+    >
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </header>
+
+  <!-- Cart Items -->
+  <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
+    <!-- Items will be rendered here by JavaScript -->
+  </div>
+
+  <!-- Empty State -->
+  <div
+    id="cart-empty"
+    class="flex-1 flex flex-col items-center justify-center p-8 text-center hidden"
+  >
+    <span class="material-symbols-outlined text-6xl text-text-muted mb-4"
+      >shopping_cart</span
+    >
+    <h3 class="text-white font-bold text-lg mb-2">Tu carrito está vacío</h3>
+    <p class="text-text-secondary text-sm mb-4">
+      Agrega productos para solicitar una cotización
+    </p>
+    <a
+      href="/catalogo"
+      class="text-primary hover:text-primary-hover transition-colors flex items-center gap-1"
+    >
+      Ver catálogo
+      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer id="cart-footer" class="p-4 border-t border-border-dark space-y-4">
+    <!-- Total -->
+    <div class="flex items-center justify-between">
+      <span class="text-text-secondary">Total Referencial:</span>
+      <span id="cart-total" class="text-2xl font-bold text-white">S/0.00</span>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <button
+      id="checkout-whatsapp"
+      class="w-full h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg"
+    >
+      <span class="material-symbols-outlined">chat</span>
+      Solicitar Cotización por WhatsApp
+    </button>
+
+    <!-- Clear Cart -->
+    <button
+      id="clear-cart"
+      class="w-full h-10 text-text-secondary hover:text-white text-sm transition-colors"
+    >
+      Vaciar carrito
+    </button>
+  </footer>
+</aside>
+
+<script>
+  import {
+    getCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+    getCartTotal,
+    getCartCount,
+  } from "../../lib/cart";
+  import { openWhatsApp } from "../../lib/whatsapp";
+
+  // DOM Elements
+  const overlay = document.getElementById("cart-overlay");
+  const drawer = document.getElementById("cart-drawer");
+  const closeBtn = document.getElementById("close-cart");
+  const itemsContainer = document.getElementById("cart-items");
+  const emptyState = document.getElementById("cart-empty");
+  const footer = document.getElementById("cart-footer");
+  const totalEl = document.getElementById("cart-total");
+  const checkoutBtn = document.getElementById("checkout-whatsapp");
+  const clearBtn = document.getElementById("clear-cart");
+  const cartButton = document.getElementById("cart-button");
+  const cartCountEl = document.getElementById("cart-count");
+
+  // Open/Close functions
+  function openCart() {
+    overlay?.classList.remove("hidden");
+    setTimeout(() => overlay?.classList.remove("opacity-0"), 10);
+    drawer?.classList.remove("translate-x-full");
+    document.body.style.overflow = "hidden";
+    renderCart();
+  }
+
+  function closeCart() {
+    overlay?.classList.add("opacity-0");
+    drawer?.classList.add("translate-x-full");
+    setTimeout(() => overlay?.classList.add("hidden"), 300);
+    document.body.style.overflow = "";
+  }
+
+  // Render cart items
+  function renderCart() {
+    const cart = getCart();
+
+    if (cart.length === 0) {
+      itemsContainer?.classList.add("hidden");
+      footer?.classList.add("hidden");
+      emptyState?.classList.remove("hidden");
+      return;
+    }
+
+    itemsContainer?.classList.remove("hidden");
+    footer?.classList.remove("hidden");
+    emptyState?.classList.add("hidden");
+
+    if (itemsContainer) {
+      itemsContainer.innerHTML = cart
+        .map(
+          (item) => `
+        <div class="flex gap-4 p-3 bg-surface-dark rounded-lg border border-border-dark">
+          <img src="${item.image}" alt="${item.title}" class="w-20 h-20 object-contain rounded-lg bg-white/5" />
+          <div class="flex-1 min-w-0">
+            <h4 class="text-white font-medium text-sm line-clamp-2">${item.title}</h4>
+            <p class="text-text-secondary text-xs">${item.brand}</p>
+            ${item.price ? `<p class="text-primary font-bold mt-1">S/${(item.price * item.quantity).toFixed(2)}</p>` : ""}
+            
+            <div class="flex items-center gap-2 mt-2">
+              <button class="qty-btn w-7 h-7 rounded bg-border-dark text-white hover:bg-primary transition-colors flex items-center justify-center" data-action="decrease" data-slug="${item.slug}">
+                <span class="material-symbols-outlined text-sm">remove</span>
+              </button>
+              <span class="text-white text-sm w-6 text-center">${item.quantity}</span>
+              <button class="qty-btn w-7 h-7 rounded bg-border-dark text-white hover:bg-primary transition-colors flex items-center justify-center" data-action="increase" data-slug="${item.slug}">
+                <span class="material-symbols-outlined text-sm">add</span>
+              </button>
+              <button class="ml-auto text-text-secondary hover:text-red-500 transition-colors" data-action="remove" data-slug="${item.slug}">
+                <span class="material-symbols-outlined text-sm">delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `
+        )
+        .join("");
+    }
+
+    // Update total
+    if (totalEl) {
+      totalEl.textContent = `S/${getCartTotal().toFixed(2)}`;
+    }
+  }
+
+  // Update header cart count
+  function updateCartCount() {
+    const count = getCartCount();
+    if (cartCountEl) {
+      cartCountEl.textContent = count.toString();
+      cartCountEl.classList.toggle("hidden", count === 0);
+    }
+  }
+
+  // Event Listeners
+  cartButton?.addEventListener("click", openCart);
+  overlay?.addEventListener("click", closeCart);
+  closeBtn?.addEventListener("click", closeCart);
+
+  checkoutBtn?.addEventListener("click", () => {
+    openWhatsApp();
+  });
+
+  clearBtn?.addEventListener("click", () => {
+    clearCart();
+    renderCart();
+    updateCartCount();
+  });
+
+  // Quantity buttons delegation
+  itemsContainer?.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const button = target.closest("[data-action]") as HTMLElement;
+    if (!button) return;
+
+    const action = button.dataset.action;
+    const slug = button.dataset.slug;
+    if (!slug) return;
+
+    const cart = getCart();
+    const item = cart.find((i) => i.slug === slug);
+    if (!item) return;
+
+    if (action === "increase") {
+      updateQuantity(slug, item.quantity + 1);
+    } else if (action === "decrease") {
+      updateQuantity(slug, item.quantity - 1);
+    } else if (action === "remove") {
+      removeFromCart(slug);
+    }
+
+    renderCart();
+    updateCartCount();
+  });
+
+  // Listen for cart updates from other pages
+  window.addEventListener("cart-updated", () => {
+    updateCartCount();
+  });
+
+  // Initial count update
+  updateCartCount();
+</script>

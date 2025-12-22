@@ -123,7 +123,14 @@ const badgeColor = discount ? "bg-red-600" : "bg-primary";
 
       {
         stock ? (
-          <button class="bg-border-dark hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center group-hover:bg-primary">
+          <button
+            class="add-to-cart-btn bg-border-dark hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center group-hover:bg-primary"
+            data-slug={slug}
+            data-title={title}
+            data-brand={brand}
+            data-price={price}
+            data-image={image}
+          >
             <span class="material-symbols-outlined">add_shopping_cart</span>
           </button>
         ) : (
@@ -138,3 +145,31 @@ const badgeColor = discount ? "bg-red-600" : "bg-primary";
     </div>
   </div>
 </div>
+
+<script>
+  import { addToCart } from "../../lib/cart";
+
+  // Add to cart button handler
+  document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const btn = e.currentTarget as HTMLButtonElement;
+
+      addToCart({
+        slug: btn.dataset.slug || "",
+        title: btn.dataset.title || "",
+        brand: btn.dataset.brand || "",
+        price: btn.dataset.price ? parseFloat(btn.dataset.price) : undefined,
+        image: btn.dataset.image || "",
+      });
+
+      // Visual feedback
+      const icon = btn.querySelector(".material-symbols-outlined");
+      if (icon) {
+        icon.textContent = "check";
+        setTimeout(() => {
+          icon.textContent = "add_shopping_cart";
+        }, 1000);
+      }
+    });
+  });
+</script>
