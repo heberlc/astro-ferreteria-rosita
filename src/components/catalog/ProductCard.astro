@@ -1,0 +1,140 @@
+---
+/**
+ * Product Card Component
+ * Reusable card for product display in catalog
+ */
+
+interface Props {
+  title: string;
+  slug: string;
+  brand: string;
+  price?: number;
+  originalPrice?: number;
+  image: string;
+  category: string;
+  isNew?: boolean;
+  discount?: number;
+  stock?: boolean;
+}
+
+const {
+  title,
+  slug,
+  brand,
+  price,
+  originalPrice,
+  image,
+  category,
+  isNew = false,
+  discount,
+  stock = true,
+} = Astro.props;
+
+const badgeText = discount ? `-${discount}% OFF` : isNew ? "NUEVO" : null;
+const badgeColor = discount ? "bg-red-600" : "bg-primary";
+---
+
+<div
+  class={`group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10 ${!stock ? "opacity-75" : ""}`}
+>
+  <!-- Badge -->
+  {
+    badgeText && (
+      <div
+        class={`absolute top-3 left-3 z-10 ${badgeColor} text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider`}
+      >
+        {badgeText}
+      </div>
+    )
+  }
+
+  {
+    !stock && (
+      <div class="absolute top-3 left-3 z-10 bg-gray-700 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
+        Agotado
+      </div>
+    )
+  }
+
+  <!-- Favorite Button -->
+  <button
+    class="absolute top-3 right-3 z-10 text-text-secondary hover:text-primary p-1.5 bg-background-dark/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+  >
+    <span class="material-symbols-outlined text-lg">favorite</span>
+  </button>
+
+  <!-- Image -->
+  <a
+    href={`/catalogo/${slug}`}
+    class={`relative h-56 w-full bg-[#2a2622] p-6 flex items-center justify-center overflow-hidden ${!stock ? "grayscale" : ""}`}
+  >
+    <img
+      src={image}
+      alt={title}
+      class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-500"
+      loading="lazy"
+    />
+  </a>
+
+  <!-- Content -->
+  <div class="flex flex-col flex-1 p-5">
+    <!-- Rating placeholder -->
+    <div class="flex items-center gap-1 mb-2 text-yellow-500 text-sm">
+      <span class="material-symbols-outlined text-base">star</span>
+      <span class="material-symbols-outlined text-base">star</span>
+      <span class="material-symbols-outlined text-base">star</span>
+      <span class="material-symbols-outlined text-base">star</span>
+      <span class="material-symbols-outlined text-base text-text-muted"
+        >star_border</span
+      >
+      <span class="text-text-secondary text-xs ml-1">(12)</span>
+    </div>
+
+    <!-- Title -->
+    <a href={`/catalogo/${slug}`}>
+      <h3
+        class="text-white font-semibold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2"
+      >
+        {title}
+      </h3>
+    </a>
+    <p class="text-text-secondary text-sm mb-4">{brand}</p>
+
+    <!-- Price & CTA -->
+    <div class="mt-auto flex items-end justify-between">
+      <div class="flex flex-col">
+        {
+          originalPrice && (
+            <span class="text-text-secondary text-xs line-through">
+              S/{originalPrice.toFixed(2)}
+            </span>
+          )
+        }
+        {
+          price ? (
+            <span class="text-white text-xl font-bold">
+              S/{price.toFixed(2)}
+            </span>
+          ) : (
+            <span class="text-text-secondary text-sm">Consultar precio</span>
+          )
+        }
+      </div>
+
+      {
+        stock ? (
+          <button class="bg-border-dark hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center group-hover:bg-primary">
+            <span class="material-symbols-outlined">add_shopping_cart</span>
+          </button>
+        ) : (
+          <button
+            class="bg-border-dark text-white/50 cursor-not-allowed p-2.5 rounded-lg flex items-center justify-center"
+            disabled
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+        )
+      }
+    </div>
+  </div>
+</div>

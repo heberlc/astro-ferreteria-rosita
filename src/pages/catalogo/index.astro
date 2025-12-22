@@ -1,0 +1,173 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/common/Header.astro";
+import Footer from "../../components/common/Footer.astro";
+import ProductCard from "../../components/catalog/ProductCard.astro";
+import FilterSidebar from "../../components/catalog/FilterSidebar.astro";
+import { getCollection } from "astro:content";
+
+// Get category from URL params
+const url = new URL(Astro.request.url);
+const categoryFilter = url.searchParams.get("category");
+
+// Get all products
+let products = await getCollection("products");
+
+// Filter by category if specified
+if (categoryFilter) {
+  products = products.filter((p) => p.data.category === categoryFilter);
+}
+
+const categoryTitle = categoryFilter
+  ? categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1)
+  : "Todos los Productos";
+---
+
+<Layout title={`${categoryTitle} | Ferretería Rosita`}>
+  <Header />
+
+  <main class="pt-20">
+    <div
+      class="flex px-6 md:px-10 lg:px-16 py-8 max-w-[1600px] w-full mx-auto gap-8"
+    >
+      <!-- Sidebar -->
+      <FilterSidebar currentCategory={categoryFilter} />
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col min-w-0">
+        <!-- Breadcrumbs -->
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <a
+            href="/"
+            class="text-text-secondary hover:text-white transition-colors text-sm font-medium"
+            >Inicio</a
+          >
+          <span class="material-symbols-outlined text-text-secondary text-base"
+            >chevron_right</span
+          >
+          <a
+            href="/catalogo"
+            class="text-text-secondary hover:text-white transition-colors text-sm font-medium"
+            >Catálogo</a
+          >
+          {
+            categoryFilter && (
+              <>
+                <span class="material-symbols-outlined text-text-secondary text-base">
+                  chevron_right
+                </span>
+                <span class="text-primary text-sm font-medium">
+                  {categoryTitle}
+                </span>
+              </>
+            )
+          }
+        </div>
+
+        <!-- Page Header -->
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-border-dark pb-6"
+        >
+          <div>
+            <h1
+              class="text-white text-3xl md:text-4xl font-bold tracking-tight mb-2"
+            >
+              {categoryTitle}
+            </h1>
+            <p class="text-text-secondary text-sm">
+              Mostrando {products.length} productos
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <!-- Sort -->
+            <button
+              class="flex items-center gap-2 bg-surface-dark border border-border-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:border-text-secondary transition-colors"
+            >
+              <span class="material-symbols-outlined text-lg">sort</span>
+              Ordenar
+              <span class="material-symbols-outlined text-lg">expand_more</span>
+            </button>
+            <!-- View Toggle -->
+            <div
+              class="flex bg-surface-dark rounded-lg p-1 border border-border-dark"
+            >
+              <button class="p-1.5 rounded bg-border-dark text-white shadow-sm">
+                <span class="material-symbols-outlined text-xl">grid_view</span>
+              </button>
+              <button
+                class="p-1.5 rounded text-text-secondary hover:text-white hover:bg-border-dark/50 transition-colors"
+              >
+                <span class="material-symbols-outlined text-xl">view_list</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        {
+          products.length > 0 ? (
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+              {products.map((product) => (
+                <ProductCard
+                  title={product.data.title}
+                  slug={product.data.slug}
+                  brand={product.data.brand}
+                  price={product.data.price}
+                  originalPrice={product.data.originalPrice}
+                  image={product.data.image}
+                  category={product.data.category}
+                  isNew={product.data.isNew}
+                  discount={product.data.discount}
+                  stock={product.data.stock}
+                />
+              ))}
+            </div>
+          ) : (
+            <div class="text-center py-20">
+              <span class="material-symbols-outlined text-6xl text-text-muted mb-4">
+                inventory_2
+              </span>
+              <h3 class="text-white text-xl font-bold mb-2">
+                No hay productos
+              </h3>
+              <p class="text-text-secondary">
+                No se encontraron productos en esta categoría.
+              </p>
+              <a
+                href="/catalogo"
+                class="inline-flex items-center gap-2 mt-4 text-primary hover:text-primary-hover transition-colors"
+              >
+                Ver todos los productos
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+            </div>
+          )
+        }
+
+        <!-- Pagination -->
+        {
+          products.length > 0 && (
+            <div class="flex justify-center mt-12 mb-8">
+              <nav class="flex items-center gap-2">
+                <button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-text-secondary hover:text-white hover:border-text-secondary transition-all">
+                  <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="flex items-center justify-center size-10 rounded-lg border border-primary bg-primary text-white font-bold shadow-lg shadow-primary/20">
+                  1
+                </button>
+                <button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-text-secondary hover:text-white hover:border-text-secondary transition-all">
+                  2
+                </button>
+                <button class="flex items-center justify-center size-10 rounded-lg border border-border-dark bg-surface-dark text-text-secondary hover:text-white hover:border-text-secondary transition-all">
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+              </nav>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

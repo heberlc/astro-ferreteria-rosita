@@ -89,12 +89,12 @@ git add -A && git commit -m "feat: homepage with Hero, Categories, Products and 
 **Objetivo**: Crear el sistema de catálogo con Content Collections.
 
 ### Actividades
-- [ ] Crear `src/components/catalog/ProductCard.astro`.
-- [ ] Crear `src/components/catalog/FilterSidebar.astro`.
-- [ ] Crear `src/pages/catalogo/index.astro` (listado con filtros).
-- [ ] Crear `src/pages/catalogo/[slug].astro` (detalle de producto).
-- [ ] Agregar 5 productos de ejemplo en `src/content/products/`.
-- [ ] Agregar las 6 categorías en `src/content/categories/`.
+- [x] Crear `src/components/catalog/ProductCard.astro`.
+- [x] Crear `src/components/catalog/FilterSidebar.astro`.
+- [x] Crear `src/pages/catalogo/index.astro` (listado con filtros).
+- [x] Crear `src/pages/catalogo/[slug].astro` (detalle de producto).
+- [x] Agregar 5 productos de ejemplo en `src/content/products/`.
+- [x] Agregar las 6 categorías en `src/content/categories/`.
 
 ### Verificación
 ```bash
@@ -182,7 +182,7 @@ git add -A && git commit -m "feat: SEO optimization with sitemap and schema"
 |-------|--------|--------|
 | 1. Foundation | ✅ Completado | `feat: initial project scaffold` |
 | 2. Core Layout | ✅ Completado | `feat: core layout components` |
-| 3. Homepage | ⏳ Pendiente | - |
+| 3. Homepage | ✅ Completado | `feat: homepage implementation` |
 | 4. Catalog | ⏳ Pendiente | - |
 | 5. Static Pages | ⏳ Pendiente | - |
 | 6. WhatsApp Cart | ⏳ Pendiente | - |
