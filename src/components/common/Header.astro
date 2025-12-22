@@ -1,0 +1,137 @@
+---
+/**
+ * Header Component - Glassmorphism Navigation
+ * Based on Stitch design assets
+ */
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 transition-all duration-300"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20 gap-8">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 shrink-0 cursor-pointer">
+        <div
+          class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white"
+        >
+          <span class="material-symbols-outlined text-[24px]">construction</span
+          >
+        </div>
+        <span
+          class="text-xl font-bold tracking-tight text-white hidden sm:block"
+          >Ferretería Rosita</span
+        >
+      </a>
+
+      <!-- Search Bar -->
+      <div class="hidden md:flex flex-1 max-w-2xl mx-auto">
+        <div class="relative w-full group">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary group-focus-within:text-primary transition-colors"
+          >
+            <span class="material-symbols-outlined">search</span>
+          </div>
+          <input
+            type="text"
+            placeholder="Buscar herramientas, materiales, marcas..."
+            class="block w-full h-12 pl-10 pr-4 rounded-lg bg-surface-dark border-transparent focus:border-primary focus:bg-[#333] focus:ring-1 focus:ring-primary text-white placeholder-text-secondary transition-all duration-200"
+          />
+        </div>
+      </div>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-4 shrink-0">
+        <!-- Navigation -->
+        <nav class="hidden lg:flex items-center gap-6 mr-4">
+          <a
+            href="/"
+            class="text-sm font-medium text-white hover:text-primary transition-colors"
+            >Inicio</a
+          >
+          <a
+            href="/catalogo"
+            class="text-sm font-medium text-text-secondary hover:text-white transition-colors"
+            >Catálogo</a
+          >
+          <a
+            href="/nosotros"
+            class="text-sm font-medium text-text-secondary hover:text-white transition-colors"
+            >Nosotros</a
+          >
+          <a
+            href="/contactanos"
+            class="text-sm font-medium text-text-secondary hover:text-white transition-colors"
+            >Contacto</a
+          >
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2">
+          <!-- Cart Button -->
+          <button
+            id="cart-button"
+            class="relative p-2 text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors group"
+          >
+            <span
+              class="material-symbols-outlined group-hover:text-primary transition-colors"
+              >shopping_cart</span
+            >
+            <span
+              id="cart-count"
+              class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white hidden"
+              >0</span
+            >
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class="lg:hidden p-2 text-text-secondary hover:text-white"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (Hidden by default) -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden hidden border-t border-white/10 bg-background-dark/95 backdrop-blur-md"
+  >
+    <div class="px-4 py-4 space-y-3">
+      <a
+        href="/"
+        class="block py-2 text-white hover:text-primary transition-colors"
+        >Inicio</a
+      >
+      <a
+        href="/catalogo"
+        class="block py-2 text-text-secondary hover:text-white transition-colors"
+        >Catálogo</a
+      >
+      <a
+        href="/nosotros"
+        class="block py-2 text-text-secondary hover:text-white transition-colors"
+        >Nosotros</a
+      >
+      <a
+        href="/contactanos"
+        class="block py-2 text-text-secondary hover:text-white transition-colors"
+        >Contacto</a
+      >
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+</script>

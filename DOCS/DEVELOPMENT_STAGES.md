@@ -15,16 +15,16 @@ Al finalizar cada etapa:
 - [x] ~~Ejecutar `pnpm create astro@latest ./` para iniciar proyecto.~~ (Pre-instalado)
 - [x] ~~Instalar TailwindCSS v4.~~ (Pre-instalado: `@tailwindcss/vite`, `tailwindcss`)
 - [x] ~~Instalar Sharp para optimización de imágenes.~~ (Pre-instalado)
-- [ ] Configurar `tailwind.config.mjs` (o CSS Variables) con la paleta Rosita.
-- [ ] Crear estructura base de carpetas:
+- [x] Configurar `tailwind.config.mjs` (o CSS Variables) con la paleta Rosita.
+- [x] Crear estructura base de carpetas:
     - `src/components/common/`
     - `src/components/home/`
     - `src/components/catalog/`
     - `src/components/ui/`
     - `src/content/products/`
     - `src/content/categories/`
-- [ ] Crear `src/content/config.ts` con esquemas Zod para productos y categorías.
-- [ ] Limpiar archivos de ejemplo generados por Astro.
+- [x] Crear `src/content/config.ts` con esquemas Zod para productos y categorías.
+- [x] Limpiar archivos de ejemplo generados por Astro.
 
 ### Verificación
 ```bash
@@ -43,11 +43,11 @@ git add -A && git commit -m "feat: initial project scaffold with Astro and Tailw
 **Objetivo**: Crear los componentes de layout reutilizables.
 
 ### Actividades
-- [ ] Crear `src/layouts/Layout.astro` con estructura HTML base (head, body).
-- [ ] Implementar `src/components/common/Header.astro` usando el HTML de Stitch.
-- [ ] Implementar `src/components/common/Footer.astro` usando el HTML de Stitch.
-- [ ] Agregar Google Fonts (Inter) en el layout.
-- [ ] Crear archivo `src/styles/global.css` con estilos base.
+- [x] Crear `src/layouts/Layout.astro` con estructura HTML base (head, body).
+- [x] Implementar `src/components/common/Header.astro` usando el HTML de Stitch.
+- [x] Implementar `src/components/common/Footer.astro` usando el HTML de Stitch.
+- [x] Agregar Google Fonts (Inter) en el layout.
+- [x] Crear archivo `src/styles/global.css` con estilos base.
 
 ### Verificación
 ```bash
@@ -180,8 +180,8 @@ git add -A && git commit -m "feat: SEO optimization with sitemap and schema"
 
 | Etapa | Estado | Commit |
 |-------|--------|--------|
-| 1. Foundation | ⏳ Pendiente | - |
-| 2. Core Layout | ⏳ Pendiente | - |
+| 1. Foundation | ✅ Completado | `feat: initial project scaffold` |
+| 2. Core Layout | ✅ Completado | `feat: core layout components` |
 | 3. Homepage | ⏳ Pendiente | - |
 | 4. Catalog | ⏳ Pendiente | - |
 | 5. Static Pages | ⏳ Pendiente | - |
