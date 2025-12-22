@@ -4,6 +4,7 @@
  */
 
 import { atom } from 'nanostores';
+import { CONTACT, WHATSAPP_TEMPLATES, getWhatsAppUrl } from '../config/site';
 
 export interface ContactFormData {
   name: string;
@@ -31,9 +32,6 @@ const initialState: ContactFormState = {
 
 // Main store
 export const $contactForm = atom<ContactFormState>({ ...initialState });
-
-// WhatsApp number for contact messages
-const WHATSAPP_NUMBER = '51955314610';
 
 /**
  * Update a single field in the form
@@ -87,20 +85,6 @@ export function validateForm(): boolean {
 }
 
 /**
- * Generate WhatsApp message from form data
- */
-function generateWhatsAppMessage(data: ContactFormData): string {
-  return `¡Hola! Me contacto desde el formulario web.
-
-👤 *Nombre:* ${data.name}
-📧 *Email:* ${data.email}
-📱 *Teléfono:* ${data.phone}
-
-💬 *Mensaje:*
-${data.message}`;
-}
-
-/**
  * Submit the form - opens WhatsApp with the message
  */
 export function submitForm(): boolean {
@@ -115,9 +99,8 @@ export function submitForm(): boolean {
     isSubmitting: true
   });
 
-  const message = generateWhatsAppMessage(data);
-  const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+  const message = WHATSAPP_TEMPLATES.contactForm(data);
+  const whatsappUrl = getWhatsAppUrl(message, CONTACT.whatsapp.primary);
 
   // Open WhatsApp
   window.open(whatsappUrl, '_blank');

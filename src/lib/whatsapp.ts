@@ -3,9 +3,8 @@
  * Creates formatted messages for quote requests
  */
 
-import { getCart, type CartItem } from './cart';
-
-const WHATSAPP_NUMBER = '51955314610'; // Rosita main number
+import { getCart } from './cart';
+import { CONTACT, WHATSAPP_TEMPLATES, getWhatsAppUrl as getUrl } from '../config/site';
 
 /**
  * Generate WhatsApp message with cart items
@@ -17,7 +16,7 @@ export function generateWhatsAppMessage(): string {
     return '';
   }
 
-  let message = '🛒 *SOLICITUD DE COTIZACIÓN - FERRETERÍA ROSITA*\n\n';
+  let message = `${WHATSAPP_TEMPLATES.cartOrder}\n\n`;
   message += '📋 *Productos:*\n';
   message += '─────────────────\n';
 
@@ -51,8 +50,7 @@ export function getWhatsAppUrl(): string {
   const message = generateWhatsAppMessage();
   if (!message) return '';
   
-  const encodedMessage = encodeURIComponent(message);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+  return getUrl(message, CONTACT.whatsapp.primary);
 }
 
 /**

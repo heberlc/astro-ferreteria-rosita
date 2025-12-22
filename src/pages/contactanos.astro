@@ -2,14 +2,21 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/common/Header.astro";
 import Footer from "../components/common/Footer.astro";
+import {
+  CONTACT,
+  WHATSAPP_TEMPLATES,
+  getWhatsAppUrl,
+  BUSINESS,
+  getPageTitle,
+} from "../config/site";
 
-const whatsappNumber = "51955314610";
-const whatsappMessage = encodeURIComponent(
-  "Hola, quisiera más información sobre sus productos."
+const whatsappUrl = getWhatsAppUrl(
+  WHATSAPP_TEMPLATES.defaultMessage,
+  CONTACT.whatsapp.primary
 );
 ---
 
-<Layout title="Contáctanos | Ferretería Rosita">
+<Layout title={getPageTitle("Contáctanos")}>
   <Header />
 
   <main class="pt-20">
@@ -29,7 +36,7 @@ const whatsappMessage = encodeURIComponent(
         <div class="space-y-8">
           <!-- WhatsApp CTA -->
           <a
-            href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+            href={whatsappUrl}
             target="_blank"
             class="block bg-green-600 hover:bg-green-700 rounded-2xl p-8 transition-colors"
           >
