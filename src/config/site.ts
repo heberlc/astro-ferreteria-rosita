@@ -53,7 +53,7 @@ export const SOCIAL = {
 
 // ============ SEO & SITE ============
 export const SITE = {
-  url: "https://corporacionrosita.com",
+  url: "https://ferreteria-rosita.netlify.app",
   title: `${BUSINESS.name} | ${BUSINESS.tagline}`,
   defaultDescription: BUSINESS.description,
   language: "es-PE",

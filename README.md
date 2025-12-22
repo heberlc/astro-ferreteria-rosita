@@ -2,6 +2,8 @@
 
 E-commerce moderno para Ferretería Rosita - Materiales de construcción y ferretería en Lima, Perú.
 
+🔗 **Demo:** [https://ferreteria-rosita.netlify.app](https://ferreteria-rosita.netlify.app)
+
 ![Ferretería Rosita](public/images/og-image.jpg)
 
 ## ✨ Características
