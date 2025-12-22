@@ -1,0 +1,146 @@
+---
+/**
+ * Preguntas Frecuentes (FAQ)
+ * Página con acordeón de preguntas comunes
+ */
+
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/common/Header.astro";
+import Footer from "../components/common/Footer.astro";
+import { getPageTitle, CONTACT, BUSINESS } from "../config/site";
+
+const faqs = [
+  {
+    question: "¿Cuáles son sus horarios de atención?",
+    answer: `Atendemos de Lunes a Sábado de ${CONTACT.hours.weekdays}. Los domingos y feriados permanecemos cerrados.`,
+  },
+  {
+    question: "¿Hacen delivery?",
+    answer:
+      "Sí, realizamos envíos a todo Lima Metropolitana. El costo del delivery varía según la zona y el peso del pedido. Consulta con nuestro equipo de ventas por WhatsApp para una cotización.",
+  },
+  {
+    question: "¿Qué métodos de pago aceptan?",
+    answer:
+      "Aceptamos efectivo, tarjetas de crédito/débito (Visa, Mastercard), transferencias bancarias, Yape y Plin. Para empresas, también trabajamos con facturas a crédito.",
+  },
+  {
+    question: "¿Cómo puedo solicitar una cotización?",
+    answer:
+      "Puedes agregar productos al carrito y enviarnos la lista por WhatsApp, o contactarnos directamente con tu lista de materiales. Te responderemos con precios y disponibilidad.",
+  },
+  {
+    question: "¿Tienen garantía en sus productos?",
+    answer:
+      "Sí, todos nuestros productos tienen la garantía del fabricante. En caso de defectos de fábrica, realizamos el cambio o devolución según las políticas de cada marca.",
+  },
+  {
+    question: "¿Hacen envíos a provincias?",
+    answer:
+      "Sí, enviamos a todo el Perú a través de agencias de transporte (Olva, Shalom, Marvisur, etc.). El cliente asume el costo del flete.",
+  },
+  {
+    question: "¿Emiten factura?",
+    answer: `Sí, emitimos boletas y facturas electrónicas. Para facturas, indícanos tu RUC al momento de la compra. Razón social: ${BUSINESS.legalName}.`,
+  },
+  {
+    question: "¿Tienen estacionamiento?",
+    answer:
+      "Contamos con zona de carga y descarga frente a nuestro local. Para estacionamiento prolongado, hay parqueo público cerca.",
+  },
+];
+---
+
+<Layout title={getPageTitle("Preguntas Frecuentes")}>
+  <Header />
+
+  <main class="pt-20">
+    <div class="max-w-4xl mx-auto px-4 py-16">
+      <!-- Header -->
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6"
+        >
+          <span class="material-symbols-outlined text-lg">help</span>
+          FAQ
+        </span>
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-6">
+          Preguntas <span class="text-primary">Frecuentes</span>
+        </h1>
+        <p class="text-text-secondary text-lg">
+          Encuentra respuestas a las dudas más comunes de nuestros clientes.
+        </p>
+      </div>
+
+      <!-- FAQ Accordion -->
+      <div class="space-y-4" id="faq-accordion">
+        {
+          faqs.map((faq, index) => (
+            <div class="bg-surface-dark rounded-xl border border-border-dark overflow-hidden">
+              <button
+                class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
+                data-index={index}
+              >
+                <span class="text-white font-medium pr-4">{faq.question}</span>
+                <span class="material-symbols-outlined text-primary shrink-0 faq-icon transition-transform duration-200">
+                  expand_more
+                </span>
+              </button>
+              <div class="faq-content hidden px-6 pb-6">
+                <p class="text-text-secondary leading-relaxed">{faq.answer}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- CTA -->
+      <div
+        class="mt-12 text-center bg-surface-dark rounded-2xl p-8 border border-border-dark"
+      >
+        <h3 class="text-xl font-bold text-white mb-4">
+          ¿No encontraste tu respuesta?
+        </h3>
+        <p class="text-text-secondary mb-6">
+          Contáctanos directamente y te ayudaremos con gusto
+        </p>
+        <a
+          href="/contactanos"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors"
+        >
+          <span class="material-symbols-outlined">chat</span>
+          Contáctanos
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+  <script>
+    // FAQ Accordion functionality
+    const toggles = document.querySelectorAll(".faq-toggle");
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const content = toggle.nextElementSibling as HTMLElement;
+        const icon = toggle.querySelector(".faq-icon") as HTMLElement;
+        const isOpen = !content.classList.contains("hidden");
+
+        // Close all others
+        document
+          .querySelectorAll(".faq-content")
+          .forEach((c) => c.classList.add("hidden"));
+        document
+          .querySelectorAll(".faq-icon")
+          .forEach((i) => i.classList.remove("rotate-180"));
+
+        // Toggle current
+        if (!isOpen) {
+          content.classList.remove("hidden");
+          icon.classList.add("rotate-180");
+        }
+      });
+    });
+  </script>
+</Layout>
