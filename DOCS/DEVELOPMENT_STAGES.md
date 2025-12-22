@@ -66,11 +66,11 @@ git add -A && git commit -m "feat: core layout with Header and Footer components
 **Objetivo**: Implementar la página de inicio completa.
 
 ### Actividades
-- [ ] Crear `src/components/home/Hero.astro` con gradientes y CTA.
-- [ ] Crear `src/components/home/CategoryGrid.astro` con tarjetas de categoría.
-- [ ] Crear `src/components/home/FeaturedProducts.astro` con grid de productos.
-- [ ] Crear `src/components/home/TrustIndicators.astro` (Envíos, Seguridad, Soporte).
-- [ ] Ensamblar todos los componentes en `src/pages/index.astro`.
+- [x] Crear `src/components/home/Hero.astro` con gradientes y CTA.
+- [x] Crear `src/components/home/CategoryGrid.astro` con tarjetas de categoría.
+- [x] Crear `src/components/home/FeaturedProducts.astro` con grid de productos.
+- [x] Crear `src/components/home/TrustIndicators.astro` (Envíos, Seguridad, Soporte).
+- [x] Ensamblar todos los componentes en `src/pages/index.astro`.
 
 ### Verificación
 ```bash

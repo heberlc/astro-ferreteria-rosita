@@ -1,0 +1,131 @@
+---
+/**
+ * Featured Products Component
+ * Showcase popular products with pricing
+ */
+
+interface Product {
+  name: string;
+  brand: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  rating: number;
+  badge?: string;
+  badgeColor?: string;
+}
+
+const products: Product[] = [
+  {
+    name: "Taladro Percutor Inalámbrico 20V MAX",
+    brand: "Dewalt",
+    price: 189.99,
+    originalPrice: 210.00,
+    image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80",
+    rating: 4.5,
+    badge: "OFERTA",
+    badgeColor: "bg-primary"
+  },
+  {
+    name: "Casco de Seguridad Industrial Ajustable",
+    brand: "3M",
+    price: 24.50,
+    image: "https://images.unsplash.com/photo-1578874691223-64558a3ca096?w=400&q=80",
+    rating: 4
+  },
+  {
+    name: "Martillo de Uña Curva Mango de Fibra",
+    brand: "Stanley",
+    price: 15.99,
+    image: "https://images.unsplash.com/photo-1586864387789-628af9feed72?w=400&q=80",
+    rating: 5
+  },
+  {
+    name: "Llave Inglesa Ajustable Cromada 10\"",
+    brand: "Truper",
+    price: 12.50,
+    image: "https://images.unsplash.com/photo-1580402427914-a6cc60d7d44f?w=400&q=80",
+    rating: 3.5,
+    badge: "NUEVO",
+    badgeColor: "bg-green-500"
+  }
+];
+
+function renderStars(rating: number) {
+  const fullStars = Math.floor(rating);
+  const hasHalf = rating % 1 >= 0.5;
+  const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
+  return { fullStars, hasHalf, emptyStars };
+}
+---
+
+<section class="py-20 bg-surface-dark">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-10">
+      <h2 class="text-3xl font-bold text-white">Productos Populares</h2>
+      <div class="flex gap-2">
+        <button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5 transition-colors">
+          <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <button class="w-10 h-10 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {products.map((product) => {
+        const stars = renderStars(product.rating);
+        return (
+          <div class="group bg-[#2a2a2a] rounded-xl overflow-hidden border border-white/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-black/50">
+            <!-- Image -->
+            <div class="relative aspect-square overflow-hidden bg-white/5 p-4 flex items-center justify-center">
+              {product.badge && (
+                <div class={`absolute top-3 left-3 z-10 ${product.badgeColor} text-white text-xs font-bold px-2 py-1 rounded`}>
+                  {product.badge}
+                </div>
+              )}
+              <img 
+                src={product.image} 
+                alt={product.name}
+                class="object-contain h-full w-full group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+              <button class="absolute bottom-3 right-3 w-10 h-10 bg-white text-black rounded-full flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-lg hover:bg-primary hover:text-white">
+                <span class="material-symbols-outlined">add_shopping_cart</span>
+              </button>
+            </div>
+
+            <!-- Info -->
+            <div class="p-5">
+              <p class="text-sm text-text-secondary mb-1">{product.brand}</p>
+              <h3 class="text-white font-semibold text-lg mb-2 line-clamp-2">{product.name}</h3>
+              
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-2xl font-bold text-primary">S/{product.price.toFixed(2)}</span>
+                  {product.originalPrice && (
+                    <span class="text-sm text-text-muted line-through ml-2">S/{product.originalPrice.toFixed(2)}</span>
+                  )}
+                </div>
+                <div class="flex text-yellow-500 text-sm">
+                  {Array.from({ length: stars.fullStars }).map(() => (
+                    <span class="material-symbols-outlined text-[16px]">star</span>
+                  ))}
+                  {stars.hasHalf && (
+                    <span class="material-symbols-outlined text-[16px]">star_half</span>
+                  )}
+                  {Array.from({ length: stars.emptyStars }).map(() => (
+                    <span class="material-symbols-outlined text-[16px] text-text-muted">star_border</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

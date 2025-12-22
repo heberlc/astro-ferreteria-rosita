@@ -2,30 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/common/Header.astro";
 import Footer from "../components/common/Footer.astro";
+import Hero from "../components/home/Hero.astro";
+import CategoryGrid from "../components/home/CategoryGrid.astro";
+import FeaturedProducts from "../components/home/FeaturedProducts.astro";
+import TrustIndicators from "../components/home/TrustIndicators.astro";
 ---
 
 <Layout title="Ferretería Rosita | Materiales de Construcción en Lima">
   <Header />
 
-  <!-- Main Content with padding for fixed header -->
   <main class="pt-20">
-    <!-- Temporary placeholder content -->
-    <section class="py-20 px-4 max-w-7xl mx-auto text-center">
-      <h1 class="text-4xl md:text-6xl font-black mb-6">
-        Soluciones <span class="text-primary">Confiables</span> para tu Proyecto
-      </h1>
-      <p class="text-text-secondary text-lg max-w-2xl mx-auto mb-8">
-        Todo lo que necesitas para construir, reparar y mejorar con la mejor
-        calidad del mercado y asesoría experta.
-      </p>
-      <a
-        href="/catalogo"
-        class="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors"
-      >
-        Ver Catálogo
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-    </section>
+    <Hero />
+    <CategoryGrid />
+    <FeaturedProducts />
+    <TrustIndicators />
   </main>
 
   <Footer />
