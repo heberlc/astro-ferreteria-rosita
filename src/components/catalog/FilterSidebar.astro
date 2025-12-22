@@ -1,12 +1,12 @@
 ---
 /**
  * Filter Sidebar Component
- * Sidebar with category, price, and brand filters - Dynamic counts from Content Collections
+ * Sidebar with dynamic category, price, and brand filters with interactive functionality
  */
 import { getCollection } from "astro:content";
 
 interface Props {
-  currentCategory?: string;
+  currentCategory?: string | null;
 }
 
 const { currentCategory } = Astro.props;
@@ -52,10 +52,10 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
   <!-- Filter Header -->
   <div class="flex items-center justify-between">
     <h3 class="text-white text-lg font-bold">Filtros</h3>
-    <a
-      href="/catalogo"
+    <button
+      id="clear-filters"
       class="text-text-secondary text-sm hover:text-primary transition-colors"
-      >Limpiar</a
+      >Limpiar</button
     >
   </div>
 
@@ -64,30 +64,36 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
     <h4 class="text-text-secondary text-xs font-bold uppercase tracking-wider">
       Categorías
     </h4>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2" id="category-filters">
+      <!-- All categories button -->
+      <button
+        data-filter="category"
+        data-category=""
+        class="category-btn group flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer border-primary/50 bg-surface-dark"
+      >
+        <span class="text-sm font-medium transition-colors text-white">
+          Todas
+        </span>
+        <span
+          class="ml-auto text-xs text-text-secondary bg-border-dark px-2 py-0.5 rounded-full"
+        >
+          {allProducts.length}
+        </span>
+      </button>
       {
         categories.map((cat) => (
-          <a
-            href={`/catalogo?category=${cat.slug}`}
-            class={`group flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${
-              currentCategory === cat.slug
-                ? "border-primary/50 bg-surface-dark"
-                : "border-border-dark bg-transparent hover:border-border-dark hover:bg-surface-dark"
-            }`}
+          <button
+            data-filter="category"
+            data-category={cat.slug}
+            class="category-btn group flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer border-border-dark bg-transparent hover:border-border-dark hover:bg-surface-dark"
           >
-            <span
-              class={`text-sm font-medium transition-colors ${
-                currentCategory === cat.slug
-                  ? "text-white"
-                  : "text-text-secondary group-hover:text-white"
-              }`}
-            >
+            <span class="text-sm font-medium transition-colors text-text-secondary group-hover:text-white">
               {cat.name}
             </span>
             <span class="ml-auto text-xs text-text-secondary bg-border-dark px-2 py-0.5 rounded-full">
               {cat.count}
             </span>
-          </a>
+          </button>
         ))
       }
     </div>
@@ -99,22 +105,32 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
       Rango de Precio
     </h4>
     <div class="flex items-center gap-4 text-white text-sm">
-      <div
-        class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1"
-      >
-        S/{minPrice}
-      </div>
+      <input
+        type="number"
+        id="price-min"
+        data-min={minPrice}
+        value={minPrice}
+        min={minPrice}
+        max={maxPrice}
+        class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1 w-full text-white focus:border-primary focus:outline-none"
+      />
       <span class="text-text-secondary">-</span>
-      <div
-        class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1"
-      >
-        S/{maxPrice}
-      </div>
+      <input
+        type="number"
+        id="price-max"
+        data-max={maxPrice}
+        value={maxPrice}
+        min={minPrice}
+        max={maxPrice}
+        class="bg-surface-dark rounded border border-border-dark px-3 py-2 flex-1 w-full text-white focus:border-primary focus:outline-none"
+      />
     </div>
-    <div class="relative h-1 w-full bg-border-dark rounded-full mt-2">
-      <div class="absolute left-0 top-0 h-full w-full bg-primary rounded-full">
-      </div>
-    </div>
+    <button
+      id="apply-price-filter"
+      class="w-full py-2 bg-primary/20 text-primary text-sm font-medium rounded-lg hover:bg-primary/30 transition-colors"
+    >
+      Aplicar precio
+    </button>
   </div>
 
   <!-- Brands -->
@@ -122,12 +138,14 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
     <h4 class="text-text-secondary text-xs font-bold uppercase tracking-wider">
       Marcas ({brands.length})
     </h4>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 max-h-64 overflow-y-auto">
       {
         brands.map((brand) => (
           <label class="flex items-center gap-3 cursor-pointer group">
             <input
               type="checkbox"
+              value={brand}
+              data-filter="brand"
               class="rounded border-border-dark bg-surface-dark text-primary focus:ring-0 focus:ring-offset-0"
             />
             <span class="text-sm text-text-secondary group-hover:text-white transition-colors">
@@ -139,3 +157,123 @@ const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 500;
     </div>
   </div>
 </aside>
+
+<script>
+  // Current selected category
+  let selectedCategory = "";
+
+  // Apply all filters
+  function applyFilters() {
+    // Get selected brands
+    const selectedBrands: string[] = [];
+    document
+      .querySelectorAll<HTMLInputElement>('[data-filter="brand"]:checked')
+      .forEach((cb) => {
+        selectedBrands.push(cb.value);
+      });
+
+    // Get price range
+    const minInput = document.getElementById("price-min") as HTMLInputElement;
+    const maxInput = document.getElementById("price-max") as HTMLInputElement;
+    const minPrice = minInput ? parseFloat(minInput.value) || 0 : 0;
+    const maxPrice = maxInput
+      ? parseFloat(maxInput.value) || Infinity
+      : Infinity;
+
+    const productCards =
+      document.querySelectorAll<HTMLElement>("[data-product]");
+    let visibleCount = 0;
+
+    productCards.forEach((card) => {
+      const brand = card.dataset.brand || "";
+      const price = parseFloat(card.dataset.price || "0");
+      const category = card.dataset.category || "";
+
+      // Category filter
+      const matchesCategory =
+        selectedCategory === "" || category === selectedCategory;
+
+      // Brand filter
+      const matchesBrand =
+        selectedBrands.length === 0 || selectedBrands.includes(brand);
+
+      // Price filter
+      const matchesPrice = price >= minPrice && price <= maxPrice;
+
+      const isVisible = matchesCategory && matchesBrand && matchesPrice;
+      card.style.display = isVisible ? "" : "none";
+
+      if (isVisible) visibleCount++;
+    });
+
+    // Update count
+    const countEl = document.getElementById("product-count");
+    if (countEl) {
+      countEl.textContent = `Mostrando ${visibleCount} productos`;
+    }
+  }
+
+  // Update category button styles
+  function updateCategoryStyles() {
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-filter="category"]')
+      .forEach((btn) => {
+        const btnCategory = btn.dataset.category || "";
+        const isActive = btnCategory === selectedCategory;
+
+        if (isActive) {
+          btn.classList.remove("border-border-dark", "bg-transparent");
+          btn.classList.add("border-primary/50", "bg-surface-dark");
+          btn.querySelector("span")?.classList.remove("text-text-secondary");
+          btn.querySelector("span")?.classList.add("text-white");
+        } else {
+          btn.classList.add("border-border-dark", "bg-transparent");
+          btn.classList.remove("border-primary/50", "bg-surface-dark");
+          btn.querySelector("span")?.classList.add("text-text-secondary");
+          btn.querySelector("span")?.classList.remove("text-white");
+        }
+      });
+  }
+
+  // Event listeners for category buttons
+  document.querySelectorAll('[data-filter="category"]').forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLButtonElement;
+      selectedCategory = target.dataset.category || "";
+      updateCategoryStyles();
+      applyFilters();
+    });
+  });
+
+  // Event listeners for brand checkboxes
+  document.querySelectorAll('[data-filter="brand"]').forEach((checkbox) => {
+    checkbox.addEventListener("change", applyFilters);
+  });
+
+  // Event listener for price filter button
+  document
+    .getElementById("apply-price-filter")
+    ?.addEventListener("click", applyFilters);
+
+  // Clear filters
+  document.getElementById("clear-filters")?.addEventListener("click", () => {
+    // Reset category
+    selectedCategory = "";
+    updateCategoryStyles();
+
+    // Reset brand checkboxes
+    document
+      .querySelectorAll<HTMLInputElement>('[data-filter="brand"]')
+      .forEach((cb) => {
+        cb.checked = false;
+      });
+
+    // Reset price inputs
+    const minInput = document.getElementById("price-min") as HTMLInputElement;
+    const maxInput = document.getElementById("price-max") as HTMLInputElement;
+    if (minInput) minInput.value = minInput.dataset.min || "0";
+    if (maxInput) maxInput.value = maxInput.dataset.max || "500";
+
+    applyFilters();
+  });
+</script>
