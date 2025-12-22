@@ -113,8 +113,8 @@ git add -A && git commit -m "feat: catalog system with products and filters"
 **Objetivo**: Crear las páginas estáticas informativas.
 
 ### Actividades
-- [ ] Crear `src/pages/nosotros.astro` con contenido de Misión/Visión/Valores.
-- [ ] Crear `src/pages/contactanos.astro` con formulario y mapa.
+- [x] Crear `src/pages/nosotros.astro` con contenido de Misión/Visión/Valores.
+- [x] Crear `src/pages/contactanos.astro` con formulario y mapa.
 
 ### Verificación
 ```bash
@@ -183,7 +183,7 @@ git add -A && git commit -m "feat: SEO optimization with sitemap and schema"
 | 1. Foundation | ✅ Completado | `feat: initial project scaffold` |
 | 2. Core Layout | ✅ Completado | `feat: core layout components` |
 | 3. Homepage | ✅ Completado | `feat: homepage implementation` |
-| 4. Catalog | ⏳ Pendiente | - |
-| 5. Static Pages | ⏳ Pendiente | - |
+| 4. Catalog | ✅ Completado | `feat: catalog system` |
+| 5. Static Pages | ✅ Completado | `feat: static pages` |
 | 6. WhatsApp Cart | ⏳ Pendiente | - |
 | 7. SEO | ⏳ Pendiente | - |

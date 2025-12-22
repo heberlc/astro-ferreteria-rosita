@@ -1,0 +1,152 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/common/Header.astro";
+import Footer from "../components/common/Footer.astro";
+---
+
+<Layout title="Nosotros | Ferretería Rosita">
+  <Header />
+
+  <main class="pt-20">
+    <!-- Hero -->
+    <section class="py-20 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-6">
+          Más de <span class="text-primary">28 años</span> construyendo confianza
+        </h1>
+        <p class="text-text-secondary text-lg leading-relaxed">
+          Somos una empresa familiar dedicada a proveer materiales de
+          construcción y ferretería de la más alta calidad para profesionales y
+          hogares peruanos.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div
+          class="bg-surface-dark rounded-xl p-6 text-center border border-border-dark"
+        >
+          <span class="text-4xl font-black text-primary">28+</span>
+          <p class="text-text-secondary text-sm mt-2">Años de experiencia</p>
+        </div>
+        <div
+          class="bg-surface-dark rounded-xl p-6 text-center border border-border-dark"
+        >
+          <span class="text-4xl font-black text-primary">5k+</span>
+          <p class="text-text-secondary text-sm mt-2">Productos</p>
+        </div>
+        <div
+          class="bg-surface-dark rounded-xl p-6 text-center border border-border-dark"
+        >
+          <span class="text-4xl font-black text-primary">120+</span>
+          <p class="text-text-secondary text-sm mt-2">Marcas</p>
+        </div>
+        <div
+          class="bg-surface-dark rounded-xl p-6 text-center border border-border-dark"
+        >
+          <span class="text-4xl font-black text-primary">10k+</span>
+          <p class="text-text-secondary text-sm mt-2">Clientes satisfechos</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission/Vision -->
+    <section class="py-20 bg-surface-dark">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Mission -->
+          <div
+            class="bg-background-dark rounded-2xl p-8 border border-border-dark"
+          >
+            <div
+              class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6"
+            >
+              <span class="material-symbols-outlined text-3xl">flag</span>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-4">Nuestra Misión</h2>
+            <p class="text-text-secondary leading-relaxed">
+              Proveer a nuestros clientes materiales de construcción y
+              ferretería de la más alta calidad, con precios justos y un
+              servicio excepcional que supere sus expectativas, contribuyendo al
+              desarrollo de proyectos exitosos en todo el Perú.
+            </p>
+          </div>
+
+          <!-- Vision -->
+          <div
+            class="bg-background-dark rounded-2xl p-8 border border-border-dark"
+          >
+            <div
+              class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6"
+            >
+              <span class="material-symbols-outlined text-3xl">visibility</span>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-4">Nuestra Visión</h2>
+            <p class="text-text-secondary leading-relaxed">
+              Ser reconocidos como la ferretería líder en Lima, destacando por
+              nuestra innovación, calidad de servicio y compromiso con el
+              crecimiento de nuestros clientes y colaboradores.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="py-20 px-4 max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-white text-center mb-12">
+        Nuestros Valores
+      </h2>
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4"
+          >
+            <span class="material-symbols-outlined text-3xl">handshake</span>
+          </div>
+          <h3 class="text-white font-bold mb-2">Respeto</h3>
+          <p class="text-text-secondary text-sm">
+            Valoramos a cada persona con dignidad.
+          </p>
+        </div>
+        <div class="text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4"
+          >
+            <span class="material-symbols-outlined text-3xl">verified</span>
+          </div>
+          <h3 class="text-white font-bold mb-2">Honestidad</h3>
+          <p class="text-text-secondary text-sm">
+            Transparencia en cada transacción.
+          </p>
+        </div>
+        <div class="text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4"
+          >
+            <span class="material-symbols-outlined text-3xl"
+              >workspace_premium</span
+            >
+          </div>
+          <h3 class="text-white font-bold mb-2">Compromiso</h3>
+          <p class="text-text-secondary text-sm">
+            Dedicación total con nuestros clientes.
+          </p>
+        </div>
+        <div class="text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4"
+          >
+            <span class="material-symbols-outlined text-3xl">stars</span>
+          </div>
+          <h3 class="text-white font-bold mb-2">Excelencia</h3>
+          <p class="text-text-secondary text-sm">
+            Buscamos la mejora continua.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

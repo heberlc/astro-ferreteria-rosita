@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/common/Header.astro";
+import Footer from "../components/common/Footer.astro";
+
+const whatsappNumber = "51955314610";
+const whatsappMessage = encodeURIComponent(
+  "Hola, quisiera más información sobre sus productos."
+);
+---
+
+<Layout title="Contáctanos | Ferretería Rosita">
+  <Header />
+
+  <main class="pt-20">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+      <!-- Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-6">
+          ¿Necesitas <span class="text-primary">ayuda</span>?
+        </h1>
+        <p class="text-text-secondary text-lg">
+          Estamos aquí para atenderte. Contáctanos por el medio que prefieras.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Contact Info -->
+        <div class="space-y-8">
+          <!-- WhatsApp CTA -->
+          <a
+            href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+            target="_blank"
+            class="block bg-green-600 hover:bg-green-700 rounded-2xl p-8 transition-colors"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center"
+              >
+                <span class="material-symbols-outlined text-3xl text-white"
+                  >chat</span
+                >
+              </div>
+              <div>
+                <h3 class="text-white text-xl font-bold">WhatsApp</h3>
+                <p class="text-white/80">Respuesta inmediata</p>
+              </div>
+              <span
+                class="material-symbols-outlined text-white ml-auto text-3xl"
+                >arrow_forward</span
+              >
+            </div>
+          </a>
+
+          <!-- Contact Cards -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div
+              class="bg-surface-dark rounded-xl p-6 border border-border-dark"
+            >
+              <span class="material-symbols-outlined text-primary text-3xl mb-4"
+                >location_on</span
+              >
+              <h3 class="text-white font-bold mb-2">Dirección</h3>
+              <p class="text-text-secondary text-sm">
+                Av. Guardia Civil 221-225<br />
+                Urb. La Campiña - Chorrillos<br />
+                Lima, Perú
+              </p>
+            </div>
+            <div
+              class="bg-surface-dark rounded-xl p-6 border border-border-dark"
+            >
+              <span class="material-symbols-outlined text-primary text-3xl mb-4"
+                >call</span
+              >
+              <h3 class="text-white font-bold mb-2">Teléfonos</h3>
+              <p class="text-text-secondary text-sm">
+                +51 955 314 610<br />
+                +51 955 099 118<br />
+                (01) 251 5860
+              </p>
+            </div>
+            <div
+              class="bg-surface-dark rounded-xl p-6 border border-border-dark"
+            >
+              <span class="material-symbols-outlined text-primary text-3xl mb-4"
+                >mail</span
+              >
+              <h3 class="text-white font-bold mb-2">Email</h3>
+              <p class="text-text-secondary text-sm">
+                ventas.empresarial@rosita.pe<br />
+                ventas@corporacionrosita.com
+              </p>
+            </div>
+            <div
+              class="bg-surface-dark rounded-xl p-6 border border-border-dark"
+            >
+              <span class="material-symbols-outlined text-primary text-3xl mb-4"
+                >schedule</span
+              >
+              <h3 class="text-white font-bold mb-2">Horario</h3>
+              <p class="text-text-secondary text-sm">
+                Lun - Sáb: 8:00 - 18:00<br />
+                Domingo: Cerrado
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-surface-dark rounded-2xl p-8 border border-border-dark">
+          <h2 class="text-2xl font-bold text-white mb-6">
+            Envíanos un mensaje
+          </h2>
+          <form class="space-y-6">
+            <div>
+              <label class="block text-text-secondary text-sm mb-2"
+                >Nombre completo</label
+              >
+              <input
+                type="text"
+                class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+                placeholder="Tu nombre"
+              />
+            </div>
+            <div>
+              <label class="block text-text-secondary text-sm mb-2">Email</label
+              >
+              <input
+                type="email"
+                class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+                placeholder="tu@email.com"
+              />
+            </div>
+            <div>
+              <label class="block text-text-secondary text-sm mb-2"
+                >Teléfono</label
+              >
+              <input
+                type="tel"
+                class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+                placeholder="+51 999 999 999"
+              />
+            </div>
+            <div>
+              <label class="block text-text-secondary text-sm mb-2"
+                >Mensaje</label
+              >
+              <textarea
+                rows="4"
+                class="w-full px-4 py-3 rounded-lg bg-background-dark border border-border-dark text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none"
+                placeholder="¿En qué podemos ayudarte?"></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full h-14 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors shadow-lg shadow-primary/25"
+            >
+              Enviar mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
