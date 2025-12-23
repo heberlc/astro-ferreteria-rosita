@@ -8,6 +8,12 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { FEATURES } from "../../config/site";
 
+interface Variant {
+  name: string;
+  sku: string;
+  price: number;
+}
+
 interface Props {
   title: string;
   slug: string;
@@ -21,6 +27,7 @@ interface Props {
   stock?: boolean;
   rating?: number;
   reviewCount?: number;
+  variants?: Variant[];
 }
 
 const {
@@ -36,7 +43,14 @@ const {
   stock = true,
   rating = 0,
   reviewCount = 0,
+  variants,
 } = Astro.props;
+
+// Calculate display price (minimum from variants or base price)
+const hasVariants = variants && variants.length > 0;
+const displayPrice = hasVariants
+  ? Math.min(...variants.map((v) => v.price))
+  : price;
 
 const badgeText = discount ? `-${discount}% OFF` : isNew ? "NUEVO" : null;
 const badgeColor = discount ? "bg-red-600" : "bg-primary";
@@ -54,7 +68,7 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 <div
   data-product={slug}
   data-brand={brand}
-  data-price={price || 0}
+  data-price={displayPrice || 0}
   data-category={category}
   class={`group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary transition-colors duration-300 shadow-lg hover:shadow-primary/10 ${!stock ? "opacity-75" : ""}`}
 >
@@ -162,10 +176,15 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
           )
         }
         {
-          price ? (
-            <span class="text-white text-xl font-bold">
-              S/{price.toFixed(2)}
-            </span>
+          displayPrice ? (
+            <>
+              {hasVariants && (
+                <span class="text-text-secondary text-xs">desde </span>
+              )}
+              <span class="text-white text-xl font-bold">
+                S/{displayPrice.toFixed(2)}
+              </span>
+            </>
           ) : (
             <span class="text-text-secondary text-sm">Consultar precio</span>
           )

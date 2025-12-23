@@ -10,7 +10,7 @@ import { FEATURES } from "../../config/site";
 export async function getStaticPaths() {
   const products = await getCollection("products");
   return products.map((product) => ({
-    params: { slug: product.data.slug },
+    params: { slug: product.id }, // Usar el ID del archivo como slug
     props: { product },
   }));
 }
@@ -25,7 +25,26 @@ const {
   description,
   features,
   category,
+  variants,
 } = product.data;
+
+// Determinar precio a mostrar (variante mínima o precio base)
+const hasVariants = variants && variants.length > 0;
+const displayPrice = hasVariants
+  ? Math.min(...variants.map((v: { price: number }) => v.price))
+  : price;
+const defaultVariant = hasVariants ? variants[0] : null;
+
+// Helper para generar SKU automáticamente
+function generateSku(productId: string, variantName: string): string {
+  return `${productId}-${variantName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+$/, "")}`;
+}
+const defaultSku = defaultVariant
+  ? generateSku(product.id, defaultVariant.name)
+  : product.id;
 
 const categoryNames: Record<string, string> = {
   construccion: "Construcción",
@@ -124,13 +143,44 @@ const categoryNames: Record<string, string> = {
             )
           }
 
+          <!-- Variant Selector -->
+          {
+            hasVariants && (
+              <div class="mb-6">
+                <label class="block text-white font-medium mb-2">
+                  Presentación:
+                </label>
+                <select
+                  id="variant-selector"
+                  class="w-full sm:w-auto px-4 py-3 bg-surface-dark border border-border rounded-lg text-white focus:border-primary focus:outline-none"
+                >
+                  {variants.map((variant: { name: string; price: number }) => (
+                    <option
+                      value={generateSku(product.id, variant.name)}
+                      data-price={variant.price}
+                      data-name={variant.name}
+                    >
+                      {variant.name} - S/{variant.price.toFixed(2)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )
+          }
+
           <!-- Price -->
           <div class="flex items-baseline gap-3 mb-6">
             {
-              price ? (
+              displayPrice ? (
                 <>
-                  <span class="text-4xl font-bold text-primary">
-                    S/{price.toFixed(2)}
+                  {hasVariants && (
+                    <span class="text-text-secondary text-lg">Precio:</span>
+                  )}
+                  <span
+                    id="price-display"
+                    class="text-4xl font-bold text-primary"
+                  >
+                    S/{displayPrice.toFixed(2)}
                   </span>
                   {originalPrice && (
                     <span class="text-xl text-text-muted line-through">
@@ -178,10 +228,12 @@ const categoryNames: Record<string, string> = {
           <div class="flex flex-col sm:flex-row gap-4 mt-auto">
             <button
               id="add-to-cart-btn"
-              data-slug={product.data.slug}
+              data-product-id={product.id}
               data-title={title}
               data-brand={brand}
-              data-price={price || 0}
+              data-price={defaultVariant?.price || price || 0}
+              data-sku={defaultSku}
+              data-variant={defaultVariant?.name || ""}
               data-image={typeof image !== "string" ? image.src : image}
               class="flex-1 py-4 px-8 rounded-lg bg-primary hover:bg-primary-hover text-white font-bold transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-3"
             >
@@ -192,8 +244,9 @@ const categoryNames: Record<string, string> = {
               id="whatsapp-btn"
               data-title={title}
               data-brand={brand}
-              data-price={price || 0}
-              data-slug={product.data.slug}
+              data-price={defaultVariant?.price || price || 0}
+              data-sku={defaultSku}
+              data-variant={defaultVariant?.name || ""}
               class="flex-1 py-4 px-8 rounded-lg bg-green-600 hover:bg-green-700 text-white font-bold transition-all flex items-center justify-center gap-3"
             >
               <span class="material-symbols-outlined">chat</span>
@@ -210,18 +263,54 @@ const categoryNames: Record<string, string> = {
   <script>
     import { addToCart } from "../../lib/cart";
 
-    // Add to Cart button
+    // Variant selector logic
+    const variantSelector = document.getElementById(
+      "variant-selector"
+    ) as HTMLSelectElement;
+    const priceDisplay = document.getElementById("price-display");
     const addToCartBtn = document.getElementById("add-to-cart-btn");
+    const whatsappBtn = document.getElementById("whatsapp-btn");
+
+    if (variantSelector) {
+      variantSelector.addEventListener("change", () => {
+        const selectedOption =
+          variantSelector.options[variantSelector.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price || "0");
+        const sku = selectedOption.value;
+        const variantName = selectedOption.dataset.name || "";
+
+        // Update price display
+        if (priceDisplay) {
+          priceDisplay.textContent = `S/${price.toFixed(2)}`;
+        }
+
+        // Update button data attributes
+        if (addToCartBtn) {
+          addToCartBtn.dataset.price = price.toString();
+          addToCartBtn.dataset.sku = sku;
+          addToCartBtn.dataset.variant = variantName;
+        }
+        if (whatsappBtn) {
+          whatsappBtn.dataset.price = price.toString();
+          whatsappBtn.dataset.sku = sku;
+          whatsappBtn.dataset.variant = variantName;
+        }
+      });
+    }
+
+    // Add to Cart button
     addToCartBtn?.addEventListener("click", () => {
-      const slug = addToCartBtn.dataset.slug || "";
+      const productId = addToCartBtn.dataset.productId || "";
       const title = addToCartBtn.dataset.title || "";
       const brand = addToCartBtn.dataset.brand || "";
       const price = parseFloat(addToCartBtn.dataset.price || "0");
       const image = addToCartBtn.dataset.image || "";
+      const sku = addToCartBtn.dataset.sku || "";
+      const variant = addToCartBtn.dataset.variant || "";
 
       addToCart({
-        slug: slug,
-        title: title,
+        slug: sku, // Usar SKU como identificador único
+        title: variant ? `${title} - ${variant}` : title,
         brand: brand,
         price: price,
         image: image,
@@ -241,19 +330,20 @@ const categoryNames: Record<string, string> = {
     });
 
     // WhatsApp button - direct product inquiry
-    const whatsappBtn = document.getElementById("whatsapp-btn");
     whatsappBtn?.addEventListener("click", () => {
       const title = whatsappBtn.dataset.title || "";
       const brand = whatsappBtn.dataset.brand || "";
       const price = parseFloat(whatsappBtn.dataset.price || "0");
-      const slug = whatsappBtn.dataset.slug || "";
+      const sku = whatsappBtn.dataset.sku || "";
+      const variant = whatsappBtn.dataset.variant || "";
 
+      const productName = variant ? `${title} - ${variant}` : title;
       const message =
         `¡Hola! Me interesa el siguiente producto:\n\n` +
-        `📦 *${title}*\n` +
+        `📦 *${productName}*\n` +
         `🏷️ Marca: ${brand}\n` +
         (price > 0 ? `💰 Precio: S/${price.toFixed(2)}\n` : "") +
-        `🔗 Código: ${slug}\n\n` +
+        `🔗 Código: ${sku}\n\n` +
         `¿Podrían darme más información?`;
 
       const phoneNumber = "51999999999"; // Replace with actual number

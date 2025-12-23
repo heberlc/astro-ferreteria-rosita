@@ -24,7 +24,7 @@ if (searchQuery) {
   products = products.filter((p) => {
     const title = p.data.title.toLowerCase();
     const brand = (p.data.brand || "").toLowerCase();
-    const slug = p.data.slug.toLowerCase();
+    const slug = p.id.toLowerCase();
     return (
       title.includes(searchQuery) ||
       brand.includes(searchQuery) ||
@@ -182,7 +182,7 @@ const categoryTitle = categoryFilter
               {products.map((product) => (
                 <ProductCard
                   title={product.data.title}
-                  slug={product.data.slug}
+                  slug={product.id}
                   brand={product.data.brand}
                   price={product.data.price}
                   originalPrice={product.data.originalPrice}
@@ -193,6 +193,7 @@ const categoryTitle = categoryFilter
                   stock={product.data.stock}
                   rating={product.data.rating}
                   reviewCount={product.data.reviewCount}
+                  variants={product.data.variants}
                 />
               ))}
             </div>
