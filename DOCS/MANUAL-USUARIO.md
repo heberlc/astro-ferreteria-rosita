@@ -9,10 +9,21 @@ Este manual explica cómo usar el panel de administración para gestionar los pr
 ## 1. Acceder al Panel
 
 ### Requisitos
-- El servidor de desarrollo debe estar corriendo
+- Node.js 18+ instalado
 - Navegador web (Chrome, Firefox, Edge)
 
-### Pasos
+### Iniciar el servidor
+
+Abrir terminal en la carpeta del proyecto y ejecutar:
+
+```bash
+pnpm install    # Solo la primera vez
+pnpm dev        # Inicia el servidor
+```
+
+Esperar a que aparezca: `Local: http://localhost:4321`
+
+### Abrir el panel
 1. Abrir el navegador
 2. Ir a: **http://localhost:4321/keystatic**
 3. Aparecerá el panel de administración
@@ -179,16 +190,37 @@ El menú de iconos incluye:
 - PNG
 - WebP
 
-### 7.2 Tamaños recomendados
-- Productos: 800x800 px (cuadrada)
-- Categorías: 800x600 px
+### 7.2 Tamaños y proporciones recomendadas
 
-### 7.3 Pasos
+| Tipo | Tamaño mínimo | Proporción ideal |
+|------|---------------|------------------|
+| Productos | 800x800 px | **Cuadrada (1:1)** |
+| Categorías | 800x600 px | Horizontal (4:3) |
+
+### 7.3 ⚠️ Importante sobre proporciones
+
+El sitio está diseñado para imágenes **cuadradas** en productos.
+
+| Si subes... | Resultado |
+|-------------|-----------|
+| ✅ Cuadrada (1:1) | Se ve perfecta |
+| ⚠️ Horizontal (4:3, 16:9) | Se recorta arriba/abajo |
+| ❌ Vertical (9:16) | Se recorta mucho, se pierde información |
+
+**Recomendación**: Tomar fotos del producto centrado y recortarlas a formato cuadrado antes de subir.
+
+### 7.4 Pasos para subir
 1. Editar producto o categoría
 2. Click en **Choose file** en campo de imagen
 3. Seleccionar imagen del computador
 4. Esperar que cargue el preview
 5. **Save**
+
+### 7.5 Optimización automática
+- El sitio optimiza automáticamente las imágenes al publicar
+- Convierte a formato WebP (más ligero)
+- Genera múltiples tamaños para móvil y escritorio
+- No necesitas comprimir las imágenes, solo súbelas en buena calidad
 
 ---
 
@@ -236,4 +268,4 @@ Si tienes dudas o problemas:
 
 ---
 
-*Manual actualizado: Diciembre 2024*
+*Manual actualizado: Diciembre 2025*
