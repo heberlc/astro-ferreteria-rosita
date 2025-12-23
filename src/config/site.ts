@@ -1,6 +1,6 @@
 /**
  * Site Configuration - Central source of truth
- * 
+ *
  * All business information, contact details, and site metadata
  * should be defined here and imported where needed.
  */
@@ -10,7 +10,8 @@ export const BUSINESS = {
   name: "Ferretería Rosita",
   legalName: "Corporación Ferretería Rosita SAC",
   tagline: "Materiales de Construcción en Lima",
-  description: "Tu ferretería de confianza con más de 30 años de experiencia en materiales de construcción, herramientas y acabados para el hogar.",
+  description:
+    "Tu ferretería de confianza con más de 30 años de experiencia en materiales de construcción, herramientas y acabados para el hogar.",
   foundingYear: 1990,
 } as const;
 
@@ -20,16 +21,9 @@ export const CONTACT = {
     primary: "51955314610",
     secondary: "51955099118",
   },
-  phones: [
-    "+51 955 314 610",
-    "+51 955 099 118",
-    "(01) 251 5860",
-  ],
+  phones: ["+51 955 314 610", "+51 955 099 118", "(01) 251 5860"],
   phonesFormatted: ["+51955314610", "+51955099118", "+5112515860"],
-  emails: [
-    "ventas.empresarial@rosita.pe",
-    "ventas@corporacionrosita.com",
-  ],
+  emails: ["ventas.empresarial@rosita.pe", "ventas@corporacionrosita.com"],
   address: {
     street: "Av. Guardia Civil 221-225",
     district: "Urb. La Campiña - Chorrillos",
@@ -53,7 +47,7 @@ export const SOCIAL = {
 
 // ============ SEO & SITE ============
 export const SITE = {
-  url: "https://ferreteria-rosita.netlify.app",
+  url: "https://ferreteria-rosita.pages.dev",
   title: `${BUSINESS.name} | ${BUSINESS.tagline}`,
   defaultDescription: BUSINESS.description,
   language: "es-PE",
@@ -77,9 +71,16 @@ export const FEATURES = {
 // ============ WHATSAPP MESSAGE TEMPLATES ============
 export const WHATSAPP_TEMPLATES = {
   cartOrder: `🛒 *SOLICITUD DE COTIZACIÓN - ${BUSINESS.name.toUpperCase()}*`,
-  productInquiry: (productName: string, productCode: string, price: number) => 
-    `Hola, me interesa el producto:\n\n📦 ${productName}\n🏷️ Código: ${productCode}\n💰 Precio: S/ ${price.toFixed(2)}\n\n¿Está disponible?`,
-  contactForm: (data: { name: string; email: string; phone: string; message: string }) =>
+  productInquiry: (productName: string, productCode: string, price: number) =>
+    `Hola, me interesa el producto:\n\n📦 ${productName}\n🏷️ Código: ${productCode}\n💰 Precio: S/ ${price.toFixed(
+      2
+    )}\n\n¿Está disponible?`,
+  contactForm: (data: {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+  }) =>
     `¡Hola! Me contacto desde el formulario web.\n\n👤 *Nombre:* ${data.name}\n📧 *Email:* ${data.email}\n📱 *Teléfono:* ${data.phone}\n\n💬 *Mensaje:*\n${data.message}`,
   defaultMessage: "Hola, quisiera más información sobre sus productos.",
 } as const;
@@ -89,7 +90,10 @@ export const WHATSAPP_TEMPLATES = {
 /**
  * Generate WhatsApp URL with pre-filled message
  */
-export function getWhatsAppUrl(message: string, phone: string = CONTACT.whatsapp.primary): string {
+export function getWhatsAppUrl(
+  message: string,
+  phone: string = CONTACT.whatsapp.primary
+): string {
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phone}?text=${encodedMessage}`;
 }

@@ -1,7 +1,7 @@
-# https://ferreteria-rosita.netlify.app
+# https://ferreteria-rosita.pages.dev
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://ferreteria-rosita.netlify.app/sitemap-index.xml
+Sitemap: https://ferreteria-rosita.pages.dev/sitemap-index.xml

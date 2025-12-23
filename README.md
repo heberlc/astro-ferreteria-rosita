@@ -2,7 +2,7 @@
 
 E-commerce moderno para Ferretería Rosita - Materiales de construcción y ferretería en Lima, Perú.
 
-🔗 **Demo:** [https://ferreteria-rosita.netlify.app](https://ferreteria-rosita.netlify.app)
+🔗 **Demo:** [https://ferreteria-rosita.pages.dev](https://ferreteria-rosita.pages.dev)
 
 ![Ferretería Rosita](public/images/og-image.jpg)
 
@@ -30,7 +30,7 @@ E-commerce moderno para Ferretería Rosita - Materiales de construcción y ferre
 
 ```bash
 # Clonar repositorio
-git clone [url-del-repo]
+git clone https://github.com/heberlc/astro-ferreteria-rosita.git
 
 # Instalar dependencias
 pnpm install
