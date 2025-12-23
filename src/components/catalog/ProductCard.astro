@@ -193,16 +193,28 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
       {
         stock ? (
-          <button
-            class="add-to-cart-btn bg-primary sm:bg-border-dark hover:bg-primary-hover sm:hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center sm:group-hover:bg-primary"
-            data-slug={slug}
-            data-title={title}
-            data-brand={brand}
-            data-price={price}
-            data-image={isLocalImage ? (image as ImageMetadata).src : image}
-          >
-            <span class="material-symbols-outlined">add_shopping_cart</span>
-          </button>
+          hasVariants ? (
+            // Products with variants: link to detail page to select variant
+            <a
+              href={`/catalogo/${slug}`}
+              class="bg-primary sm:bg-border-dark hover:bg-primary-hover sm:hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center sm:group-hover:bg-primary"
+              title="Ver opciones"
+            >
+              <span class="material-symbols-outlined">visibility</span>
+            </a>
+          ) : (
+            // Products without variants: quick add to cart
+            <button
+              class="add-to-cart-btn bg-primary sm:bg-border-dark hover:bg-primary-hover sm:hover:bg-primary text-white p-2.5 rounded-lg transition-colors flex items-center justify-center sm:group-hover:bg-primary"
+              data-slug={slug}
+              data-title={title}
+              data-brand={brand}
+              data-price={displayPrice}
+              data-image={isLocalImage ? (image as ImageMetadata).src : image}
+            >
+              <span class="material-symbols-outlined">add_shopping_cart</span>
+            </button>
+          )
         ) : (
           <button
             class="bg-border-dark text-white/50 cursor-not-allowed p-2.5 rounded-lg flex items-center justify-center"

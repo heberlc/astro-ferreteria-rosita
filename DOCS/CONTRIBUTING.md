@@ -203,4 +203,4 @@ Para dudas sobre el proyecto, crear un Issue en GitHub o contactar directamente.
 
 ---
 
-*Última actualización: Diciembre 2024*
+*Última actualización: Diciembre 2025*
