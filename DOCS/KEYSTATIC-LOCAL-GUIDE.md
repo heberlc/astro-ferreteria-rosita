@@ -124,7 +124,83 @@ schema: {
 
 ---
 
+## Singleton: Configuración del Sitio
+
+Keystatic permite crear "singletons" - archivos únicos de configuración editables desde el admin.
+
+### Configuración en keystatic.config.ts
+
+```typescript
+import { singleton } from '@keystatic/core';
+
+singletons: {
+  siteSettings: singleton({
+    label: 'Configuración del Sitio',
+    path: 'src/content/settings/site',
+    format: { data: 'yaml' },  // Importante: especificar formato
+    schema: {
+      businessName: fields.text({ label: 'Nombre', validation: { isRequired: true } }),
+      whatsappPrimary: fields.text({ label: 'WhatsApp' }),
+      addressStreet: fields.text({ label: 'Dirección' }),
+      hoursWeekdays: fields.text({ label: 'Horario' }),
+      // ... más campos
+    },
+  }),
+},
+```
+
+### Leer settings en Astro
+
+```typescript
+// src/config/settings.ts
+import { getCollection } from "astro:content";
+
+export async function getSiteSettings() {
+  const settings = await getCollection("settings");
+  return settings.find((s) => s.id === "site")?.data;
+}
+```
+
+### Uso en componentes
+
+```astro
+---
+import { getSiteSettings } from "@/config/settings";
+const settings = await getSiteSettings();
+---
+<p>📞 {settings?.whatsappPrimary}</p>
+```
+
+---
+
+## Campos Select para Iconos
+
+En lugar de que el cliente escriba nombres de iconos, usar un select predefinido:
+
+### Configuración
+
+```typescript
+icon: fields.select({
+  label: 'Icono de Categoría',
+  options: [
+    { label: '🏗️ Construcción', value: 'construction' },
+    { label: '🔧 Gasfitería', value: 'plumbing' },
+    { label: '⚡ Electricidad', value: 'bolt' },
+    { label: '📋 General', value: 'category' },
+    // Agregar más iconos según necesidad
+  ],
+  defaultValue: 'category',
+}),
+```
+
+### Importante
+
+Al cambiar un campo `text` a `select`, asegúrate de que los valores existentes en los archivos .mdoc coincidan con las opciones del select, de lo contrario Keystatic mostrará error de validación.
+
+---
+
 ## Sistema de Variantes de Productos
+
 
 ### Configuración en Keystatic
 

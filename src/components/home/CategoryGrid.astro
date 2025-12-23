@@ -35,7 +35,7 @@ const categories = categoriesData
       const isLocalImage = typeof category.data.image !== 'string';
       return (
         <a 
-          href={`/catalogo?category=${category.data.slug}`}
+          href={`/catalogo?category=${category.id}`}
           class="group relative overflow-hidden rounded-2xl aspect-4/5 bg-surface-dark border border-white/5 shadow-xl transition-all hover:border-primary/50"
         >
           <!-- Background Image -->

@@ -50,7 +50,6 @@ const categories = defineCollection({
   loader: glob({ pattern: "**/*.mdoc", base: "./src/content/categories" }),
   schema: ({ image }) => z.object({
     title: z.string(),
-    slug: z.string(),
     description: z.string(),
     icon: z.string(),
     image: z.union([image(), z.string()]),
@@ -58,7 +57,34 @@ const categories = defineCollection({
   }),
 });
 
+/**
+ * Site Settings (Singleton from Keystatic)
+ */
+const settings = defineCollection({
+  loader: glob({ pattern: "*.yaml", base: "./src/content/settings" }),
+  schema: z.object({
+    businessName: z.string(),
+    tagline: z.string().optional(),
+    description: z.string().optional(),
+    whatsappPrimary: z.string(),
+    whatsappSecondary: z.string().optional(),
+    phone: z.string().optional(),
+    email: z.string().optional(),
+    addressStreet: z.string().optional(),
+    addressDistrict: z.string().optional(),
+    addressCity: z.string().optional(),
+    googleMapsUrl: z.string().optional(),
+    hoursWeekdays: z.string().optional(),
+    hoursWeekend: z.string().optional(),
+    facebookUrl: z.string().optional(),
+    instagramUrl: z.string().optional(),
+    tiktokUrl: z.string().optional(),
+  }),
+});
+
 export const collections = {
   products,
   categories,
+  settings,
 };
+
