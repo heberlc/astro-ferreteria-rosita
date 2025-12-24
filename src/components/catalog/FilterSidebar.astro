@@ -27,9 +27,9 @@ allProducts.forEach((product) => {
 const categories = categoriesData
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99))
   .map((cat) => ({
-    slug: cat.data.slug,
+    slug: cat.id,
     name: cat.data.title,
-    count: categoryCountMap.get(cat.data.slug) || 0,
+    count: categoryCountMap.get(cat.id) || 0,
   }));
 
 // Get unique brands from products
